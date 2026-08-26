@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta charset="UTF-8">
+
+<title>Loading Article...</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+    if (e.ctrlKey && e.keyCode === 85) {
+        return false;
+    }
+};
+</script>
+
+<style>
+body {background-color:#f0ece0;background-repeat:no-repeat;background-position:top left;background-attachment:fixed;}
+h1{text-align:center;font-family:Impact, sans-serif;font-variant:small-caps;letter-spacing:5px;color:#000000;background-color:#e1d7bc;}
+p {font-family:Times, serif;font-size:18px;font-style:normal;font-weight:normal;color:#000000;background-color:#e8e1ce;}
+mark.black {background-color:#000000;}
+
+</style>
+
+</head>
+
+<body>
+
+<h1 id="articleTitle">
+    Loading...
+</h1>
+
+<p>
+    <b id="articleMeta">
+        Loading...
+    </b>
+</p>
+
+<p></p>
+
+<div id="articleContent">
+    Loading...
+</div>
+
+
+<script src="missing-reports.js"></script>
+
+<script>
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const articleID =
+    params.get("id");
+
+
+/*
+ * ========================================
+ * FIND ARTICLE
+ * ========================================
+ */
+
+const article =
+    articles[articleID];
+
+
+/*
+ * ========================================
+ * DISPLAY ARTICLE
+ * ========================================
+ */
+
+if (article) {
+
+    document.title =
+        article.pageTitle ||
+        article.title;
+
+    document.getElementById(
+        "articleTitle"
+    ).textContent =
+        article.title;
+
+
+    document.getElementById(
+        "articleMeta"
+    ).textContent =
+        article.date +
+        " | " +
+        article.publication;
+
+
+    document.getElementById(
+        "articleContent"
+    ).innerHTML =
+        article.content;
+
+}
+
+
+/*
+ * ========================================
+ * ARTICLE NOT FOUND
+ * ========================================
+ */
+
+else {
+
+    document.title =
+        "Article Not Found";
+
+
+    document.getElementById(
+        "articleTitle"
+    ).textContent =
+        "ARTICLE NOT FOUND";
+
+
+    document.getElementById(
+        "articleMeta"
+    ).textContent =
+        "";
+
+
+    document.getElementById(
+        "articleContent"
+    ).innerHTML = `
+        <p>
+            The requested article could not be found.
+        </p>
+    `;
+
+}
+
+</script>
+
+</body>
+</html>

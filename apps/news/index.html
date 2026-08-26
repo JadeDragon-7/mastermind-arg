@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>www.drakoranews.com</title>
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Actual temperature range
+  const minTemp = 75;
+  const maxTemp = 110;
+
+  // Generate real temperature
+  const randomTemp =
+    Math.floor(Math.random() * (maxTemp - minTemp + 1)) + minTemp;
+
+  // Generate "feels like" temperature (realistic offset)
+  const randomFeels =
+    randomTemp + Math.floor(Math.random() * 8) - 3; // ≈ -3 to +4
+
+  // Apply to page
+  document.getElementById("temp").textContent = randomTemp;
+  document.getElementById("feels").textContent = randomFeels;
+
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // -------- Temperature logic (already working) --------
+  const minTemp = 35;
+  const maxTemp = 85;
+
+  const randomTemp =
+    Math.floor(Math.random() * (maxTemp - minTemp + 1)) + minTemp;
+
+  const randomFeels =
+    randomTemp + Math.floor(Math.random() * 8) - 3;
+
+  document.getElementById("temp").textContent = randomTemp;
+  document.getElementById("feels").textContent = randomFeels;
+
+  // -------- Time display logic --------
+  function updateTime() {
+    const now = new Date();
+
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    const ampm = hours >= 12 ? "PM" : "AM";
+
+    hours = hours % 12;
+    hours = hours ? hours : 12; // 0 → 12
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+
+    document.getElementById("timeDisplay").textContent =
+      `${hours}:${minutes} ${ampm}`;
+  }
+
+  updateTime();              // run once immediately
+  setInterval(updateTime, 1000); // update every second
+
+});
+</script>
+
+<style>
+
+@font-face {
+  font-family: "Algerian";
+  src: url("Fonts/ALGER.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Felix";
+  src: url("Fonts/FELIXTI.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0c142c;
+      color: #000000;
+    }
+
+    header {
+      background: #052683;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-family: "Algerian", Arial, sans-serif;
+      font-weight: normal;
+      font-size: 40px;
+    }
+
+    nav {
+        background: #0238cc;
+        padding: 10px;
+        text-align: center;
+        font-family: "Felix", Arial, sans-serif;
+        font-weight: normal;
+    }
+
+    nav a {
+      color: #ffffff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .headline {
+      margin: 40px 0;
+      padding-bottom: 25px;
+      border-bottom: 2px solid #0238cc;
+        font-family: "Felix", Arial, sans-serif;
+        font-weight: normal;
+        font-size: 17px;
+        line-height: 30px;
+        letter-spacing: 2px;
+    }
+
+    .headline a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 1.3em;
+              font-weight: normal;
+    }
+
+    .headline a:hover {
+      color: #5d81e4;
+    }
+
+    .year {
+      margin: 0px 0;
+      padding-bottom: 0px;
+      border-bottom: 18px double #0238cc;
+    }
+
+    .summary {
+      font-size: 0.9em;
+      color: #adadad;
+    }
+
+    .date {
+        font-size: 12px;
+        color: #7c7c7c;
+    }
+
+    footer {
+      text-align: center;
+      background: #052683;
+      color: white;
+      padding: 10px;
+      margin-top: 40px;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 100px;
+      line-height: 0;
+    }
+
+    p {
+        font-family: "Felix", Arial, sans-serif;
+        font-weight: normal;
+        font-size: 35px;
+        line-height: 10px;
+    }
+    
+    div.bottom {
+        font-family: "Felix", Arial, sans-serif;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 10px;
+    }
+
+    div.summary {
+        font-family:'Times New Roman', Times, serif;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+    div.title {
+        margin: 40px 0;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        color:#ffffff;
+        font-family: "Felix", Arial, sans-serif;
+        font-weight: bold;
+        font-size: 35px;
+        line-height: 40px;
+        letter-spacing: 2px;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 250px;
+      left: 0;
+      width: 50px;
+      background: #0044ff00;
+      color: white;
+      padding: 20px 10px;
+    }
+
+  .sidebar a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    margin: 10px 7px;
+    font-family: "Felix", Arial, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+  }
+
+  .sidebar a:hover {
+    color: #5d81e4;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  div.weather {
+        color:#ffffff;
+        font-family: "Felix", Arial, sans-serif;
+        font-size: 30px;
+        letter-spacing: 2px;
+        text-indent: 100px;
+        padding-bottom: 0px;
+  }
+
+  div.weather2 {
+        color:#adadad;
+        font-family: "Felix", Arial, sans-serif;
+        font-size:15px;
+        letter-spacing: 2px;
+        text-indent: 230px;
+        padding-top: 0px;
+  }
+
+  </style>
+  
+</head>
+<body>
+
+  <header>
+    <h1>DRAKORA NEWS</h1>
+    <p>Breaking News and Headlines on Califorian Events</p>
+  </header>
+
+  <nav>
+    <a href="index.html"><span style = "color:#5d81e4; font-weight: bold;">Home</span></a>
+    <a href="news.html"><span style = "font-weight: bold;">News</span></a>
+    <a href="reports.html"><span style = "font-weight: bold;">Reports</span></a>
+    <a href="contact.html"><span style = "font-weight: bold;">Contact</span></a>
+  </nav>
+
+  <main>
+    <div class="title">
+        DRAKORA, CALIFORNIA
+    </div>
+
+  <div class = "weather">
+      <img src="Home/Time.png" alt="Time icon"
+       style="height:80px; vertical-align:middle; margin-right:10px; margin-left: 15px;">
+    September 1st, 2024
+  </div>
+  <div class="weather2" id="timeDisplay" style="font-size:18px; color:#adadad; margin-top: 0px;">
+  --:--
+  </div>
+  <br>
+  <br>
+    <div class="weather">
+  <img src="Home/Weaather.png" alt="Weather icon"
+       style="height:80px; vertical-align:middle; margin-right:0px;">
+  <span id="temp"></span> F
+</div>
+    <div class = "weather2">
+      Feels like <span id="feels"></span> F
+    </div>
+<br>
+    <div class="title">
+        LATEST ARTICLE
+    </div>
+
+    <div class="year"></div>
+
+    <div class="headline">
+      <a href="article.html?id=faces-of-the-ultimate-system">The Faces of the Ultimate System</a>
+      <div class="summary"><br>Viewers vote on the most popular, notorious, and craziest conspiracies of Ultimate individuals.</div>
+      <div class = "date"><br>January 1st, 2024 | By Nadia Valentine | CA News Editorial</div>
+    </div>
+
+
+  </main>
+
+  <footer>
+    <div class = "bottom">&copy; 2024 DTV</div>
+  </footer>
+
+</body>
+</html>

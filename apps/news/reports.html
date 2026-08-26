@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>www.drakoranews.com/reports</title>
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+  <style>
+
+@font-face {
+  font-family: "Algerian";
+  src: url("Fonts/ALGER.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Felix";
+  src: url("Fonts/FELIXTI.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0c142c;
+      color: #000000;
+    }
+
+    header {
+      background: #052683;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-family: "Algerian", Arial, sans-serif;
+      font-weight: normal;
+      font-size: 40px;
+    }
+
+    nav {
+        background: #0238cc;
+        padding: 10px;
+        text-align: center;
+        font-family: "Felix", Arial, sans-serif;
+        font-weight: normal;
+    }
+
+    nav a {
+      color: #ffffff;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 20px;
+      letter-spacing: 2px;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    .headline {
+      margin: 40px 0;
+      padding-bottom: 25px;
+      border-bottom: 2px solid #0238cc;
+        font-family: "Felix", Arial, sans-serif;
+        font-weight: normal;
+        font-size: 17px;
+        line-height: 30px;
+        letter-spacing: 2px;
+    }
+
+    .headline a {
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 1.3em;
+              font-weight: normal;
+    }
+
+    .headline a:hover {
+      color: #5d81e4;
+    }
+
+    .year {
+      margin: 0px 0;
+      padding-bottom: 0px;
+      border-bottom: 18px double #0238cc;
+    }
+
+    .summary {
+      font-size: 0.9em;
+      color: #adadad;
+    }
+
+    .date {
+        font-size: 14px;
+        color: #7c7c7c;
+    }
+
+    footer {
+      text-align: center;
+      background: #052683;
+      color: white;
+      padding: 10px;
+      margin-top: 40px;
+    }
+
+    h1 {
+      font-weight: normal;
+      font-size: 100px;
+      line-height: 0;
+    }
+
+    p {
+        font-family: "Felix", Arial, sans-serif;
+        font-weight: normal;
+        font-size: 35px;
+        line-height: 10px;
+    }
+    
+    div.bottom {
+        font-family: "Felix", Arial, sans-serif;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 10px;
+    }
+
+    div.summary {
+        font-family:'Times New Roman', Times, serif;
+        font-weight: normal;
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+    div.title {
+        margin: 40px 0;
+        padding-bottom: 0px;
+        padding-top: 0px;
+        color:#ffffff;
+        font-family: "Felix", Arial, sans-serif;
+        font-weight: bold;
+        font-size: 35px;
+        line-height: 40px;
+        letter-spacing: 2px;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 250px;
+      left: 0;
+      width: 50px;
+      background: #0044ff00;
+      color: white;
+      padding: 20px 10px;
+    }
+
+  .sidebar a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    margin: 10px 7px;
+    font-family: "Felix", Arial, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  .sidebar a:hover {
+    color: #5d81e4;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+mark.black {background-color: black;}
+
+  </style>
+
+  
+</head>
+<body>
+
+  <header>
+    <h1>DRAKORA NEWS</h1>
+    <p>Breaking News and Headlines on Califorian Events</p>
+  </header>
+
+  <nav>
+    <a href="index.html"><span style = "font-weight: bold;">Home</span></a>
+    <a href="News.html"><span style = "font-weight: bold;">News</span></a>
+    <a href="Reports.html"><span style = "color:#5d81e4; font-weight: bold;">Reports</span></a>
+    <a href="Contact.html"><span style = "font-weight: bold;">Contact</span></a>
+  </nav>
+
+  <main>
+
+<div class="sidebar">
+  <a href="#yActive">Active</a>
+  <a href="#ySolved">Solved</a>
+  <a href="#yCold">Unsolved</a>
+</div>
+
+  <div class="title" id="yActive">
+      Active Reports
+
+    <div class="headline">
+      <a href="missing-reports.html?id=marette-ahn">Marette Ahn</a>
+      <div class = "date">September 3rd, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=zia-nguyen">Zia Nguyen</a>
+      <div class = "date">September 2nd, 2024 | Monrovia Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=kendall-hayes">Kendall Hayes</a>
+      <div class = "date">September 1st, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=morgan-cantrell">Morgan Cantrell</a>
+      <div class = "date">August 30th, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=jerreth-fitidel">Jerreth Fitidel</a>
+      <div class = "date">August 30th, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=roger-fabel">Roger Fabel</a>
+      <div class = "date">August 30th, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=zayne-doyle">Zayne Doyle</a>
+      <div class = "date">August 30th, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=atlas-copeland">Atlas Copeland</a>
+      <div class = "date">August 29th, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=dexter-darnella">Dexter Darnella</a>
+      <div class = "date">August 29th, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=isabella-tucker">Isabella Tucker</a>
+      <div class = "date">August 29th, 2024 | Sacramento Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=nyx-bryon">Nyx Bryon</a>
+      <div class = "date">August 29th, 2024 | Anaheim Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=ginerva-coppola">Ginerva Coppola</a>
+      <div class = "date">August 28th, 2024 | Drakora Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=jill-revera">Jill Revera</a>
+      <div class = "date">August 28th, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=delilah-hart">Delilah Hart</a>
+      <div class = "date">August 27th, 2024 | San Francisco Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=reed-williams">Reed Williams</a>
+      <div class = "date">August 27th, 2024 | Drakora Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=jay-garrison">Jay Garrison</a>
+      <div class = "date">August 26th, 2024 | Pasadena Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=rayko-erbin">Rayko Erbin</a>
+      <div class = "date">August 26th, 2024 | Redding Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=noah-patterson">Noah Patterson</a>
+      <div class = "date">August 26th, 2024 | Santa Monica Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=sebastian-curtis">Sebastian Curtis</a>
+      <div class = "date">August 26th, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=raelynn-lawson">RaeLynn Lawson</a>
+      <div class = "date">August 25th, 2024 | San Francisco Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=kash-kaiser">Kash Kaiser</a>
+      <div class = "date">August 24th, 2024 | Los Angeles Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=vida-talison">Vida Talison</a>
+      <div class = "date">August 24th, 2024 | Drakora Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=lucas-ward">Lucas Ward</a>
+      <div class = "date">August 23rd, 2024 | Fresno Police Department | CASE STATUS — Open, Unsolved</div>
+    </div>
+
+    <div class="year"></div>
+
+    <div class="title" id="ySolved">
+        Solved Reports
+    </div>
+
+    <div class="year"></div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=arthur-foley">Arthur Foley</a>
+      <div class = "date">June 21st, 2024 | Drakora Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=haven-peterson">Haven Peterson</a>
+      <div class = "date">June 8th, 2023 | Riverside Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=zier-talern">Zier Talern</a>
+      <div class = "date">June 5th, 2023 | Santa Monica Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=londyn-rowland">Londyn Rowland</a>
+      <div class = "date">June 4th, 2023 | Los Angeles Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=derrick-blood">Derrick Blood</a>
+      <div class = "date">June 4th, 2023 | Drakora Police Department | CASE STATUS — Closed, Suicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=elia-clermont">Elia Clermont</a>
+      <div class = "date">June 3rd, 2023 | Alturas Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=sarah-revalos">Sarah Revalos</a>
+      <div class = "date">June 2nd, 2023 | Drakora Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=yosefine-breslau">Yosefine Breslau</a>
+      <div class = "date">June 1st, 2023 | Sacramento  Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=toshi-reveur">Elivia Reveur</a>
+      <div class = "date">June 1st, 2023 | Los Angeles Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=avery-irving">Avery Irving</a>
+      <div class = "date">June 1st, 2023 | Santa Monica Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=saige-booru">Matthew Booru</a>
+      <div class = "date">May 30th, 2023 | East La Mirada Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=elena-winscle">Elena Winscle</a>
+      <div class = "date">May 30th, 2023 | Pasadena Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=masumi-suzuki">Masumi Suzuki</a>
+      <div class = "date">May 29th, 2023 | Anaheim Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=everett-gibson">Everett Gibson</a>
+      <div class = "date">May 26th, 2023 | Los Angeles Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=iyu-nagame">Iyu Nagame</a>
+      <div class = "date">May 26th, 2023 | Los Angeles Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=basil-perry">Basil Perry</a>
+      <div class = "date">May 26th, 2023 | San Francisco Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=declan-marrow">Declan Marrow</a>
+      <div class = "date">May 25th, 2023 | San Francisco Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=dustin-weaver">Dustin Weaver</a>
+      <div class = "date">May 25th, 2023 | Anaheim Police Department | CASE STATUS — Closed, Unconfirmed Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=caspian-bishop">Caspian Bishop</a>
+      <div class = "date">May 24th, 2023 | Drakora Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=samantha-pachi">Samantha Pachi</a>
+      <div class = "date">May 24th, 2023 | Anaheim Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=zaide-chance">Zaide Chance</a>
+      <div class = "date">September 1st, 2022 | Drakora Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=cozbi-flair">Cozbi Flair</a>
+      <div class = "date">August 30th, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=zernek-syple">Zernek Syple</a>
+      <div class = "date">August 29th, 2022 | Drakora Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=lyria-lawrence">Lyria Lawrence</a>
+      <div class = "date">August 29th, 2022 | Drakora Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=damian-anderson">Damian Anderson</a>
+      <div class = "date">August 27th, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=laura-ren">Laura Ren</a>
+      <div class = "date">August 26th, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=cole-vaye">Cole Vaye</a>
+      <div class = "date">August 26th, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=maga-reineking">Maga Reineking</a>
+      <div class = "date">August 25th, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=omega-reineking">Omega Reineking</a>
+      <div class = "date">August 25th, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=yua-sky">Yua Sky</a>
+      <div class = "date">August 23rd, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=dominic-ayis">Dominic Ayis</a>
+      <div class = "date">August 23rd, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=pearl-winters">Pearl Winters</a>
+      <div class = "date">August 22nd, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=kira-winterberry">Kira Winterberry</a>
+      <div class = "date">August 22nd, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=karma-mayfield">Karma Mayfield</a>
+      <div class = "date">August 21st, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=oliver-stanton">Oliver Stanton</a>
+      <div class = "date">August 21st, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=ruby-ivera">Ruby Ivera</a>
+      <div class = "date">August 20th, 2022 | Drakora Police Department | CASE STATUS — Closed, Located</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=brynn-laviar">Brynn Laviar</a>
+      <div class = "date">August 15th, 2022 | Drakora Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=koa-alves">Koa Alves</a>
+      <div class = "date">May 11th, 2022 | Drakora Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=elijah-erickson">Elijah Erickson</a>
+      <div class = "date">September 5th, 2016 | Anaheim Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=lorelei-hart">Lorelei Hart</a>
+      <div class = "date">September 5th, 2016 | Charlotte Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=cain-peterson">Cain Peterson</a>
+      <div class = "date">September 5th, 2016 | Riverside Police Department | CASE STATUS — Closed, Homicide</div>
+    </div>
+    
+    <div class="headline">
+      <a href="missing-reports.html?id=axel-gordon">Axel Gordon</a>
+      <div class = "date">September 5th, 2015 | Drakora Police Department | CASE STATUS — Closed, Suicide</div>
+    </div>
+
+    <div class="title" id="yCold">
+        Cold Cases
+    </div>
+
+    <div class="year"></div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=mari-lewis">Mari Lewis</a>
+      <div class = "date">July 1st, 2023 | Drakora Police Department | CASE STATUS — Closed, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=kali-blair">Kali Blair</a>
+      <div class = "date">June 30th, 2023 | Drakora Police Department | CASE STATUS — Closed, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=jin-ahn">Jin Ahn</a>
+      <div class = "date">January 5th, 2023 | Los Angeles Police Department | CASE STATUS — Closed, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=savannah-lawrence">Savannah Lawrence</a>
+      <div class = "date">November 18th, 2022 | Drakora Police Department | CASE STATUS — Closed, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=elijah-caddel">Elijah Caddel</a>
+      <div class = "date">October 22nd, 2022 | Drakora Police Department | CASE STATUS — Closed, Unsolved</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=derrick-blood-young">Derrick Blood</a>
+      <div class = "date">October 4th, 2011 | Drakora Police Department | CASE STATUS — Closed, New Case File</div>
+    </div>
+
+    <div class="headline">
+      <a href="missing-reports.html?id=harvey-choi">Harvey Choi</a>
+      <div class = "date">January 5th, 2006 | Goyang Police Department | CASE STATUS — Closed, Unsolved</div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </main>
+
+  <footer>
+    <div class = "bottom">&copy; 2024 DTV</div>
+  </footer>
+
+</body>
+</html>
