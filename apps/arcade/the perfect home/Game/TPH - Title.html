@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>...</title>
+
+<!-- Disable CTRL U -->
+<script>
+  document.onkeydown = function(e) {
+    if (e.ctrlKey && e.keyCode === 85) {
+      return false;
+    }
+  };
+</script>
+
+<style>
+
+@font-face {
+    font-family: "Nico";
+    src: url("Fonts/NicoVoide-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Title";
+    src: url("Fonts/MAIAN.TTF");
+}
+
+body{
+    margin:0;
+    overflow:hidden;
+
+    width:1920px;
+    height:1080px;
+
+    background:black;
+    color:white;
+}
+
+#titleContainer{
+
+    position:absolute;
+
+    top:40%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:100%;
+
+    text-align:center; 
+
+    animation: drift 8s ease-in-out infinite;
+
+}
+
+#titleScreen {
+
+    position:fixed;
+    inset:0;
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:
+        opacity 2s ease,
+        visibility 0s linear 2s;
+
+}
+
+#titleScreen.show{
+
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+
+    transition:opacity 2s ease;
+
+}
+
+#title{
+
+    margin:0;
+
+    font-family:"Title";
+    font-size:120px;
+
+    color:#ffffff;
+
+    opacity:0;
+    transition:opacity 2s;
+
+}
+
+#subtitle{
+
+    margin-top:20px;
+    margin-bottom:180px;
+
+    font-family:"Title";
+    font-size:38px;
+
+    opacity:0;
+    transition:opacity 2s;
+
+    color:rgb(209, 209, 209);
+
+}
+
+#pressStart{
+
+    position:fixed;
+
+    left:50%;
+    bottom:200px;
+
+    transform:translateX(-50%);
+
+    font-family:"Nico";
+    font-size:28px;
+
+    opacity:0;
+    transition:opacity 2s;
+}
+
+#headphoneNotice{
+
+    position:fixed;
+
+    left:50%;
+    bottom:30px;
+
+    transform:translateX(-50%);
+
+    font-family:"Title";
+    font-size:18px;
+
+    color:#999;
+
+    opacity:0;
+    transition:opacity 2s;
+}
+
+#errorCode{
+
+    position:fixed;
+
+    bottom:15px;
+    right:20px;
+
+    font-family:"Title";
+    font-size:12px;
+
+    color:#ffffff;
+    font-size:10px;
+    letter-spacing:2px;
+
+    opacity:0;
+    transition:opacity 2s ease;
+}
+
+#fadeScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    background:black;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity 3.5s ease;
+
+    z-index:9999;
+
+}
+
+@keyframes blink{
+
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:0.2;
+    }
+
+}
+
+@keyframes drift {
+
+    0%,100%{
+        transform:translate(-50%,-50%);
+    }
+
+    50%{
+        transform:translate(-50%,-49%);
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="titleScreen">
+
+    <div id="titleContainer">
+
+        <h1 id="title">THE PERFECT HOME</h1>
+
+            <div id="subtitle">...</div>
+
+    </div>
+
+    <div id="pressStart">
+        PRESS SPACE TO BEGIN
+    </div>
+
+    <div id="headphoneNotice">
+        For the best experience, headphones are recommended.
+    </div>
+
+    <div id="errorCode">
+        ERROR_206
+    </div>
+
+</div>
+
+<audio id="titleMusic" loop>
+    <source src="Music/The Perfect Home.mp3" type="audio/mpeg">
+</audio>
+
+<div id="fadeScreen"></div>
+
+</body>
+
+<script>
+
+const title = document.getElementById("title");
+const subtitle = document.getElementById("subtitle");
+const pressStart = document.getElementById("pressStart");
+const music = document.getElementById("titleMusic");
+const headphoneNotice = document.getElementById("headphoneNotice");
+const errorCode = document.getElementById("errorCode");
+const titleScreen = document.getElementById("titleScreen");
+
+music.volume = 0;
+
+let started = false;
+
+titleScreen.classList.add("show");
+
+revealTitle();
+
+music.play();
+fadeInMusic();
+
+function revealTitle() {
+
+    setTimeout(() => {
+
+        title.style.opacity = "1";
+
+        setTimeout(() => {
+
+            subtitle.style.opacity = "1";
+
+            setTimeout(() => {
+
+                headphoneNotice.style.opacity = "1";
+
+                setTimeout(() => {
+
+                    errorCode.style.opacity = "1";
+
+                    setTimeout(() => {
+
+                        pressStart.style.opacity = "1";
+
+                        setTimeout(() => {
+
+                            pressStart.style.animation =
+                                "blink 2s ease-in-out infinite";
+
+                        }, 2000);
+
+                    }, 1000);
+
+                }, 1000);
+
+            }, 1500);
+
+        }, 1500);
+
+    }, 1000);
+
+}
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.code !== "Space") return;
+    if(started) return;
+
+    started = true;
+
+    music.play();
+
+    fadeInMusic();
+
+    document.body.style.transition = "opacity 2s";
+    document.body.style.opacity = "0";
+
+    setTimeout(()=>{
+
+        window.location.href = "TPH - Game.html";
+
+    },2000);
+
+});
+
+function fadeInMusic(){
+
+    const fade = setInterval(()=>{
+
+        if(music.volume < 0.15){
+
+            music.volume += 0.01;
+
+        }else{
+
+            clearInterval(fade);
+
+        }
+
+    },100);
+
+}
+
+</script>
+
+</body>
+</html>

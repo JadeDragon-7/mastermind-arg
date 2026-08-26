@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>...</title>
+
+<!-- Disable CTRL U -->
+<script>
+  document.onkeydown = function(e) {
+    if (e.ctrlKey && e.keyCode === 85) {
+      return false;
+    }
+  };
+</script>
+
+<style>
+
+@font-face {
+    font-family: "NicoVoide";
+    src: url("Fonts/NicoVoide-Regular.ttf");
+}
+
+body {
+    margin: 0;
+    background: #222;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+#game {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    background: #3a3a3a;
+    border: 4px solid black;
+    overflow: hidden;
+}
+
+#player {
+    position: absolute;
+
+    width: 32px;
+    height: 32px;
+
+    left: 50px;
+    top: 50px;
+}
+
+#playerSprite {
+    position: absolute;
+
+    width: 64px;
+    height: 64px;
+
+    left: -16px;
+    top: -16px;
+
+    background-image: url("Images/BlackPlayer.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.wall {
+    position: absolute;
+    background: rgb(0, 0, 0);
+}
+
+.transparent_wall {
+    position: absolute;
+    background: rgb(255, 0, 0);
+}
+
+.npc {
+    position: absolute;
+    width: 64px;
+    height: 64px;
+    background-image: url("Images/Interact.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#dialogueBox {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 780px;
+    height: 100px;
+    background: rgba(0,0,0,0.9);
+    color: white;
+    border: 2px solid white;
+    display: none;
+    padding: 20px;
+    line-height: 50px;
+    box-sizing: border-box;
+    font-size: 22px;
+    font-family:'NicoVoide';
+}
+
+#controlsBox {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+
+    width: 220px;
+
+    background: rgba(0,0,0,0.9);
+    color: white;
+
+    border: 2px solid white;
+    border-radius: 10px;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+}
+
+#controlsBox h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+#controlsBox p {
+    margin: 8px 0;
+    font-family: 'NicoVoide';
+}
+
+.trigger {
+    position: absolute;
+    background: rgba(0, 255, 0, 0);
+}
+
+#actionPrompt {
+    position: absolute;
+    display: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-family: 'NicoVoide';
+    color: #ff0000;
+}
+
+#fadeScreen {
+    position: fixed;
+    inset: 0;
+
+    background: black;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 2s ease;
+
+    z-index: 99999;
+}
+
+#fadeScreen.active {
+    opacity: 1;
+}
+
+@keyframes letterShake {
+
+    0%   { transform: translate(0px, 0px) rotate(0deg); }
+    20%  { transform: translate(-1px, 1px) rotate(-1deg); }
+    40%  { transform: translate(1px, -1px) rotate(1deg); }
+    60%  { transform: translate(-1px, -1px) rotate(-1deg); }
+    80%  { transform: translate(1px, 1px) rotate(1deg); }
+    100% { transform: translate(0px, 0px) rotate(0deg); }
+
+}
+
+.shakyLetter {
+    display: inline-block;
+    animation: letterShake 0.2s infinite;
+    transform-origin: center;
+}
+
+
+</style>
+</head>
+
+
+
+<div id="controlsBox">
+    <p>a b d c</p>
+    <p>E - INTERACT</p>
+    <p>SPACE - NEXT</p>
+</div>
+
+<body>
+
+<div id="fadeScreen" class="active"></div>
+
+<audio id="bgMusic" loop>
+    <source src="Music/Darkest Child.mp3" type="audio/mpeg">
+</audio>
+
+<div id="game">
+
+<div id="actionPrompt"></div>
+
+<div class="trigger"
+     data-destination="TPH - Dialogue.html"
+     style="
+        left:695px;
+        top:460px;
+        width:50px;
+        height:50px;">
+</div>
+
+<div id="player">
+    <div id="playerSprite"></div>
+</div>
+
+    <!-- Border -->
+
+    <div class="wall" style="left:0; top:0; width:800px; height:10px;"></div>
+    <div class="wall" style="left:0; top:590px; width:800px; height:10px;"></div>
+    <div class="wall" style="left:0; top:0; width:10px; height:600px;"></div>
+    <div class="wall" style="left:790px; top:0; width:10px; height:600px;"></div>
+
+    <!-- Game Room -->
+
+    <div class="wall" style="left:0px; top:250px; width:300px; height:10px;"></div>
+
+    <!-- Doorway -->
+    <div class="wall" style="left:300px; top:-40px; width:10px; height:180px;"></div>
+
+    <!-- Music Room -->
+
+    <div class="wall" style="right:0px; top:250px; width:300px; height:10px;"></div>
+
+    <!-- Doorway -->
+    <div class="wall" style="right:300px; top:-40px; width:10px; height:180px;"></div>
+
+    <!-- Theatre Room -->
+
+    <div class="wall" style="left:300px; top:200px; width:10px; height:130px;"></div>
+    <div class="wall" style="left:300px; top:390px; width:10px; height:300px;"></div>
+
+    <!-- Art Room -->
+
+    <div class="wall" style="right:300px; top:200px; width:10px; height:130px;"></div>
+    <div class="wall" style="right:300px; top:390px; width:10px; height:300px;"></div>
+
+
+    <div class="wall" style="right:0px; top:475px; width:60px; height:6px;"></div>
+    <div class="wall" style="right:100px; top:475px; width:200px; height:6px;"></div>
+    <div class="wall" style="right:60px; top:475px; width:60px; height:6px; background:#ff000000;"></div>
+
+    <!-- NPCs -->
+
+    <div class="npc"
+         id="npc1"
+         data-dialogue='[
+         {"text":"I\u0027M NOT SUPPOSED TO GO IN THERE.", "speed":40},
+         {"text":"I WONDER WHERE VICTORIA IS.", "speed":40}
+         ]'
+         style="left:720px; top:10px;">
+    </div>
+
+    <div class="npc"
+         id="npc2"
+         data-dialogue='[
+         {"text":"I DON\u0027T WANT TO GO DOWNSTAIRS.", "speed":40}
+         ]'
+         style="left:370px; top:10px;">
+    </div>
+
+    <div class="npc"
+         id="npc3"
+         data-dialogue='[
+         {"text":"I DIDN\u0027T MEAN TO MAKE HER MAD.", "speed":40},
+         {"text":"DAD SAID HE\u0027D FIX IT ONCE HE WAS FEELING BETTER.", "speed":40},
+         {"text":".....","speed":600}
+         ]'
+         style="left:170px; top:150px;">
+    </div>
+
+    <div class="npc"
+         id="npc4"
+         data-dialogue='[
+         {"text":"MAYBE LACEY WILL WATCH A MOVIE WITH ME.","speed":40}
+         ]'
+         style="left:0px; top:520px;">
+    </div>
+
+    <div class="npc"
+         id="npc5"
+         data-dialogue='[
+         {"text":"PLEASE  DON\u0027T  MAKE  ME  GO  IN  THERE.", "speed":60, "shake":true}
+         ]'
+         style="left:480px; top:325px;">
+    </div>
+
+    <div class="npc"
+         id="npc6"
+         data-dialogue='[
+         {"text":"...REVA.", "speed":300, "shake":false}
+         ]'
+         style="left:730px; top:260px;"
+         data-color="#ff0000">
+    </div>
+
+    <div id="dialogueBox"></div>
+
+</div>
+
+<script>
+
+const bgMusic = document.getElementById("bgMusic");
+bgMusic.volume = 0;
+
+const fadeScreen = document.getElementById("fadeScreen");
+const player = document.getElementById("player");
+const dialogueBox = document.getElementById("dialogueBox");
+
+let playerX = 50;
+let playerY = 50;
+const speed = 3;
+
+const keys = {};
+
+let talking = false;
+let currentNPC = null;
+let dialogueLines = [];
+let dialogueIndex = 0;
+let typingInterval = null;
+let typingSpeed = 35;
+
+let musicStarted = false;
+
+document.addEventListener("keydown", (e) => {
+
+if (!musicStarted) {
+
+    musicStarted = true;
+
+    fadeMusicIn(2000);
+
+}
+
+    keys[e.key] = true;
+
+if (e.key.toLowerCase() === "e") {
+
+    if (talking) return;
+
+    const npc = findNearbyNPC();
+
+    if (npc) {
+        startDialogue(npc);
+        return;
+    }
+
+    const trigger = findNearbyTrigger();
+
+    if (trigger) {
+
+fadeToPage(trigger.dataset.destination);
+
+    }
+
+}
+
+if (e.code === "Space") {
+
+    if (!talking) return;
+
+    if (typing) return;
+
+    nextDialogue();
+
+}
+
+});
+
+document.addEventListener("keyup", (e) => {
+    keys[e.key] = false;
+});
+
+function checkCollision(rect1, rect2) {
+
+    return (
+        rect1.left < rect2.right &&
+        rect1.right > rect2.left &&
+        rect1.top < rect2.bottom &&
+        rect1.bottom > rect2.top
+    );
+
+}
+
+function movePlayer() {
+
+    if (talking) return;
+
+    let newX = playerX;
+    let newY = playerY;
+
+    if (keys["ArrowUp"]) newY -= speed;
+    if (keys["ArrowDown"]) newY += speed;
+    if (keys["ArrowLeft"]) newX -= speed;
+    if (keys["ArrowRight"]) newX += speed;
+
+    player.style.left = newX + "px";
+    player.style.top = newY + "px";
+
+    const playerRect = player.getBoundingClientRect();
+
+    let blocked = false;
+
+    document.querySelectorAll(".wall").forEach(wall => {
+
+        if (
+            checkCollision(
+                playerRect,
+                wall.getBoundingClientRect()
+            )
+        ) {
+            blocked = true;
+        }
+
+    });
+
+    if (!blocked) {
+        playerX = newX;
+        playerY = newY;
+    }
+
+    player.style.left = playerX + "px";
+    player.style.top = playerY + "px";
+}
+
+function findNearbyNPC() {
+
+    for (const npc of document.querySelectorAll(".npc")) {
+
+        const playerRect = player.getBoundingClientRect();
+        const npcRect = npc.getBoundingClientRect();
+
+        const closeEnough =
+            Math.abs(playerRect.left - npcRect.left) < 70 &&
+            Math.abs(playerRect.top - npcRect.top) < 70;
+
+        if (closeEnough) {
+            return npc;
+        }
+
+    }
+
+    return null;
+}
+
+function startDialogue(npc) {
+
+    typingSpeed = parseInt(npc.dataset.speed) || 35;
+    talking = true;
+    currentNPC = npc;
+
+    dialogueLines = JSON.parse(
+        npc.dataset.dialogue
+    );
+
+    dialogueIndex = 0;
+
+    dialogueBox.style.color =
+        npc.dataset.color || "white";
+
+    dialogueBox.style.display = "block";
+
+    const line = dialogueLines[dialogueIndex];
+
+typeText(
+    line.text,
+    line.speed || 35,
+    line.shake || false
+);
+
+}
+
+function nextDialogue() {
+
+    dialogueIndex++;
+
+    if (dialogueIndex >= dialogueLines.length) {
+
+        talking = false;
+        currentNPC = null;
+
+        dialogueBox.style.display = "none";
+
+        return;
+    }
+
+const line = dialogueLines[dialogueIndex];
+
+typeText(
+    line.text,
+    line.speed || 35,
+    line.shake || false
+);
+
+}
+
+function typeText(text, speed, shake) {
+
+    clearInterval(typingInterval);
+
+    typing = true;
+
+    dialogueBox.textContent = "";
+
+    let index = 0;
+
+    typingInterval = setInterval(() => {
+
+const span = document.createElement("span");
+
+if (text[index] === " ") {
+    span.innerHTML = "&nbsp;";
+} else {
+    span.textContent = text[index];
+}
+
+if (shake) {
+
+    span.classList.add("shakyLetter");
+
+    span.style.animationDelay =
+        (Math.random() * 0.3) + "s";
+
+}
+
+dialogueBox.appendChild(span);
+
+        index++;
+
+        if (index >= text.length) {
+
+            clearInterval(typingInterval);
+
+            typing = false;
+
+        }
+
+    }, speed);
+
+}
+
+function findNearbyTrigger() {
+
+    const playerRect =
+        player.getBoundingClientRect();
+
+    for (const trigger of document.querySelectorAll(".trigger")) {
+
+        const triggerRect =
+            trigger.getBoundingClientRect();
+
+        if (
+            checkCollision(
+                playerRect,
+                triggerRect
+            )
+        ) {
+            return trigger;
+        }
+    }
+
+    return null;
+}
+
+
+function gameLoop() {
+
+    movePlayer();
+
+    updatePrompt();
+
+    requestAnimationFrame(gameLoop);
+
+}
+
+const actionPrompt =
+    document.getElementById("actionPrompt");
+
+function updatePrompt() {
+
+    if (talking) {
+
+        actionPrompt.style.display = "none";
+        return;
+
+    }
+
+    const trigger = findNearbyTrigger();
+
+    if (trigger) {
+
+        actionPrompt.style.display = "block";
+
+        actionPrompt.textContent =
+            "Enter?";
+
+        actionPrompt.style.left =
+            trigger.offsetLeft + "px";
+
+        actionPrompt.style.top =
+            (trigger.offsetTop - 25) + "px";
+
+        return;
+    }
+
+    actionPrompt.style.display = "none";
+}
+
+function fadeToPage(destination) {
+
+    fadeScreen.classList.add("active");
+
+    fadeMusicOut(800);
+
+    setTimeout(() => {
+
+        window.location.href = destination;
+
+    }, 800);
+
+}
+
+function fadeMusicIn(duration = 2000, targetVolume = 0.10) {
+
+    bgMusic.volume = 0;
+    bgMusic.play();
+
+    const step = 0.01;
+    const interval = duration / (targetVolume / step);
+
+    const fade = setInterval(() => {
+
+        if (bgMusic.volume < targetVolume - step) {
+
+            bgMusic.volume += step;
+
+        } else {
+
+            bgMusic.volume = targetVolume;
+            clearInterval(fade);
+
+        }
+
+    }, interval);
+
+}
+
+function fadeMusicOut(duration = 800) {
+
+    const step = 0.02;
+    const interval = duration * step;
+
+    const fade = setInterval(() => {
+
+        if (bgMusic.volume > step) {
+            bgMusic.volume -= step;
+        } else {
+            bgMusic.volume = 0;
+            bgMusic.pause();
+            clearInterval(fade);
+        }
+
+    }, interval);
+
+}
+
+
+gameLoop();
+
+window.addEventListener("load", () => {
+
+    setTimeout(() => {
+
+        fadeScreen.classList.remove("active");
+
+    }, 50);
+
+});
+
+</script>
+
+</body>
+</html>

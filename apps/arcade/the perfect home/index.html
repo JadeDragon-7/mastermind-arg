@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>...</title>
+
+<!-- Disable CTRL U -->
+<script>
+  document.onkeydown = function(e) {
+    if (e.ctrlKey && e.keyCode === 85) {
+      return false;
+    }
+  };
+</script>
+
+<style>
+
+@font-face {
+    font-family: "Nico";
+    src: url("Game/Fonts/NicoVoide-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Title";
+    src: url("Game/Fonts/MAIAN.TTF");
+}
+
+html, body{
+    margin:0;
+    overflow:hidden;
+
+    width:1920px;
+    height:1080px;
+
+    background:black;
+    color:white;
+}
+
+#titleContainer{
+
+    position:absolute;
+
+    top:40%;
+    left:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:100%;
+
+    text-align:center; 
+
+    animation: drift 8s ease-in-out infinite;
+
+}
+
+#titleScreen {
+
+    position:fixed;
+    inset:0;
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transition:
+        opacity 2s ease,
+        visibility 0s linear 2s;
+
+}
+
+#titleScreen.show{
+
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+
+    transition:opacity 2s ease;
+
+}
+
+#title{
+
+    margin:0;
+
+    font-family:"Title";
+    font-size:120px;
+
+    color:#ffffff;
+
+    opacity:0;
+    transition:opacity 2s;
+
+}
+
+#subtitle{
+
+    margin-top:20px;
+    margin-bottom:180px;
+
+    font-family:"Title";
+    font-size:38px;
+
+    opacity:0;
+    transition:opacity 2s;
+
+    color:rgb(209, 209, 209);
+
+}
+
+#pressStart{
+
+    position:fixed;
+
+    left:50%;
+    bottom:200px;
+
+    transform:translateX(-50%);
+
+    font-family:"Nico";
+    font-size:28px;
+
+    opacity:0;
+    transition:opacity 2s;
+}
+
+#headphoneNotice{
+
+    position:fixed;
+
+    left:50%;
+    bottom:30px;
+
+    transform:translateX(-50%);
+
+    font-family:"Title";
+    font-size:18px;
+
+    color:#999;
+
+    opacity:0;
+    transition:opacity 2s;
+}
+
+#errorCode{
+
+    position:fixed;
+
+    bottom:15px;
+    right:20px;
+
+    font-family:"Title";
+    font-size:12px;
+
+    color:#ffffff;
+    font-size:10px;
+    letter-spacing:2px;
+
+    opacity:0;
+    transition:opacity 2s ease;
+}
+
+#loaderScreen{
+
+    position:fixed;
+    inset:0;
+
+    background:black;
+
+    overflow:hidden;
+}
+
+#slot{
+
+    width:350px;
+    height:110px;
+
+    margin:20px auto;
+
+    background:#080808;
+
+    border:3px solid #2c2c2c;
+
+    border-radius:4px;
+
+    position:relative;
+
+    box-shadow:
+        inset 0 0 30px rgba(0,0,0,.9);
+
+}
+
+#slot::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:10px;
+
+    border:2px solid #1f1f1f;
+
+    border-radius:3px;
+
+}
+
+#cartridge{
+
+    position:absolute;
+
+    left:50%;
+    bottom:80px;
+
+    transform:translateX(-50%);
+
+    width:340px;
+    height:105px;
+
+    background:#2b2b2b;
+
+    border:3px solid #555;
+
+    border-radius:4px;
+
+    overflow:hidden;
+
+    cursor:grab;
+
+    user-select:none;
+
+    box-shadow:
+        0 0 18px rgba(0,0,0,.6),
+        inset 0 0 8px rgba(255,255,255,.05);
+
+    z-index:20;
+
+}
+
+.label{
+
+    text-align:center;
+
+    margin-top:25px;
+
+    color:white;
+
+    font-family:"Nico";
+
+}
+
+#fadeScreen{
+
+    position:fixed;
+
+    inset:0;
+
+    background:black;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:opacity 3.5s ease;
+
+    z-index:9999;
+
+}
+
+#machine{
+
+    width:650px;
+
+    background:#111;
+
+    border:3px solid #2a2a2a;
+
+    border-radius:12px;
+
+    margin:40px auto;
+
+    padding:30px;
+
+    #machine{
+
+    z-index:10;
+
+    position:absolute;
+
+    left:50%;
+    top:40px;
+
+    transform:translateX(-50%);
+}
+
+}
+
+#monitor{
+
+    width:420px;
+    height:260px;
+
+    margin:auto;
+
+    background:#000;
+
+    border:6px solid #333;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+}
+
+#screenText{
+
+    opacity:.2;
+
+    text-align:center;
+
+    color:#00ff88;
+
+    font-family:'Courier New', Courier, monospace;
+
+    font-size:28px;
+
+    letter-spacing:2px;
+
+}
+
+#slotLabel{
+
+    margin-top:35px;
+
+    text-align:center;
+
+    font-family:"Title";
+
+    letter-spacing:3px;
+
+    color:#bbb;
+
+}
+
+#powerSection{
+
+    margin-top:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+#powerLight{
+
+    width:12px;
+    height:12px;
+
+    border-radius:50%;
+
+    background:#440000;
+}
+
+#powerText{
+
+    font-family:"Title";
+
+    font-size:16px;
+
+    color:#444444;
+
+}
+
+.labelTitle{
+
+    position:absolute;
+
+    left:50%;
+    top:56%;
+
+    transform:translate(-50%,-50%);
+
+    width:90%;
+
+    text-align:center;
+
+    font-family:"Title";
+
+    font-size:28px;
+
+    line-height:32px;
+
+    color:rgb(190, 190, 190);
+
+    letter-spacing:1px;
+
+    z-index:2;
+
+}
+
+.goldPins{
+
+    position:absolute;
+
+    top:0;
+    left:20px;
+    right:20px;
+
+    height:18px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #caa43b 0px,
+            #caa43b 4px,
+            transparent 4px,
+            transparent 7px
+        );
+
+}
+
+#cartridge::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:14px;
+    right:14px;
+
+    top:24px;
+    bottom:10px;
+
+    background:#363636;
+
+    border:1px solid #555;
+
+}
+
+#cartridgeBay{
+
+    width:400px;
+    height:140px;
+
+    margin:25px auto;
+
+    background:#222;
+
+    border:3px solid #444;
+
+    border-radius:10px;
+
+    padding:15px;
+
+}
+
+@keyframes blink{
+
+    0%,100%{
+        opacity:1;
+    }
+
+    50%{
+        opacity:0.2;
+    }
+
+}
+
+@keyframes drift {
+
+    0%,100%{
+        transform:translate(-50%,-50%);
+    }
+
+    50%{
+        transform:translate(-50%,-49%);
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div id="loaderScreen">
+
+    <div id="machine">
+
+        <div id="monitor">
+
+            <div id="screenText">
+                SYSTEM OFFLINE
+                <br><br>
+                INSERT CARTRIDGE
+            </div>
+
+        </div>
+<br><br><br><br>
+<div id="cartridgeBay">
+
+        <div id="slot"></div>
+
+</div>
+
+        <div id="powerSection">
+
+            <div id="powerLight"></div>
+
+            <div id="powerText">
+                POWER
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="cartridge">
+
+    <div class="labelTitle">
+        THE PERFECT HOME
+    </div>
+
+    <div class="goldPins"></div>
+
+</div>
+
+</div>
+
+
+
+
+<div id="titleScreen">
+
+    <div id="titleContainer">
+
+        <h1 id="title">THE PERFECT HOME</h1>
+
+            <div id="subtitle">...</div>
+
+    </div>
+
+    <div id="pressStart">
+        PRESS SPACE TO BEGIN
+    </div>
+
+    <div id="headphoneNotice">
+        For the best experience, headphones are recommended.
+    </div>
+
+    <div id="errorCode">
+        ERROR_206
+    </div>
+
+</div>
+
+<audio id="titleMusic" loop>
+    <source src="Game/Music/The Perfect Home.mp3" type="audio/mpeg">
+</audio>
+
+<div id="fadeScreen"></div>
+
+</body>
+
+<script>
+
+const title = document.getElementById("title");
+const subtitle = document.getElementById("subtitle");
+const pressStart = document.getElementById("pressStart");
+const music = document.getElementById("titleMusic");
+const headphoneNotice = document.getElementById("headphoneNotice");
+const errorCode = document.getElementById("errorCode");
+const loaderScreen = document.getElementById("loaderScreen");
+const titleScreen = document.getElementById("titleScreen");
+const fadeScreen = document.getElementById("fadeScreen");
+const cartridge = document.getElementById("cartridge");
+
+music.volume = 0;
+
+let started = false;
+
+function revealTitle() {
+
+    setTimeout(() => {
+
+        title.style.opacity = "1";
+
+        setTimeout(() => {
+
+            subtitle.style.opacity = "1";
+
+            setTimeout(() => {
+
+                headphoneNotice.style.opacity = "1";
+
+                setTimeout(() => {
+
+                    errorCode.style.opacity = "1";
+
+                    setTimeout(() => {
+
+                        pressStart.style.opacity = "1";
+
+                        setTimeout(() => {
+
+                            pressStart.style.animation =
+                                "blink 2s ease-in-out infinite";
+
+                        }, 2000);
+
+                    }, 1000);
+
+                }, 1000);
+
+            }, 1500);
+
+        }, 1500);
+
+    }, 1000);
+
+}
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.code !== "Space") return;
+    if(started) return;
+
+    started = true;
+
+    music.play();
+
+    fadeInMusic();
+
+    document.body.style.transition = "opacity 2s";
+    document.body.style.opacity = "0";
+
+    setTimeout(()=>{
+
+        window.location.href = "Game/TPH - Game.html";
+
+    },2000);
+
+});
+
+function fadeInMusic(){
+
+    const fade = setInterval(()=>{
+
+        if(music.volume < 0.15){
+
+            music.volume += 0.01;
+
+        }else{
+
+            clearInterval(fade);
+
+        }
+
+    },100);
+
+}
+
+function success() {
+
+    // Prevent dragging anymore
+    cartridge.style.pointerEvents = "none";
+
+const slot = document.getElementById("slot");
+const slotRect = slot.getBoundingClientRect();
+
+cartridge.style.transition = "all .35s ease";
+
+cartridge.style.left =
+    (slotRect.left + (slotRect.width - cartridge.offsetWidth) / 2) + "px";
+
+cartridge.style.top =
+    (slotRect.top + (slotRect.height - cartridge.offsetHeight) / 2) + "px";
+
+cartridge.style.transform = "none";
+cartridge.style.bottom = "auto";
+
+    document.getElementById("powerLight").style.background = "#00ff66";
+
+    document.getElementById("powerLight").style.boxShadow =
+    "0 0 12px #00ff66";
+
+    document.getElementById("screenText").style.opacity = "1";
+
+    document.getElementById("screenText").innerHTML =
+    "LOADING...";
+
+    // Small delay so the player sees it click in
+    setTimeout(() => {
+
+        // Fade to black
+        fadeScreen.style.opacity = "1";
+
+        // Wait until black
+        setTimeout(() => {
+
+loaderScreen.style.display = "none";
+
+titleScreen.classList.add("show");
+
+            // Begin your title reveal
+            revealTitle();
+
+            // Start music
+            music.play();
+            fadeInMusic();
+
+            // Fade back from black
+            setTimeout(() => {
+
+                fadeScreen.style.opacity = "0";
+
+            },300);
+
+        },4000);
+
+    },5000);
+
+}
+
+let dragging = false;
+
+let offsetX = 0;
+let offsetY = 0;
+
+cartridge.addEventListener("mousedown", (e) => {
+
+    dragging = true;
+
+    const rect = cartridge.getBoundingClientRect();
+
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+
+    cartridge.style.cursor = "grabbing";
+
+});
+
+document.addEventListener("mousemove", (e) => {
+
+    if (!dragging) return;
+
+    cartridge.style.left = (e.clientX - offsetX) + "px";
+    cartridge.style.top = (e.clientY - offsetY) + "px";
+
+    cartridge.style.bottom = "auto";
+    cartridge.style.transform = "none";
+
+});
+
+document.addEventListener("mouseup", () => {
+
+    if (!dragging) return;
+
+    dragging = false;
+
+    cartridge.style.cursor = "grab";
+
+    const slot = document.getElementById("slot");
+
+    const tapeRect = cartridge.getBoundingClientRect();
+    const slotRect = slot.getBoundingClientRect();
+
+    const tapeCenterX = tapeRect.left + tapeRect.width / 2;
+    const tapeCenterY = tapeRect.top + tapeRect.height / 2;
+
+    const slotCenterX = slotRect.left + slotRect.width / 2;
+    const slotCenterY = slotRect.top + slotRect.height / 2;
+
+    const distance = Math.hypot(
+        tapeCenterX - slotCenterX,
+        tapeCenterY - slotCenterY
+    );
+
+    if (distance < 100) {
+
+        success();
+
+    } else {
+
+        cartridge.style.transition = "all .4s ease";
+
+        cartridge.style.left = "50%";
+        cartridge.style.bottom = "80px";
+        cartridge.style.top = "auto";
+        cartridge.style.transform = "translateX(-50%)";
+
+        setTimeout(() => {
+            cartridge.style.transition = "";
+        }, 400);
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

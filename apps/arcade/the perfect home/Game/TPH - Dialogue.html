@@ -1,0 +1,1189 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>...</title>
+
+<!-- Disable CTRL U -->
+<script>
+  document.onkeydown = function(e) {
+    if (e.ctrlKey && e.keyCode === 85) {
+      return false;
+    }
+  };
+</script>
+
+<style>
+
+@font-face {
+    font-family: "Riday";
+    src: url("Fonts/Ridayparcia-JRgqn.otf");
+}
+
+@font-face {
+    font-family: "Roslyn";
+    src: url("Fonts/BetterGrade-519DV.ttf");
+}
+
+@font-face {
+    font-family: "Nico";
+    src: url("Fonts/NicoVoide-Regular.ttf");
+}
+
+html,
+body {
+
+    width:100%;
+    height:100%;
+
+    margin:0;
+    padding:0;
+
+    overflow:hidden;
+
+    background:black;
+    color:white;
+
+    font-family:'Riday';
+    line-height:50px;
+
+}
+
+#story{
+
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%, -50%);
+
+    width:800px;
+
+    white-space:pre-wrap;
+
+    opacity:1;
+
+    transition:opacity 2s ease;
+
+}
+
+#story.hide {
+    opacity: 0;
+}
+
+#game {
+
+    display:none;
+    opacity:0;
+
+    transition:opacity 3s ease;
+
+    position:relative;
+
+    width:1500px;
+    height:700px;
+
+    background:#000;
+
+    border:4px solid black;
+
+    overflow:hidden;
+
+    transform-origin:center center;
+}
+
+#game.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+#fade {
+    position: fixed;
+    inset: 0;
+    background: black;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s;
+}
+
+#fade.active {
+    opacity: 1;
+}
+
+#player {
+    position: absolute;
+
+    width: 32px;
+    height: 32px;
+
+    left: 50px;
+    top: 50px;
+}
+
+#playerSprite {
+    position: absolute;
+
+    width: 48px;
+    height: 48px;
+
+    left: -16px;
+    top: -16px;
+
+    background-image: url("Images/WhitePlayer.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.wall {
+    position: absolute;
+    background: rgb(0, 0, 0);
+}
+
+.transparent_wall {
+    position: absolute;
+    background: rgba(255, 0, 0, 0);
+}
+
+.npc {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    background-image: url("Images/Interact.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#dialogueBox {
+    position: absolute;
+
+    width: 780px;
+    height: 100px;
+
+    bottom: 0px;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: rgba(0,0,0,0.9);
+    border: 2px solid #0877fd;
+    color: white;
+
+    box-sizing: border-box;
+
+    display: none;
+
+    z-index: 100;
+
+    padding: 20px;
+    font-size: 40px;
+    font-family:'Riday';
+}
+
+#controlsBox {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+
+    width: 220px;
+
+    background: rgba(0,0,0,0.9);
+    color: white;
+
+    border: 2px solid oklch(47.747% 0.19594 29.223);
+    border-radius: 10px;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+}
+
+#controlsBox h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+#controlsBox p {
+    margin: 8px 0;
+    font-family: 'NicoVoide';
+}
+
+.trigger {
+    position: absolute;
+    background: rgba(0, 255, 0, 0);
+}
+
+#actionPrompt {
+    position: absolute;
+    display: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-family: 'NicoVoide';
+    color: #ff0000;
+}
+
+#gameContainer{
+
+    width:100vw;
+    height:100vh;
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    overflow:hidden;
+
+}
+
+#credits {
+    position: fixed;
+    inset: 0;
+
+    background: black;
+    color: white;
+
+    display: none;
+    overflow: hidden;
+
+    opacity: 1;
+    transition: opacity 2s ease;
+
+    z-index: 5000;
+}
+
+#creditsContent {
+
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 100%;
+    animation: scrollCredits 40s linear forwards;
+    animation-play-state: paused;
+
+    color:white;
+    font-family: 'Nico';
+    font-size: 30px;
+    line-height: 0;
+
+}
+
+@keyframes scrollCredits {
+
+    from {
+        top: 100%;
+    }
+
+    to {
+        top: -180%;
+    }
+
+}
+
+#startPrompt {
+    position: fixed;
+
+    left: 50%;
+    bottom: 80px;
+
+    transform: translateX(-50%);
+
+    font-family: 'Nico';
+    font-size: 28px;
+    color: white;
+
+    opacity: 0;
+
+    transition: opacity 2s ease;
+}
+
+#startPrompt.show {
+    opacity: 1;
+}
+
+#startPrompt.hide {
+    opacity: 0;
+    animation: none;
+    pointer-events: none;
+}
+
+#fontPreload{
+
+    position:absolute;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    left:-9999px;
+
+}
+
+@keyframes blink {
+
+    0%,100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.2;
+    }
+
+}
+
+.Roslyn { color: #c00000; font-family: 'Roslyn'; font-size: 65px; line-height: 0px; }
+.RoslynPunctuation { color: #c00000; font-family: 'Roslyn'; font-size: 125px; line-height: 0px; }
+.Nico { color: #ffc20e; font-family: 'Nico'; font-size: 24px; line-height: 0px; }
+.green { color: #66ff99; }
+
+</style>
+</head>
+<body>
+
+<div id="fontPreload">
+
+    <span style="font-family:'Riday';">.</span>
+    <span style="font-family:'Roslyn';">.</span>
+    <span style="font-family:'Nico';">.</span>
+
+</div>
+
+<div id="story"></div>
+
+<div id="startPrompt">
+    PRESS SPACE TO CONTINUE
+</div>
+
+<div id="fade"></div>
+
+<div id="gameContainer">
+
+<div id="game">
+    <canvas id="gameCanvas"></canvas>
+
+<div id="player">
+    <div id="playerSprite"></div>
+</div>
+
+    <div id="dialogueBox"></div>
+    <div id="actionPrompt"></div>
+
+    <!-- Border -->
+
+    <div class="wall" style="left:0; top:0; width:1500px; height:10px;"></div>
+    <div class="wall" style="left:0; bottom:0; width:1500px; height:10px;"></div>
+    <div class="wall" style="left:0; top:0; width:10px; height:700px;"></div>
+    <div class="wall" style="right:0; top:0; width:10px; height:700px;"></div>
+
+    <div class="npc"
+         id="npc1"
+         data-dialogue='[
+         {"text":"Does it feel good?","color":"white"},
+         {"text":"Digging up the past they tried so desperately to keep buried.","color":"white"},
+         {"text":"...","color":"white","speed":300},
+         {"text":"Are you happy with yourself?","color":"white"},
+         {"text":"You\u0027re forcing a child to relive their most traumatic memories.","color":"white"},
+         {"text":"...","color":"white","speed":300},
+         {"text":"I suppose it doesn\u0027t matter.","color":"white"},
+         {"text":"He\u0027s dead anyways.","color":"#b10000","speed":300}
+        ]'
+         style="right:100px; top:400px;">
+    </div>
+
+</div>
+</div>
+
+<div id="credits">
+
+    <div id="creditsContent">
+
+        <h1 style = "margin-bottom: 300px;">THANK YOU FOR PLAYING.</h1>
+
+        <p style = "font-size: 40;">STORY</p>
+        <br>
+        <p class="glitchText" data-text="NJKO VLEDE" style = "margin-bottom: 200px;">NICO VOIDE</p>
+
+        <p style = "font-size: 40;">PROGRAMMING</p>
+        <br>
+        <p class="glitchText" data-text="MENTEM" style = "margin-bottom: 200px;">MENTEM</p>
+
+        <br><br>
+
+        <p style = "font-size: 40;">DESIGN</p>
+        <br>
+        <p class="glitchText" data-text="MCNKANA" style = "margin-bottom: 300px;"> KALIANA</p>
+
+        <p style = "font-size: 40;">MUSIC</p>
+        <br>
+        <p style = "margin-bottom: 60px;">TITLE SCREEN d THE PERFECT HOME</p>
+        <p style = "margin-bottom: 60px;">GAME d DARKEST CHILD</p>
+        <p style = "margin-bottom: 60px;">DIALOGUE d DON'T GO IN THERE</p>
+        <p style = "margin-bottom: 300px;">CREDITS d DUALISM</p>
+
+
+
+        <br><br><br>
+
+        <h2>THE END..?</h2>
+
+    </div>
+
+</div>
+
+<audio id="storyMusic" loop>
+    <source src="Music/Dont Go In There.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="creditsMusic" loop>
+    <source src="Music/Dualism.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+window.onload = () => {
+
+    if (DEV_MODE !== "normal") return;
+
+    const prompt = document.getElementById("startPrompt");
+
+    // Wait a moment before beginning the fade
+    setTimeout(() => {
+
+        prompt.classList.add("show");
+
+        // After the fade finishes, start blinking
+        setTimeout(() => {
+            prompt.style.animation = "blink 2s ease-in-out infinite";
+        }, 2000);
+
+    }, 1000);
+
+};
+
+const DEV_MODE = "normal";
+
+const storyMusic = document.getElementById("storyMusic");
+const creditsMusic = document.getElementById("creditsMusic");
+
+storyMusic.volume = 0;
+creditsMusic.volume = 0;
+
+const dialogue = [
+    { text: "What are you doing here.",
+    color: "Roslyn",
+    speed: 200,
+    pause: 1500
+},
+
+    { text: "I'M SORRY.",
+    color: "Nico",
+    speed: 50,
+    pause: 2000
+},
+
+    { text: "You shouldn't be here.",
+    color: "Roslyn",
+    speed: 200,
+    pause: 800
+},
+
+    { text: "I'M SORRY.",
+    color: "Nico",
+    speed: 50,
+    pause: 1500
+},
+
+    { text: "Where is he?",
+    color: "Roslyn",
+    speed: 200,
+    pause: 800
+ },
+
+    { text: "HE'S NOT HOME YET, REMEMBER?",
+    color: "Nico",
+    speed: 100,
+    pause: 1000
+ },
+
+    { text: "...",
+    color: "RoslynPunctuation",
+    speed: 1000,
+    pause: 1000
+ },
+
+    { text: "Is that what she told you?",
+    color: "Roslyn",
+    speed: 200,
+    pause: 800
+ },
+
+    { text: "NO.",
+    color: "Nico",
+    speed: 125,
+    pause: 2000
+ },
+
+    { text: "She's telling you lies.",
+    color: "Roslyn",
+    speed: 200,
+    pause: 800
+ },
+
+    { text: "SHE'S NOT.",
+    color: "Nico",
+    speed: 50,
+    pause: 2000
+ },
+
+    { text: "...",
+    color: "RoslynPunctuation",
+    speed: 1000,
+    pause: 1000
+ },
+
+    { text: "...PLEASE DON'T HURT HER.",
+    color: "Nico",
+    speed: 125,
+    pause: 2000
+ },
+
+    { text: "Go to your room.",
+    color: "Roslyn",
+    speed: 200,
+    pause: 1000
+ },
+
+    { text: "...I'M SORRY.",
+    color: "Nico",
+    speed: 150,
+    pause: 100000
+ },
+
+];
+
+const storyDiv = document.getElementById("story");
+const typingSpeed = 180;
+const STORY_START_DELAY = 6000;
+
+let lineIndex = 0;
+let charIndex = 0;
+let currentSpan;
+let typing = false;
+
+function typeLine() {
+
+    if (charIndex === 0) {
+        currentSpan = document.createElement("span");
+        currentSpan.className = dialogue[lineIndex].color;
+        storyDiv.appendChild(currentSpan);
+    }
+
+    if (charIndex < dialogue[lineIndex].text.length) {
+
+        currentSpan.textContent += dialogue[lineIndex].text.charAt(charIndex);
+        charIndex++;
+
+        const currentSpeed = dialogue[lineIndex].speed || typingSpeed;
+        setTimeout(typeLine, currentSpeed);
+
+    } else {
+
+        storyDiv.appendChild(document.createElement("br"));
+        storyDiv.appendChild(document.createElement("br"));
+
+        lineIndex++;
+        charIndex = 0;
+
+        if (lineIndex < dialogue.length) {
+
+            const pause = dialogue[lineIndex - 1].pause || 1000;
+            setTimeout(typeLine, pause);
+
+        } else {
+
+            storyFinished();
+
+        }
+    }
+}
+
+function storyFinished() {
+
+    const fade = document.getElementById("fade");
+
+    fade.classList.add("active");
+
+    setTimeout(() => {
+
+        document.getElementById("story").style.display = "none";
+
+        const game = document.getElementById("game");
+        game.style.display = "block";
+
+        requestAnimationFrame(() => {
+            game.style.opacity = "1";
+        });
+
+        gameLoop();
+
+        // Wait before removing black overlay
+        setTimeout(() => {
+            fade.classList.remove("active");
+        }, 1000);
+
+    }, 2000);
+}
+
+if (lineIndex >= dialogue.length) {
+    storyFinished();
+}
+
+let storyStarted = false;
+
+function startStory() {
+
+    if (storyStarted) return;
+
+    storyStarted = true;
+
+    const prompt = document.getElementById("startPrompt");
+
+    // Stop blinking
+    prompt.style.animation = "none";
+
+    // Force the browser to notice the animation stopping
+    void prompt.offsetWidth;
+
+    // Fade out
+    prompt.classList.add("hide");
+
+    // Wait for the fade to finish
+setTimeout(() => {
+
+    prompt.remove();
+
+    // Start the music immediately
+    fadeIn(storyMusic, 0.15, 200);
+
+    // Wait before showing the first line
+    setTimeout(() => {
+
+        typeLine();
+
+    }, STORY_START_DELAY);
+
+}, 2000);
+
+}
+
+
+
+
+
+
+
+const player = document.getElementById("player");
+const dialogueBox = document.getElementById("dialogueBox");
+
+let playerX = 50;
+let playerY = 415;
+const moveSpeed = 3;
+
+const keys = {};
+
+let talking = false;
+let currentNPC = null;
+let dialogueLines = [];
+let dialogueIndex = 0;
+let typingInterval = null;
+
+document.addEventListener("keydown", (e) => {
+
+    if (
+        DEV_MODE === "normal" &&
+        !storyStarted &&
+        e.code === "Space"
+    ) {
+
+        e.preventDefault();
+
+        startStory();
+
+        return;
+    }
+
+});
+
+document.addEventListener("keydown", (e) => {
+
+    keys[e.key] = true;
+
+if (e.key.toLowerCase() === "e") {
+
+    if (talking) return;
+
+    const npc = findNearbyNPC();
+
+    if (npc) {
+        startDialogue(npc);
+        return;
+    }
+
+    const trigger = findNearbyTrigger();
+
+    if (trigger) {
+
+        window.location.href =
+            trigger.dataset.destination;
+
+    }
+
+}
+
+if (e.code === "Space") {
+
+    if (!talking) return;
+
+    if (typing) return;
+
+    nextDialogue();
+
+}
+
+});
+
+document.addEventListener("keyup", (e) => {
+    keys[e.key] = false;
+});
+
+function checkCollision(rect1, rect2) {
+
+    return (
+        rect1.left < rect2.right &&
+        rect1.right > rect2.left &&
+        rect1.top < rect2.bottom &&
+        rect1.bottom > rect2.top
+    );
+
+}
+
+function movePlayer() {
+
+    if (talking) return;
+
+    let newX = playerX;
+    let newY = playerY;
+
+    if (keys["ArrowUp"]) newY -= moveSpeed;
+    if (keys["ArrowDown"]) newY += moveSpeed;
+    if (keys["ArrowLeft"]) newX -= moveSpeed;
+    if (keys["ArrowRight"]) newX += moveSpeed;
+
+    player.style.left = newX + "px";
+    player.style.top = newY + "px";
+
+    const playerRect = player.getBoundingClientRect();
+
+    let blocked = false;
+
+    document.querySelectorAll(".wall").forEach(wall => {
+
+        if (
+            checkCollision(
+                playerRect,
+                wall.getBoundingClientRect()
+            )
+        ) {
+            blocked = true;
+        }
+
+    });
+
+    if (!blocked) {
+        playerX = newX;
+        playerY = newY;
+    }
+
+    player.style.left = playerX + "px";
+    player.style.top = playerY + "px";
+}
+
+function findNearbyNPC() {
+
+    for (const npc of document.querySelectorAll(".npc")) {
+
+        const playerRect = player.getBoundingClientRect();
+        const npcRect = npc.getBoundingClientRect();
+
+        const closeEnough =
+            Math.abs(playerRect.left - npcRect.left) < 70 &&
+            Math.abs(playerRect.top - npcRect.top) < 70;
+
+        if (closeEnough) {
+            return npc;
+        }
+
+    }
+
+    return null;
+}
+
+function startDialogue(npc) {
+
+    talking = true;
+    currentNPC = npc;
+
+    dialogueLines = JSON.parse(
+        npc.dataset.dialogue
+    );
+
+    dialogueIndex = 0;
+
+    dialogueBox.style.color =
+        npc.dataset.color || "white";
+
+    dialogueBox.style.display = "block";
+
+const line = dialogueLines[dialogueIndex];
+
+dialogueBox.style.color = line.color;
+typeText(line.text, line.speed || 35);
+}
+
+function nextDialogue() {
+
+    dialogueIndex++;
+
+if (dialogueIndex >= dialogueLines.length) {
+
+    talking = false;
+    currentNPC = null;
+
+    dialogueBox.style.display = "none";
+
+    endGame();
+
+    return;
+}
+
+const line = dialogueLines[dialogueIndex];
+
+dialogueBox.style.color = line.color;
+typeText(line.text, line.speed || 35);
+
+}
+
+function typeText(text, speed) {
+
+    clearInterval(typingInterval);
+
+    typing = true;
+
+    dialogueBox.textContent = "";
+
+    let index = 0;
+
+    typingInterval = setInterval(() => {
+
+        dialogueBox.textContent += text[index];
+        index++;
+
+        if (index >= text.length) {
+            clearInterval(typingInterval);
+            typing = false;
+        }
+
+    }, speed);
+
+}
+
+function findNearbyTrigger() {
+
+    const playerRect =
+        player.getBoundingClientRect();
+
+    for (const trigger of document.querySelectorAll(".trigger")) {
+
+        const triggerRect =
+            trigger.getBoundingClientRect();
+
+        if (
+            checkCollision(
+                playerRect,
+                triggerRect
+            )
+        ) {
+            return trigger;
+        }
+    }
+
+    return null;
+}
+
+
+function gameLoop() {
+
+    movePlayer();
+
+    updatePrompt();
+
+    requestAnimationFrame(gameLoop);
+
+}
+
+const actionPrompt =
+    document.getElementById("actionPrompt");
+
+function updatePrompt() {
+
+    if (talking) {
+
+        return;
+
+    }
+
+    const trigger = findNearbyTrigger();
+
+    if (trigger) {
+
+        actionPrompt.style.display = "block";
+
+        actionPrompt.textContent =
+            "Enter?";
+
+        actionPrompt.style.left =
+            trigger.offsetLeft + "px";
+
+        actionPrompt.style.top =
+            (trigger.offsetTop - 25) + "px";
+
+        return;
+    }
+
+    actionPrompt.style.display = "none";
+}
+
+switch (DEV_MODE) {
+
+    case "normal":
+        // The story is started in window.onload
+        break;
+
+    case "game": {
+
+        document.getElementById("story").style.display = "none";
+        document.getElementById("fade").style.display = "none";
+
+        const game = document.getElementById("game");
+
+        game.style.display = "block";
+        game.style.opacity = "1";
+
+        gameLoop();
+
+        break;
+    }
+
+case "credits": {
+
+    document.getElementById("story").style.display = "none";
+    document.getElementById("fade").style.display = "none";
+    document.getElementById("gameContainer").style.display = "none";
+
+    const credits = document.getElementById("credits");
+
+    credits.style.display = "block";
+
+    fadeIn(creditsMusic, 0.15, 3000);
+
+    break;
+    }
+}
+
+function endGame() {
+
+    const game = document.getElementById("game");
+    const fade = document.getElementById("fade");
+
+    dialogueBox.style.display = "none";
+
+    fadeOut(storyMusic, 3000);
+
+    game.style.opacity = "0";
+
+    setTimeout(() => {
+
+        fade.classList.add("active");
+
+        setTimeout(() => {
+
+            document.getElementById("gameContainer").style.display = "none";
+
+const credits = document.getElementById("credits");
+
+credits.style.display = "block";
+
+fadeIn(creditsMusic, 0.45, 3000);
+
+requestAnimationFrame(() => {
+    credits.style.opacity = "1";
+});
+
+fade.classList.remove("active");
+
+// Wait before the credits begin scrolling
+setTimeout(() => {
+
+    document.getElementById("creditsContent").style.animationPlayState = "running";
+
+}, 3000);
+
+        }, 1000);
+
+    }, 1000);
+
+}
+
+const credits = document.getElementById("creditsContent");
+
+credits.addEventListener("animationend", () => {
+
+    const creditsScreen = document.getElementById("credits");
+
+    // Fade out the credits music
+    fadeOut(creditsMusic, 2000);
+
+    // Fade the credits to black
+    creditsScreen.style.opacity = "0";
+
+    setTimeout(() => {
+
+        window.location.href = "TPH - Title.html";
+
+    }, 2000);
+
+});
+
+const letters =
+"ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+document.querySelectorAll(".glitchText").forEach(startGlitch);
+
+function startGlitch(element) {
+
+    const original = element.dataset.text;
+
+    const letterTimers = [];
+    let current = original.split("");
+
+    element.textContent = current.join("");
+
+    for (let i = 0; i < original.length; i++) {
+
+        if (original[i] === " ") continue;
+
+        // Give each letter its own permanent speed
+        letterTimers[i] = 60 + Math.random() * 1;
+
+        glitchLetter(i);
+    }
+
+    function glitchLetter(index) {
+
+        const delay = letterTimers[index];
+
+        setTimeout(() => {
+
+            if (Math.random() < 0.4) {
+
+                current[index] =
+                    letters[Math.floor(Math.random() * letters.length)];
+
+            } else {
+
+                current[index] = original[index];
+
+            }
+
+            element.textContent = current.join("");
+
+            glitchLetter(index);
+
+        }, delay);
+    }
+}
+
+function fadeIn(audio, targetVolume = 0.5, duration = 3000) {
+
+    audio.volume = 0;
+    audio.play();
+
+    const step = targetVolume / (duration / 50);
+
+    const fade = setInterval(() => {
+
+        if (audio.volume < targetVolume) {
+
+            audio.volume = Math.min(audio.volume + step, targetVolume);
+
+        } else {
+
+            clearInterval(fade);
+
+        }
+
+    }, 50);
+
+}
+
+function fadeOut(audio, duration = 3000) {
+
+    const step = audio.volume / (duration / 50);
+
+    const fade = setInterval(() => {
+
+        if (audio.volume > step) {
+
+            audio.volume -= step;
+
+        } else {
+
+            audio.volume = 0;
+            audio.pause();
+            audio.currentTime = 0;
+
+            clearInterval(fade);
+
+        }
+
+    }, 50);
+
+}
+
+const game = document.getElementById("game");
+
+function resizeGame() {
+
+    const scale = Math.min(
+        window.innerWidth / 1500,
+        window.innerHeight / 700
+    );
+
+    game.style.transform = `scale(${scale})`;
+
+}
+
+window.addEventListener("resize", resizeGame);
+
+resizeGame();
+
+
+
+
+</script>
+
+
+</body>
+</html>
