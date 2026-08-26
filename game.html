@@ -1,0 +1,2343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>ARG Computer</title>
+
+    <style>
+
+        :root {
+
+        --accent-color: #3498DB;
+
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #111;
+        }
+
+
+        /* ========================================
+           COMPUTER
+        ======================================== */
+
+        #computer {
+            width: 100vw;
+            height: 100vh;
+
+            display: flex;
+            flex-direction: column;
+
+            background: #222;
+            color: white;
+        }
+
+
+        /* ========================================
+           TOP BAR
+        ======================================== */
+
+#topBar {
+
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 18px;
+
+    background: #0b0b0b;
+
+    border-bottom: 1px solid #555;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.5);
+
+}
+
+
+#systemName {
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+}
+
+
+#systemStatus {
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    color: #aaa;
+
+}
+
+
+        /* ========================================
+           DESKTOP
+        ======================================== */
+
+#desktop {
+
+    flex: 1;
+
+    position: relative;
+
+    padding: 30px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+
+    gap: 25px;
+
+    background:
+        radial-gradient(
+            circle at center,
+            #303030 0%,
+            #191919 100%
+        );
+
+    overflow: hidden;
+
+}
+
+
+        /* ========================================
+           APPLICATION ICON
+        ======================================== */
+
+.application {
+
+    width: 100px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 10px;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    border: 1px solid var(--accent-color);
+
+    transition:
+        background 0.15s,
+        border-color 0.15s;
+
+    box-shadow:
+    inset 0 0 10px rgba(0,0,0,0.5),
+    0 0 8px color-mix(
+        in srgb,
+        var(--accent-color) 40%,
+        transparent
+    );
+
+}
+
+
+.application:hover {
+
+    background: rgba(255,255,255,0.08);
+
+    border-color: rgba(255,255,255,0.2);
+
+}
+
+
+.applicationIcon {
+
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+
+    margin-bottom: 8px;
+
+    background: rgba(0,0,0,0.25);
+
+    border: 1px solid #555;
+
+    box-shadow:
+        inset 0 0 10px rgba(0,0,0,0.5),
+        0 3px 8px rgba(0,0,0,0.4);
+
+}
+
+
+.applicationName {
+
+    width: 100%;
+
+    text-align: center;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+
+    word-break: break-word;
+
+    color: #ddd;
+
+}
+
+
+        /* ========================================
+           LOCKED APPLICATION
+        ======================================== */
+
+.locked {
+
+    opacity: 0.35;
+
+    filter: grayscale(1);
+
+    cursor: not-allowed;
+
+}
+
+.locked .applicationIcon {
+
+    background: rgba(0,0,0,0.45);
+
+    border-color: #333;
+
+}
+
+.locked .applicationName {
+
+    color: #777;
+
+}
+
+
+        /* ========================================
+           BOTTOM BAR
+        ======================================== */
+
+        #bottomBar {
+
+            height: 40px;
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 15px;
+
+            background: #111;
+            border-top: 2px solid #444;
+
+            font-size: 13px;
+
+        }
+
+
+#logoutButton {
+
+    height: 34px;
+
+    padding: 0 14px;
+
+    background: #191919;
+
+    border: 1px solid #555;
+
+    color: #ccc;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+}
+
+#logoutButton:hover {
+
+    background: #303030;
+
+    color: white;
+
+}
+
+
+        /* ========================================
+           LOADING
+        ======================================== */
+
+        #loading {
+
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            font-size: 20px;
+
+        }
+
+
+/* ========================================
+   WINDOW CONTAINER
+======================================== */
+
+#windowContainer {
+
+    position: absolute;
+
+    top: 48px;
+    left: 0;
+    right: 0;
+    bottom: 46px;
+
+    pointer-events: none;
+
+    z-index: 100;
+
+}
+
+/* ========================================
+   APPLICATION WINDOWS
+======================================== */
+
+.appWindow {
+
+    position: absolute;
+
+    top: 80px;
+    left: 200px;
+
+    width: 800px;
+    height: 550px;
+
+    min-width: 400px;
+    min-height: 250px;
+
+    background: #161616;
+
+    border: 1px solid var(--accent-color);
+
+    display: none;
+
+    flex-direction: column;
+
+    z-index: 100;
+
+    pointer-events: auto;
+
+    box-shadow:
+        10px 10px 30px rgba(0,0,0,0.65);
+
+}
+
+
+/* ========================================
+   WINDOW HEADER
+======================================== */
+
+.appWindowHeader {
+
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding-left: 12px;
+
+    background: #0b0b0b;
+
+    border-bottom: 1px solid #555;
+
+    cursor: move;
+
+    user-select: none;
+
+}
+
+
+.appWindowTitle {
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    color: #ddd;
+
+}
+
+
+/* ========================================
+   WINDOW BUTTONS
+======================================== */
+
+.windowButtons {
+
+    display: flex;
+
+    height: 100%;
+
+}
+
+
+.windowButton {
+
+    width: 38px;
+
+    height: 100%;
+
+    border: none;
+
+    border-left: 1px solid #333;
+
+    background: transparent;
+
+    color: #aaa;
+
+    cursor: pointer;
+
+    font-size: 14px;
+
+}
+
+.windowButton:hover {
+
+    background: #333;
+
+    color: white;
+
+}
+
+
+/* ========================================
+   WINDOW CONTENT
+======================================== */
+
+.appWindowContent {
+
+    flex: 1;
+
+    background: #222;
+
+    overflow: hidden;
+
+}
+
+
+.appWindowContent iframe {
+
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+}
+
+/* ========================================
+   WINDOW RESIZE HANDLE
+======================================== */
+
+.windowResizeHandle {
+
+    position: absolute;
+
+    right: 0;
+    bottom: 0;
+
+    width: 16px;
+    height: 16px;
+
+    cursor: nwse-resize;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent 0%,
+            transparent 45%,
+            #777 45%,
+            #777 55%,
+            transparent 55%,
+            transparent 100%
+        );
+
+}
+
+
+/* ========================================
+   TASKBAR
+======================================== */
+
+#taskbar {
+
+    height: 46px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    padding: 5px 8px;
+
+    background: #0b0b0b;
+
+    border-top: 1px solid #555;
+
+    box-shadow:
+        0 -2px 8px rgba(0,0,0,0.5);
+
+}
+
+
+.taskbarApplication {
+
+    height: 34px;
+
+    min-width: 110px;
+
+    padding: 0 12px;
+
+    border: 1px solid #444;
+
+    background: #181818;
+
+    color: #bbb;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+}
+
+.taskbarApplication:hover {
+
+    background: var(--accent-color);
+
+    color: white;
+
+}
+
+
+.taskbarApplication.active {
+
+    background: #444;
+
+}
+
+#taskbarInfo {
+
+    margin-left: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    color: #888;
+
+}
+
+#username {
+
+    color: var(--accent-color);
+
+    font-weight: bold;
+
+}
+
+#clock {
+
+    color: #ccc;
+
+    font-variant-numeric: tabular-nums;
+
+}
+
+#computer::after {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            rgba(255,255,255,0.018) 0px,
+            rgba(255,255,255,0.018) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    z-index: 9999;
+
+}
+
+/* ========================================
+   SYSTEM NOTIFICATION
+======================================== */
+
+#systemNotification {
+
+    position: absolute;
+
+    top: 80px;
+    right: 30px;
+
+    width: 360px;
+
+    padding: 18px;
+
+    background: #111;
+
+    border: 1px solid var(--accent-color);
+
+    box-shadow:
+        0 0 20px rgba(0,0,0,0.7),
+        0 0 10px color-mix(
+            in srgb,
+            var(--accent-color) 30%,
+            transparent
+        );
+
+    z-index: 5000;
+
+    display: none;
+
+}
+
+
+#notificationHeader {
+
+    margin-bottom: 12px;
+
+    padding-bottom: 8px;
+
+    border-bottom: 1px solid #444;
+
+    color: var(--accent-color);
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+}
+
+
+#notificationMessage {
+
+    margin-bottom: 18px;
+
+    color: #ddd;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+}
+
+
+#notificationClose {
+
+    padding: 7px 18px;
+
+    background: transparent;
+
+    border: 1px solid var(--accent-color);
+
+    color: var(--accent-color);
+
+    cursor: pointer;
+
+    font-family: inherit;
+
+}
+
+
+#notificationClose:hover {
+
+    background: var(--accent-color);
+
+    color: #111;
+
+}
+
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div id="computer">
+
+
+    <!-- ========================================
+         TOP BAR
+    ======================================== -->
+
+    <div id="topBar">
+
+        <div id="systemName">
+            ARG COMPUTER
+        </div>
+
+        <div id="systemStatus">
+            SYSTEM: <span id="statusText">LOADING...</span>
+        </div>
+
+    </div>
+
+
+    <!-- ========================================
+         DESKTOP
+    ======================================== -->
+
+    <div id="desktop">
+
+        <div id="loading">
+            INITIALIZING SYSTEM...
+        </div>
+
+    </div>
+
+
+<!-- ========================================
+     APPLICATION WINDOWS
+======================================== -->
+
+<div id="windowContainer"></div>
+
+<!-- ========================================
+     SYSTEM NOTIFICATION
+======================================== -->
+
+<div id="systemNotification">
+
+    <div id="notificationHeader">
+        SYSTEM MESSAGE
+    </div>
+
+    <div id="notificationMessage">
+    </div>
+
+    <button id="notificationClose">
+        OK
+    </button>
+
+</div>
+
+
+<!-- ========================================
+     TASKBAR
+======================================== -->
+
+<div id="taskbar">
+
+    <button id="logoutButton">
+        LOG OUT
+    </button>
+
+    <div id="taskbarApplications"></div>
+
+    <div id="taskbarInfo">
+
+        <span>
+            USER: <span id="username">---</span>
+        </span>
+
+        <span>
+            CHAPTER: <span id="chapter">---</span>
+        </span>
+
+        <span id="clock">
+            --:--:--
+        </span>
+
+    </div>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+
+    /* ========================================
+       SUPABASE
+    ======================================== */
+
+        const SUPABASE_URL = "https://fyhxgigfatooxkxlxipz.supabase.co";
+        const SUPABASE_KEY = "sb_publishable_vq5sbfZOEZV5SR1m0uuicw_W2Rqd6-L";
+
+
+    const supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+    /* ========================================
+       ELEMENTS
+    ======================================== */
+
+    const desktop =
+        document.getElementById("desktop");
+
+    const loading =
+        document.getElementById("loading");
+
+    const username =
+        document.getElementById("username");
+
+    const chapter =
+        document.getElementById("chapter");
+
+    const statusText =
+        document.getElementById("statusText");
+
+    const windowContainer =
+        document.getElementById("windowContainer");
+
+    const taskbarApplications =
+        document.getElementById("taskbarApplications");
+
+    let highestZIndex = 100;
+    let playerAccessLevel = 0;
+
+    const logoutButton =
+        document.getElementById("logoutButton");
+
+const systemNotification =
+    document.getElementById(
+        "systemNotification"
+    );
+
+const notificationMessage =
+    document.getElementById(
+        "notificationMessage"
+    );
+
+const notificationClose =
+    document.getElementById(
+        "notificationClose"
+    );
+
+
+    /* ========================================
+       REAL TIME NOTIFICATIONS
+    ======================================== */
+
+function showSystemNotification(
+    message
+) {
+
+    notificationMessage.textContent =
+        message;
+
+    systemNotification.style.display =
+        "block";
+
+}
+
+notificationClose.addEventListener(
+    "click",
+    () => {
+
+        systemNotification.style.display =
+            "none";
+
+    }
+);
+
+
+    /* ========================================
+       INITIALIZE COMPUTER
+    ======================================== */
+
+    async function initializeComputer() {
+
+
+        /*
+         * 1. CHECK LOGIN
+         */
+
+        const {
+            data: { session }
+        } = await supabaseClient.auth.getSession();
+
+
+        if (!session) {
+
+            window.location.href = "login.html";
+
+            return;
+
+        }
+
+
+
+        /*
+         * 2. GET PLAYER
+         */
+
+        const {
+            data: player,
+            error: playerError
+        } = await supabaseClient
+
+            .from("players")
+
+            .select("username, access_level, color")
+
+            .eq("user_id", session.user.id)
+
+            .single();
+
+
+
+        if (playerError) {
+
+            console.error(
+                "PLAYER ERROR:",
+                playerError
+            );
+
+            loading.textContent =
+                "PLAYER PROFILE ERROR";
+
+            return;
+
+        }
+
+
+
+        /*
+         * DISPLAY PLAYER
+         */
+
+        username.textContent =
+            player.username;
+
+        playerAccessLevel =
+            player.access_level;
+
+        document.documentElement.style.setProperty(
+        "--accent-color",
+        player.color
+        );
+
+        subscribeToGameState();
+        subscribeToApplications();
+
+        /*
+         * 3. GET GAME STATE
+         */
+
+        const {
+            data: gameState,
+            error: gameStateError
+        } = await supabaseClient
+
+            .from("game_state")
+
+            .select(
+                "current_chapter, system_status, system_message"
+            )
+
+            .eq("id", 1)
+
+            .single();
+
+
+
+        if (gameStateError) {
+
+            console.error(
+                "GAME STATE ERROR:",
+                gameStateError
+            );
+
+            loading.textContent =
+                "GAME STATE ERROR";
+
+            return;
+
+        }
+
+
+
+        /*
+         * DISPLAY GAME STATE
+         */
+
+        chapter.textContent =
+            gameState.current_chapter;
+
+        statusText.textContent =
+            gameState.system_status;
+
+
+
+        /*
+         * 4. GET APPLICATIONS
+         */
+
+        const {
+            data: applications,
+            error: applicationError
+        } = await supabaseClient
+
+            .from("applications")
+
+            .select(
+                "id, name, display_name, icon, description, url, required_access_level, unlocked"
+            )
+
+            .order("id");
+
+
+
+        if (applicationError) {
+
+            console.error(
+                "APPLICATION ERROR:",
+                applicationError
+            );
+
+            loading.textContent =
+                "APPLICATION ERROR";
+
+            return;
+
+        }
+
+
+
+        /*
+         * REMOVE LOADING
+         */
+
+        loading.remove();
+
+
+
+        /*
+         * 5. CREATE APPLICATION ICONS
+         */
+
+        applications.forEach(
+            application => {
+
+                createApplicationIcon(
+                    application,
+                    player.access_level
+                );
+
+            }
+        );
+
+    }
+
+
+
+    /* ========================================
+       CREATE APPLICATION ICON
+    ======================================== */
+
+    function createApplicationIcon(
+        application,
+        playerAccessLevel
+    ) {
+
+
+        const icon =
+            document.createElement("div");
+
+
+        icon.className =
+            "application";
+        
+        icon.dataset.applicationId =
+            application.id;
+
+
+
+        /*
+         * Determine whether the player
+         * can access the application.
+         */
+
+        const accessible =
+            application.unlocked &&
+            playerAccessLevel >=
+            application.required_access_level;
+
+
+
+        /*
+         * Locked application
+         */
+
+        if (!accessible) {
+
+            icon.classList.add("locked");
+
+        }
+
+
+
+        /*
+         * Icon
+         */
+
+        const iconImage =
+            document.createElement("div");
+
+
+        iconImage.className =
+            "applicationIcon";
+
+
+        iconImage.textContent =
+            accessible
+                ? application.icon
+                : "🔒";
+
+
+
+        /*
+         * Name
+         */
+
+        const name =
+            document.createElement("div");
+
+
+        name.className =
+            "applicationName";
+
+
+        name.textContent =
+            application.display_name;
+
+
+
+        /*
+         * Add to icon
+         */
+
+        icon.appendChild(
+            iconImage
+        );
+
+        icon.appendChild(
+            name
+        );
+
+
+
+        /*
+         * Click behavior
+         */
+
+        icon.addEventListener(
+            "click",
+            () => {
+
+                if (!accessible) {
+
+                    alert(
+                        "ACCESS DENIED"
+                    );
+
+                    return;
+
+                }
+
+
+                openApplication(
+                    application
+                );
+
+            }
+        );
+
+
+
+        /*
+         * Add to desktop
+         */
+
+        desktop.appendChild(
+            icon
+        );
+
+    }
+
+
+
+    /* ========================================
+       OPEN APPLICATION
+    ======================================== */
+
+function openApplication(application) {
+
+    /*
+     * If the application is already open,
+     * bring its window to the front.
+     */
+
+    const existingWindow =
+        document.getElementById(
+            "window-" + application.id
+        );
+
+    if (existingWindow) {
+
+        highestZIndex++;
+
+        existingWindow.style.zIndex =
+            highestZIndex;
+
+        existingWindow.style.display =
+            "flex";
+
+        return;
+    }
+
+
+    /*
+     * Create window
+     */
+
+    const windowElement =
+        document.createElement("div");
+
+    windowElement.className =
+        "appWindow";
+
+    windowElement.id =
+        "window-" + application.id;
+
+
+    /*
+     * Create header
+     */
+
+    const header =
+        document.createElement("div");
+
+    header.className =
+        "appWindowHeader";
+
+
+    /*
+     * Title
+     */
+
+    const title =
+        document.createElement("span");
+
+    title.className =
+        "appWindowTitle";
+
+    title.textContent =
+        application.display_name;
+
+
+    /*
+     * Window buttons
+     */
+
+    const buttons =
+        document.createElement("div");
+
+    buttons.className =
+        "windowButtons";
+
+
+    /*
+     * Minimize
+     */
+
+    const minimize =
+        document.createElement("button");
+
+    minimize.className =
+        "windowButton";
+
+    minimize.textContent =
+        "—";
+
+
+    /*
+     * Maximize
+     */
+
+    const maximize =
+        document.createElement("button");
+
+    maximize.className =
+        "windowButton";
+
+    maximize.textContent =
+        "□";
+
+
+    /*
+     * Close
+     */
+
+    const close =
+        document.createElement("button");
+
+    close.className =
+        "windowButton";
+
+    close.textContent =
+        "×";
+
+
+    buttons.appendChild(minimize);
+    buttons.appendChild(maximize);
+    buttons.appendChild(close);
+
+
+    header.appendChild(title);
+    header.appendChild(buttons);
+
+
+    /*
+     * Content
+     */
+
+    const content =
+        document.createElement("div");
+
+    content.className =
+        "appWindowContent";
+
+
+    /*
+     * Load the actual application
+     */
+
+const frame =
+    document.createElement("iframe");
+
+console.log(
+    "OPENING APPLICATION:",
+    application.display_name,
+    application.url
+);
+
+frame.src = application.url;
+
+frame.style.width =
+    "100%";
+
+frame.style.height =
+    "100%";
+
+frame.style.border =
+    "none";
+
+content.appendChild(frame);
+
+const resizeHandle =
+    document.createElement("div");
+
+resizeHandle.className =
+    "windowResizeHandle";
+
+windowElement.appendChild(
+    resizeHandle
+);
+
+
+    /*
+     * Assemble window
+     */
+
+    windowElement.appendChild(header);
+    windowElement.appendChild(content);
+
+    windowContainer.appendChild(windowElement);
+
+
+    /*
+     * Display window
+     */
+
+    highestZIndex++;
+
+    windowElement.style.zIndex =
+        highestZIndex;
+
+    windowElement.style.display =
+        "flex";
+
+
+    /*
+     * Close
+     */
+
+    close.addEventListener(
+        "click",
+        () => {
+
+            windowElement.remove();
+
+            const taskButton =
+                document.getElementById(
+                    "task-" + application.id
+                );
+
+            if (taskButton) {
+                taskButton.remove();
+            }
+
+        }
+    );
+
+
+    /*
+     * Minimize
+     */
+
+    minimize.addEventListener(
+        "click",
+        () => {
+
+            windowElement.style.display =
+                "none";
+
+        }
+    );
+
+
+    /*
+     * Maximize
+     */
+
+    let maximized = false;
+
+    maximize.addEventListener(
+        "click",
+        () => {
+
+            maximized =
+                !maximized;
+
+            if (maximized) {
+
+                windowElement.style.left =
+                    "0px";
+
+                windowElement.style.top =
+                    "0px";
+
+                windowElement.style.width =
+                    "100%";
+
+                windowElement.style.height =
+                    "100%";
+
+            } else {
+
+                windowElement.style.left =
+                    "200px";
+
+                windowElement.style.top =
+                    "80px";
+
+                windowElement.style.width =
+                    "800px";
+
+                windowElement.style.height =
+                    "550px";
+
+            }
+
+        }
+    );
+
+
+    /*
+     * Bring window to front
+     */
+
+    windowElement.addEventListener(
+        "mousedown",
+        () => {
+
+            highestZIndex++;
+
+            windowElement.style.zIndex =
+                highestZIndex;
+
+        }
+    );
+
+
+    /*
+     * Create taskbar button
+     */
+
+    const taskButton =
+        document.createElement("button");
+
+    taskButton.className =
+        "taskbarApplication";
+
+    taskButton.id =
+        "task-" + application.id;
+
+    taskButton.textContent =
+        application.display_name;
+
+
+    taskButton.addEventListener(
+        "click",
+        () => {
+
+            windowElement.style.display =
+                "flex";
+
+            highestZIndex++;
+
+            windowElement.style.zIndex =
+                highestZIndex;
+
+        }
+    );
+
+
+    taskbarApplications.appendChild(
+        taskButton
+    );
+
+
+    /*
+     * Make window draggable
+     */
+
+    makeWindowDraggable(
+        windowElement,
+        header
+    );
+
+    makeWindowResizable(
+    windowElement,
+    resizeHandle
+    );
+
+}
+
+    /* ========================================
+       DRAGGING FUNCTION
+    ======================================== */
+
+function makeWindowDraggable(
+    windowElement,
+    header
+) {
+
+    let dragging = false;
+
+    let offsetX = 0;
+    let offsetY = 0;
+
+
+    header.addEventListener(
+        "pointerdown",
+        (event) => {
+
+            /*
+             * Don't start dragging if the user
+             * clicked one of the window buttons.
+             */
+
+            if (
+                event.target.closest(".windowButtons")
+            ) {
+                return;
+            }
+
+
+            dragging = true;
+
+
+            /*
+             * Capture the pointer so dragging
+             * continues even if the cursor moves
+             * quickly.
+             */
+
+            header.setPointerCapture(
+                event.pointerId
+            );
+
+
+            /*
+             * Get the window's current position.
+             */
+
+            const rect =
+                windowElement.getBoundingClientRect();
+
+
+            /*
+             * Get the window container's position.
+             */
+
+            const containerRect =
+                windowContainer.getBoundingClientRect();
+
+
+            /*
+             * Calculate where inside the window
+             * the user clicked.
+             */
+
+            offsetX =
+                event.clientX -
+                rect.left;
+
+            offsetY =
+                event.clientY -
+                rect.top;
+
+
+            /*
+             * Bring the window to the front.
+             */
+
+            highestZIndex++;
+
+            windowElement.style.zIndex =
+                highestZIndex;
+
+
+            /*
+             * Prevent text selection.
+             */
+
+            event.preventDefault();
+
+        }
+    );
+
+
+    header.addEventListener(
+        "pointermove",
+        (event) => {
+
+            if (!dragging) {
+                return;
+            }
+
+
+            const containerRect =
+                windowContainer.getBoundingClientRect();
+
+
+            /*
+             * Calculate the new position
+             * relative to the window container.
+             */
+
+            let newX =
+                event.clientX -
+                containerRect.left -
+                offsetX;
+
+
+            let newY =
+                event.clientY -
+                containerRect.top -
+                offsetY;
+
+
+            /*
+             * Keep the window inside the
+             * computer screen.
+             */
+
+            const maxX =
+                containerRect.width -
+                windowElement.offsetWidth;
+
+
+            const maxY =
+                containerRect.height -
+                windowElement.offsetHeight;
+
+
+            newX =
+                Math.max(
+                    0,
+                    Math.min(
+                        newX,
+                        maxX
+                    )
+                );
+
+
+            newY =
+                Math.max(
+                    0,
+                    Math.min(
+                        newY,
+                        maxY
+                    )
+                );
+
+
+            /*
+             * Apply the position.
+             */
+
+            windowElement.style.left =
+                newX + "px";
+
+            windowElement.style.top =
+                newY + "px";
+
+        }
+    );
+
+
+    header.addEventListener(
+        "pointerup",
+        (event) => {
+
+            dragging = false;
+
+            header.releasePointerCapture(
+                event.pointerId
+            );
+
+        }
+    );
+
+
+    header.addEventListener(
+        "pointercancel",
+        () => {
+
+            dragging = false;
+
+        }
+    );
+
+
+    document.addEventListener(
+        "mousemove",
+        (event) => {
+
+            if (!dragging) {
+                return;
+            }
+
+
+            const desktopRect =
+                desktop.getBoundingClientRect();
+
+
+            let newX =
+                event.clientX -
+                desktopRect.left -
+                offsetX;
+
+
+            let newY =
+                event.clientY -
+                desktopRect.top -
+                offsetY;
+
+
+            /*
+             * Keep the window reasonably
+             * inside the desktop.
+             */
+
+            newX =
+                Math.max(
+                    0,
+                    Math.min(
+                        newX,
+                        desktopRect.width -
+                        windowElement.offsetWidth
+                    )
+                );
+
+
+            newY =
+                Math.max(
+                    0,
+                    Math.min(
+                        newY,
+                        desktopRect.height -
+                        windowElement.offsetHeight
+                    )
+                );
+
+
+            windowElement.style.left =
+                newX + "px";
+
+            windowElement.style.top =
+                newY + "px";
+
+        }
+    );
+
+
+    document.addEventListener(
+        "mouseup",
+        () => {
+
+            dragging = false;
+
+        }
+    );
+
+}
+
+function makeWindowResizable(
+    windowElement,
+    resizeHandle
+) {
+
+    let resizing = false;
+
+    let startX = 0;
+    let startY = 0;
+
+    let startWidth = 0;
+    let startHeight = 0;
+
+
+    resizeHandle.addEventListener(
+        "pointerdown",
+        (event) => {
+
+            resizing = true;
+
+            startX =
+                event.clientX;
+
+            startY =
+                event.clientY;
+
+            startWidth =
+                windowElement.offsetWidth;
+
+            startHeight =
+                windowElement.offsetHeight;
+
+
+            resizeHandle.setPointerCapture(
+                event.pointerId
+            );
+
+
+            highestZIndex++;
+
+            windowElement.style.zIndex =
+                highestZIndex;
+
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+        }
+    );
+
+
+    resizeHandle.addEventListener(
+        "pointermove",
+        (event) => {
+
+            if (!resizing) {
+                return;
+            }
+
+
+            const deltaX =
+                event.clientX -
+                startX;
+
+            const deltaY =
+                event.clientY -
+                startY;
+
+
+            let newWidth =
+                startWidth +
+                deltaX;
+
+            let newHeight =
+                startHeight +
+                deltaY;
+
+
+            /*
+             * Minimum size
+             */
+
+            newWidth =
+                Math.max(
+                    400,
+                    newWidth
+                );
+
+            newHeight =
+                Math.max(
+                    250,
+                    newHeight
+                );
+
+
+            /*
+             * Keep the right edge
+             * inside the computer.
+             */
+
+            const containerRect =
+                windowContainer.getBoundingClientRect();
+
+            const windowRect =
+                windowElement.getBoundingClientRect();
+
+
+            const maxWidth =
+                containerRect.right -
+                windowRect.left;
+
+
+            const maxHeight =
+                containerRect.bottom -
+                windowRect.top;
+
+
+            newWidth =
+                Math.min(
+                    newWidth,
+                    maxWidth
+                );
+
+            newHeight =
+                Math.min(
+                    newHeight,
+                    maxHeight
+                );
+
+
+            windowElement.style.width =
+                newWidth + "px";
+
+            windowElement.style.height =
+                newHeight + "px";
+
+        }
+    );
+
+
+    resizeHandle.addEventListener(
+        "pointerup",
+        (event) => {
+
+            resizing = false;
+
+            resizeHandle.releasePointerCapture(
+                event.pointerId
+            );
+
+        }
+    );
+
+
+    resizeHandle.addEventListener(
+        "pointercancel",
+        () => {
+
+            resizing = false;
+
+        }
+    );
+
+}
+
+
+    /* ========================================
+       LOG OUT
+    ======================================== */
+
+    logoutButton.addEventListener(
+        "click",
+        async () => {
+
+            await supabaseClient.auth.signOut();
+
+            window.location.href =
+                "login.html";
+
+        }
+    );
+
+    /* ========================================
+       CLOCK
+    ======================================== */
+
+function updateClock() {
+
+    const now =
+        new Date();
+
+    const hours =
+        String(
+            now.getHours()
+        ).padStart(2, "0");
+
+    const minutes =
+        String(
+            now.getMinutes()
+        ).padStart(2, "0");
+
+    const seconds =
+        String(
+            now.getSeconds()
+        ).padStart(2, "0");
+
+
+    document.getElementById(
+        "clock"
+    ).textContent =
+        hours + ":" +
+        minutes + ":" +
+        seconds;
+
+}
+
+function subscribeToGameState() {
+
+    console.log("Starting Realtime subscription...");
+
+    const channel = supabaseClient
+        .channel("game-state-changes")
+
+        .on(
+            "postgres_changes",
+            {
+                event: "*",
+                schema: "public",
+                table: "game_state"
+            },
+
+            (payload) => {
+
+                console.log(
+                    "REALTIME EVENT RECEIVED:",
+                    payload
+                );
+
+                const newState =
+                    payload.new;
+
+                if (!newState) {
+                    return;
+                }
+
+                /*
+                 * Update status
+                 */
+
+                statusText.textContent =
+                    newState.system_status;
+
+
+                /*
+                 * Update chapter
+                 */
+
+                chapter.textContent =
+                    newState.current_chapter;
+
+
+                /*
+                 * Show notification
+                 */
+
+                if (
+                    newState.system_message &&
+                    newState.system_message.trim() !== ""
+                ) {
+
+                    showSystemNotification(
+                        newState.system_message
+                    );
+
+                }
+
+            }
+        )
+
+        .subscribe(
+            (status) => {
+
+                console.log(
+                    "Realtime subscription status:",
+                    status
+                );
+
+            }
+        );
+
+
+    return channel;
+
+}
+
+/* ========================================
+   REALTIME APPLICATION UPDATES
+======================================== */
+
+function subscribeToApplications() {
+
+    console.log(
+        "Starting Applications Realtime subscription..."
+    );
+
+
+    const channel =
+        supabaseClient
+
+            .channel(
+                "applications-changes"
+            )
+
+            .on(
+                "postgres_changes",
+                {
+                    event: "UPDATE",
+                    schema: "public",
+                    table: "applications"
+                },
+
+                (payload) => {
+
+                    console.log(
+                        "APPLICATION REALTIME EVENT:",
+                        payload
+                    );
+
+
+                    const updatedApplication =
+                        payload.new;
+
+
+                    if (!updatedApplication) {
+                        return;
+                    }
+
+
+                    updateApplicationIcon(
+                        updatedApplication
+                    );
+
+                }
+            )
+
+            .subscribe(
+                (status) => {
+
+                    console.log(
+                        "Applications Realtime status:",
+                        status
+                    );
+
+                }
+            );
+
+
+    return channel;
+
+}
+
+function updateApplicationIcon(
+    application
+) {
+
+    /*
+     * Find the existing desktop icon.
+     */
+
+    const icon =
+        document.querySelector(
+            `[data-application-id="${application.id}"]`
+        );
+
+
+    /*
+     * If it doesn't exist, something went
+     * wrong or the application wasn't loaded.
+     */
+
+    if (!icon) {
+
+        console.warn(
+            "Could not find application icon:",
+            application.id
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Determine whether the player
+     * can access the application.
+     */
+
+    const accessible =
+        application.unlocked &&
+        playerAccessLevel >=
+            application.required_access_level;
+
+
+    /*
+     * Find the icon itself.
+     */
+
+    const iconImage =
+        icon.querySelector(
+            ".applicationIcon"
+        );
+
+
+    /*
+     * Update locked/unlocked appearance.
+     */
+
+    if (accessible) {
+
+        icon.classList.remove(
+            "locked"
+        );
+
+
+        iconImage.textContent =
+            application.icon;
+
+    } else {
+
+        icon.classList.add(
+            "locked"
+        );
+
+
+        iconImage.textContent =
+            "🔒";
+
+    }
+
+}
+
+
+updateClock();
+
+setInterval(
+    updateClock,
+    1000
+);
+
+    /* ========================================
+       START
+    ======================================== */
+
+initializeComputer();
+
+
+</script>
+
+
+</body>
+
+</html>
