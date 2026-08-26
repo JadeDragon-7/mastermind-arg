@@ -263,7 +263,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Avery.png" width="277" height="256.5" >
+<img src="Pictures/V2/Avery.png" width="277" height="256.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Santa Monica Police Department:</b> (424)-837-2269</p>
 <p></p>
@@ -353,8 +353,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/NOT-PLAYERS/Axel Gordon.jpg" width="184" height="290" >
-<img src="PICTURES/NOT-PLAYERS/Axel Gordon 2.jpg" width="184" height="242">
+<img src="Pictures/NOT-PLAYERS/Axel Gordon.jpg" width="184" height="290" >
+<img src="Pictures/NOT-PLAYERS/Axel Gordon 2.jpg" width="184" height="242">
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Gordon Family:</b> (626)-706-4209</p>
@@ -446,7 +446,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Basil Perry.png" width="299.5" height="299.5" >
+<img src="Pictures/V2/Basil Perry.png" width="299.5" height="299.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>San Francisco Police Department:</b> (628)-869-9381</p>
 <p></p>
@@ -536,7 +536,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/NOT-PLAYERS/Brynn Laviar.jpg" width="245" height="352.67" >
+<img src="Pictures/NOT-PLAYERS/Brynn Laviar.jpg" width="245" height="352.67" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -627,8 +627,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/NOT-PLAYERS/Cain Peterson.jpg" width="243.5" height="278.5" >
-<img src="PICTURES/NOT-PLAYERS/Cain Peterson 2.jpg" width="184" height="242">
+<img src="Pictures/NOT-PLAYERS/Cain Peterson.jpg" width="243.5" height="278.5" >
+<img src="Pictures/NOT-PLAYERS/Cain Peterson 2.jpg" width="184" height="242">
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Riverside Police Department:</b> (626)-754-9430</p>
 <p><b>Peterson Family:</b> (626)-625-1450</p>
@@ -720,7 +720,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Caspian Bishop.png" width="183.75" height="244" >
+<img src="Pictures/V2/Caspian Bishop.png" width="183.75" height="244" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Bishop Family:</b> (626)-979-3070</p>
@@ -811,7 +811,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Cole Vaye.jpg" width="212.4" height="314.4" >
+<img src="Pictures/V1/Cole Vaye.jpg" width="212.4" height="314.4" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -901,7 +901,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Cozbi Flair.png" width="240" height="309.67" >
+<img src="Pictures/V1/Cozbi Flair.png" width="240" height="309.67" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -991,7 +991,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Damian Anderson.png" width="191" height="300" >
+<img src="Pictures/V1/Damian Anderson.png" width="191" height="300" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Cozbi Flair:</b> (626)-471-4927</p>
@@ -1083,7 +1083,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Declan Marrow.png" width="269.2" height="253.2" >
+<img src="Pictures/V2/Declan Marrow.png" width="269.2" height="253.2" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>San Francisco Police Department:</b> (628)-869-9381</p>
 <p></p>
@@ -1172,8 +1172,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Delilah Hart.jpg" width="245.33" height="245.33" >
-<img src="PICTURES/V3/14.png" width="150" height="150" >
+<img src="Pictures/V3/Delilah Hart.jpg" width="245.33" height="245.33" >
+<img src="Pictures/V3/14.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>San Francisco Police Department:</b> (628)-869-9381</p>
 <p><b>Hart Family:</b> (704)-764-2714</p>
@@ -1351,7 +1351,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Derrick Blood.png" width="267" height="282.5" >
+<img src="Pictures/V2/Derrick Blood.png" width="267" height="282.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -1441,8 +1441,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Dexter Darnella.png" width="245.33" height="239" >
-<img src="PICTURES/V3/9.png" width="150" height="150" >
+<img src="Pictures/V3/Dexter Darnella.png" width="245.33" height="239" >
+<img src="Pictures/V3/9.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b><mark class = "black">☐☐☐☐☐☐☐☐ ☐☐☐☐☐☐☐☐</mark>:</b> (213)-550-9535</p>
@@ -1533,7 +1533,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Dominic Ayis.png" width="260" height="350" >
+<img src="Pictures/V1/Dominic Ayis.png" width="260" height="350" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Ayis Family:</b> (626)-172-4998</p>
@@ -1623,7 +1623,7 @@ const articles = {
 <p>No known communication from Dustin following his disappearance.</p>
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
-<img src="PICTURES/V2/Dustin Weaver.png" width="212" height="300" >
+<img src="Pictures/V2/Dustin Weaver.png" width="212" height="300" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Anaheim Police Department:</b> (657)-963-9905</p>
 <p><b>Platinum Community Centre:</b> (657)-596-8054</p>
@@ -1714,7 +1714,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Elena Winscle.png" width="238.5" height="306.5" >
+<img src="Pictures/V2/Elena Winscle.png" width="238.5" height="306.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Pasadena Police Department:</b> (626)-251-5795</p>
 <p><b>Winscle Family:</b> (626)-294-8000</p>
@@ -1806,7 +1806,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Elia Clermont.png" width="236" height="293" >
+<img src="Pictures/V2/Elia Clermont.png" width="236" height="293" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Alturas Police Department:</b> (626)-635-9947</p>
 <p><b>Clermont Family:</b> (626)-892-4975</p>
@@ -1896,7 +1896,7 @@ const articles = {
 <p>Law enforcement investigation remains open, however the case has been labeled as a cold case due to lack of leads; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/NOT-PLAYERS/Oct22.jpg" width="256" height="256" >
+<img src="Pictures/NOT-PLAYERS/Oct22.jpg" width="256" height="256" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -1985,8 +1985,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/NOT-PLAYERS/Elijah Erickson.jpg" width="243.5" height="278.5" >
-<img src="PICTURES/NOT-PLAYERS/Elijah Erickson 2.jpg" width="184" height="327">
+<img src="Pictures/NOT-PLAYERS/Elijah Erickson.jpg" width="243.5" height="278.5" >
+<img src="Pictures/NOT-PLAYERS/Elijah Erickson 2.jpg" width="184" height="327">
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Anaheim Police Department:</b> (657)-963-9905</p>
 <p><b>Erickson Family:</b> (626)-245-4559</p>
@@ -2077,7 +2077,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Everett Gibson.png" width="245" height="245" >
+<img src="Pictures/V2/Everett Gibson.png" width="245" height="245" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
@@ -2166,8 +2166,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Ginerva Coppola.png" width="245.33" height="346.66" >
-<img src="PICTURES/V3/12.png" width="150" height="150" >
+<img src="Pictures/V3/Ginerva Coppola.png" width="245.33" height="346.66" >
+<img src="Pictures/V3/12.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Coppola Family:</b> (626)-767-7831</p>
@@ -2348,7 +2348,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Haven Peterson.png" width="233.5" height="305" >
+<img src="Pictures/V2/Haven Peterson.png" width="233.5" height="305" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Riverside Police Department:</b> (626)-754-9430</p>
 <p></p>
@@ -2438,8 +2438,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Isabella Tucker.png" width="240" height="320" >
-<img src="PICTURES/V3/10.png" width="150" height="150" >
+<img src="Pictures/V3/Isabella Tucker.png" width="240" height="320" >
+<img src="Pictures/V3/10.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Sacramento Police Department:</b> (916)-522-1217</p>
 <p></p>
@@ -2529,7 +2529,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Iyu Nagame.png" width="282" height="282" >
+<img src="Pictures/V2/Iyu Nagame.png" width="282" height="282" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b>Nagame Family:</b> (213)-177-2926</p>
@@ -2620,8 +2620,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Jay Garrison.png" width="124.67" height="354.67" >
-<img src="PICTURES/V3/16.png" width="150" height="150" >
+<img src="Pictures/V3/Jay Garrison.png" width="124.67" height="354.67" >
+<img src="Pictures/V3/16.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Pasadena Police Department:</b> (626)-251-5795</p>
 <p></p>
@@ -2711,8 +2711,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Jerreth Fitidel.png" width="188" height="235" >
-<img src="PICTURES/V3/5.png" width="150" height="150" >
+<img src="Pictures/V3/Jerreth Fitidel.png" width="188" height="235" >
+<img src="Pictures/V3/5.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b>Fitidel Family:</b> (213)-365-6583</p>
@@ -2803,8 +2803,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Jill Revera.png" width="262" height="393.33" >
-<img src="PICTURES/V3/13.png" width="150" height="150" >
+<img src="Pictures/V3/Jill Revera.png" width="262" height="393.33" >
+<img src="Pictures/V3/13.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b>Revera Family:</b> (213)-528-5421</p>
@@ -2896,7 +2896,7 @@ const articles = {
 <p>Law enforcement investigation remains open, however the case has been labeled as a cold case due to lack of leads; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/NOT-PLAYERS/Jan04.png" width="192.5" height="356.5" >
+<img src="Pictures/NOT-PLAYERS/Jan04.png" width="192.5" height="356.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b>Ahn Family:</b> (213)-498-2381</p>
@@ -2987,7 +2987,7 @@ const articles = {
 <p>Law enforcement investigation remains open, however the case has been labeled as a cold case due to lack of leads; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Kali Blair.jpg" width="245.33" height="245.33" >
+<img src="Pictures/V3/Kali Blair.jpg" width="245.33" height="245.33" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Roman Hawthorne:</b> (626)-683-6530</p>
@@ -3078,7 +3078,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Karma Mayfield.png" width="185" height="308.5" >
+<img src="Pictures/V1/Karma Mayfield.png" width="185" height="308.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Mayfield Family:</b> (626)-382-4910</p>
@@ -3169,8 +3169,8 @@ const articles = {
 <p>Law enforcement investigation remains open, however the case has been labeled as a cold case due to lack of leads; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Kash Kaiser.png" width="238.4" height="272" >
-<img src="PICTURES/V3/21.png" width="150" height="150" >
+<img src="Pictures/V3/Kash Kaiser.png" width="238.4" height="272" >
+<img src="Pictures/V3/21.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b><mark class = "black">☐☐☐☐ ☐☐☐☐☐☐☐☐</mark>:</b> (213)-520-1475</p>
@@ -3261,8 +3261,8 @@ const articles = {
 <p>Law enforcement investigation remains open, however the case has been labeled as a cold case due to lack of leads; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Koda Hayes.jpg" width="245.33" height="326" >
-<img src="PICTURES/V3/3.png" width="150" height="150" >
+<img src="Pictures/V3/Koda Hayes.jpg" width="245.33" height="326" >
+<img src="Pictures/V3/3.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
@@ -3352,7 +3352,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Kira Winterberry.png" width="275.5" height="340" >
+<img src="Pictures/V1/Kira Winterberry.png" width="275.5" height="340" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Winterberry Family:</b> (626)-668-4872</p>
@@ -3444,7 +3444,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/NOT-PLAYERS/Koa Alves.jpg" width="245.33" height="319.33" >
+<img src="Pictures/NOT-PLAYERS/Koa Alves.jpg" width="245.33" height="319.33" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Brynn Laviar:</b> (626)-159-8180</p>
@@ -3535,7 +3535,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Laura Ren.png" width="188" height="305.6" >
+<img src="Pictures/V1/Laura Ren.png" width="188" height="305.6" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Ren Family:</b> (626)-291-5863</p>
@@ -3625,7 +3625,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Londyn Rowland.PNG" width="254" height="308.4" >
+<img src="Pictures/V2/Londyn Rowland.PNG" width="254" height="308.4" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (626)-733-1606</p>
 <p></p>
@@ -3715,8 +3715,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/NOT-PLAYERS/Lorelei Hart.jpg" width="245" height="245" >
-<img src="PICTURES/NOT-PLAYERS/Lorelei Hart 2.jpg" width="245" height="245">
+<img src="Pictures/NOT-PLAYERS/Lorelei Hart.jpg" width="245" height="245" >
+<img src="Pictures/NOT-PLAYERS/Lorelei Hart 2.jpg" width="245" height="245">
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Charlotte Police Department:</b> (704)-467-1034</p>
 <p><b>Hart Family:</b> (704)-764-2714</p>
@@ -3807,8 +3807,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/NOT-PLAYERS/Lorelei Hart.jpg" width="245" height="245" >
-<img src="PICTURES/NOT-PLAYERS/Lorelei Hart 2.jpg" width="245" height="245">
+<img src="Pictures/NOT-PLAYERS/Lorelei Hart.jpg" width="245" height="245" >
+<img src="Pictures/NOT-PLAYERS/Lorelei Hart 2.jpg" width="245" height="245">
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Charlotte Police Department:</b> (704)-467-1034</p>
 <p><b>Hart Family:</b> (704)-764-2714</p>
@@ -3899,8 +3899,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Lucas Ward.png" width="245.33" height="303" >
-<img src="PICTURES/V3/23.png" width="150" height="150" >
+<img src="Pictures/V3/Lucas Ward.png" width="245.33" height="303" >
+<img src="Pictures/V3/23.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Fresno Police Department:</b> (559)-914-9477</p>
 <p><b>Ward Family:</b> (559)-688-2788</p>
@@ -4081,7 +4081,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Maga Reineking.png" width="224.4" height="272" >
+<img src="Pictures/V1/Maga Reineking.png" width="224.4" height="272" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Reineking Family:</b> (626)-791-3948</p>
@@ -4355,7 +4355,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Masumi Suzuki.png" width="211.5" height="299.5" >
+<img src="Pictures/V2/Masumi Suzuki.png" width="211.5" height="299.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Anaheim Police Department:</b> (657)-963-9905</p>
 <p></p>
@@ -4445,8 +4445,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Fox Cantrell.jpg" width="245.33" height="245.33" >
-<img src="PICTURES/V3/4.png" width="150" height="150" >
+<img src="Pictures/V3/Fox Cantrell.jpg" width="245.33" height="245.33" >
+<img src="Pictures/V3/4.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
@@ -4536,8 +4536,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Noah Patterson.png" width="210" height="278.85" >
-<img src="PICTURES/V3/18.png" width="150" height="150" >
+<img src="Pictures/V3/Noah Patterson.png" width="210" height="278.85" >
+<img src="Pictures/V3/18.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Santa Monica Police Department:</b> (424)-837-2269</p>
 <p><b>Patterson Family:</b> (424)-333-3918</p>
@@ -4628,8 +4628,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Nyx Bryon.jpg" width="245.33" height="306.67" >
-<img src="PICTURES/V3/11.png" width="150" height="150" >
+<img src="Pictures/V3/Nyx Bryon.jpg" width="245.33" height="306.67" >
+<img src="Pictures/V3/11.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Anaheim Police Department:</b> (657)-963-9905</p>
 <p></p>
@@ -4719,7 +4719,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Oliver Stanton.png" width="236" height="304" >
+<img src="Pictures/V1/Oliver Stanton.png" width="236" height="304" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -4809,7 +4809,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Omega Reineking.jpg" width="201.33" height="289" >
+<img src="Pictures/V1/Omega Reineking.jpg" width="201.33" height="289" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Reineking Family:</b> (626)-791-3948</p>
@@ -4900,7 +4900,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Pearl Winters.png" width="230.5" height="256" >
+<img src="Pictures/V1/Pearl Winters.png" width="230.5" height="256" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -4990,8 +4990,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/RaeLynn Lawson.png" width="210.28" height="279.14" >
-<img src="PICTURES/V3/20.png" width="150" height="150" >
+<img src="Pictures/V3/RaeLynn Lawson.png" width="210.28" height="279.14" >
+<img src="Pictures/V3/20.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>San Francisco Police Department:</b> (628)-869-9381</p>
 <p></p>
@@ -5081,8 +5081,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Mira Erbin.png" width="210.28" height="319.42" >
-<img src="PICTURES/V3/17.png" width="150" height="150" >
+<img src="Pictures/V3/Mira Erbin.png" width="210.28" height="319.42" >
+<img src="Pictures/V3/17.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Redding Police Department:</b> (530)-813-4299</p>
 <p></p>
@@ -5172,8 +5172,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Reed Williams.png" width="158" height="316.67" >
-<img src="PICTURES/V3/15.png" width="150" height="150" >
+<img src="Pictures/V3/Reed Williams.png" width="158" height="316.67" >
+<img src="Pictures/V3/15.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -5264,8 +5264,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Roger Fabel.png" width="210.67" height="354.67" >
-<img src="PICTURES/V3/6.png" width="150" height="150" >
+<img src="Pictures/V3/Roger Fabel.png" width="210.67" height="354.67" >
+<img src="Pictures/V3/6.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
@@ -5355,7 +5355,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Ruby Ivera.png" width="245" height="338.5" >
+<img src="Pictures/V1/Ruby Ivera.png" width="245" height="338.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -5446,7 +5446,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Saige Booru.png" width="222" height="264.5" >
+<img src="Pictures/V2/Saige Booru.png" width="222" height="264.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>East La Mirada Police Department:</b> (562)-746-5799</p>
 <p></p>
@@ -5536,7 +5536,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Samantha Pachi.png" width="165" height="299.5" >
+<img src="Pictures/V2/Samantha Pachi.png" width="165" height="299.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Anaheim Police Department:</b> (657)-963-9905</p>
 <p><b>Pachi Family:</b> (626)-920-2167</p>
@@ -5627,7 +5627,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Sarah Revalos.png" width="233" height="317" >
+<img src="Pictures/V2/Sarah Revalos.png" width="233" height="317" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Revalos Family:</b> (626)-391-6064</p>
@@ -5718,7 +5718,7 @@ const articles = {
 <p>Law enforcement investigation remains open, however the case has been labeled as a cold case due to lack of leads; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/NOT-PLAYERS/Nov18.jpg" width="237" height="314.5" >
+<img src="Pictures/NOT-PLAYERS/Nov18.jpg" width="237" height="314.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -5808,8 +5808,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Sebastian Curtis.png" width="225.6" height="321.6" >
-<img src="PICTURES/V3/19.png" width="150" height="150" >
+<img src="Pictures/V3/Sebastian Curtis.png" width="225.6" height="321.6" >
+<img src="Pictures/V3/19.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
@@ -5900,7 +5900,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Toshi Reveur.png" width="179.5" height="299.5" >
+<img src="Pictures/V2/Toshi Reveur.png" width="179.5" height="299.5" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b>Cirque Nocturne:</b> (725)-103-6405</p>
@@ -5991,8 +5991,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Vendant Talison.png" width="245.33" height="245.33" >
-<img src="PICTURES/V3/22.png" width="150" height="150" >
+<img src="Pictures/V3/Vendant Talison.png" width="245.33" height="245.33" >
+<img src="Pictures/V3/22.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -6083,7 +6083,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Yosefine Breslau.png" width="225.2" height="277.2" >
+<img src="Pictures/V2/Yosefine Breslau.png" width="225.2" height="277.2" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Sacramento Police Department:</b> (916)-522-1217</p>
 <p><b>Breslau Family:</b> +49 (421)-908-9467</p>
@@ -6174,7 +6174,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Yua Sky.png" width="236" height="307" >
+<img src="Pictures/V1/Yua Sky.png" width="236" height="307" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Sky Family:</b> (626)-4987-3913</p>
@@ -6356,8 +6356,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Zayne Doyle.png" width="266.67" height="376.44" >
-<img src="PICTURES/V3/7.png" width="150" height="150" >
+<img src="Pictures/V3/Zayne Doyle.png" width="266.67" height="376.44" >
+<img src="Pictures/V3/7.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b>Doyle Family:</b> (213)-371-5816</p>
@@ -6448,7 +6448,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V1/Zernek Syple.jpg" width="240" height="320" >
+<img src="Pictures/V1/Zernek Syple.jpg" width="240" height="320" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Syple Family:</b> (626)-4816-3344</p>
@@ -6539,8 +6539,8 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Zia Nguyen.png" width="208.67" height="373.33" >
-<img src="PICTURES/V3/2.png" width="150" height="150" >
+<img src="Pictures/V3/Zia Nguyen.png" width="208.67" height="373.33" >
+<img src="Pictures/V3/2.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Monrovia Police Department:</b> (626)-287-4917</p>
 <p></p>
@@ -6631,7 +6631,7 @@ const articles = {
 <p>Law enforcement investigation remains open; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V2/Zier Talern.png" width="300" height="232" >
+<img src="Pictures/V2/Zier Talern.png" width="300" height="232" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Santa Monica Police Department:</b> (424)-837-2269</p>
 <p></p>
