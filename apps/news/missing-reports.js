@@ -4172,8 +4172,8 @@ const articles = {
 <p>Law enforcement investigation remains open, however the case has been labeled as a cold case due to lack of leads; no confirmed sightings.</p>
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
-<img src="PICTURES/V3/Marette Ahn.png" width="210.28" height="316.57" >
-<img src="PICTURES/V3/1.png" width="150" height="150" >
+<img src="Pictures/V3/Marette Ahn.png" width="210.28" height="316.57" >
+<img src="Pictures/V3/1.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
