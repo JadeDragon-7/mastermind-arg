@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Music Player</title>
+</head>
+
+<style>
+
+/* ==========================
+   Page
+========================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#111;
+    color:white;
+    font-family:Arial, Helvetica, sans-serif;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    height:100vh;
+    overflow:hidden;
+}
+
+/* ==========================
+   Music Player
+========================== */
+
+#player{
+
+    width:420px;
+
+    background:#1b1b1b;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    box-shadow:
+        0 0 30px rgba(0,0,0,.6);
+
+    text-align:center;
+
+    border:2px solid var(--accent);
+
+}
+
+/* ==========================
+   Cover
+========================== */
+
+#cover{
+
+    width:280px;
+    height:280px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+        0 0 30px var(--accent);
+
+}
+
+/* ==========================
+   Song Info
+========================== */
+
+#title{
+
+    font-size:28px;
+    font-weight:bold;
+    color:var(--accent);
+    margin-bottom:8px;
+
+}
+
+#artist{
+
+    color:#999;
+
+    margin-bottom:30px;
+
+    font-size:16px;
+
+}
+
+/* ==========================
+   Buttons
+========================== */
+
+#controls{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:30px;
+
+    margin-bottom:25px;
+
+}
+
+button{
+
+    width:60px;
+    height:60px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#2b2b2b;
+
+    color:white;
+
+    font-size:24px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+button:hover{
+
+    background:var(--accent);
+
+    transform:scale(1.08);
+
+}
+
+button:active{
+
+    transform:scale(.95);
+
+}
+
+/* ==========================
+   Timeline
+========================== */
+
+#timeline{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:20px;
+
+}
+
+#currentTime,
+#duration{
+
+    width:45px;
+
+    font-size:14px;
+
+    color:#999;
+
+}
+
+/* ==========================
+   Custom Progress Bar
+========================== */
+
+#progressBar{
+
+    position:relative;
+
+    flex:1;
+
+    height:6px;
+
+    background:#333;
+
+    border-radius:999px;
+
+    cursor:pointer;
+
+}
+
+#progressFill{
+
+    position:absolute;
+
+    left:0;
+    top:0;
+
+    height:100%;
+
+    width:0%;
+
+    background:var(--accent);
+
+    border-radius:999px;
+
+}
+
+#progressThumb{
+
+    position:absolute;
+
+    top:50%;
+    left:0%;
+
+    width:16px;
+    height:16px;
+
+    border-radius:50%;
+
+    background:var(--accent);
+
+    transform:translate(-50%,-50%);
+
+    cursor:pointer;
+
+}
+
+#progressFill,
+#progressThumb{
+
+    transition:.08s linear;
+
+}
+
+#progressBar{
+    overflow:visible;
+}
+
+/* ==========================
+   Volume Slider
+========================== */
+
+#volumeBar{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+#volume{
+
+    -webkit-appearance:none;
+    appearance:none;
+
+    flex:1;
+
+    height:6px;
+
+    border-radius:999px;
+
+    background:#333;
+
+    cursor:pointer;
+
+}
+
+#volume::-webkit-slider-thumb{
+
+    -webkit-appearance:none;
+    appearance:none;
+
+    width:16px;
+    height:16px;
+
+    border-radius:50%;
+
+    background:var(--accent);
+
+    border:none;
+
+    cursor:pointer;
+
+}
+
+/* ==========================
+   Music Visualizer
+========================== */
+
+#visualizer{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-end;
+
+    gap:5px;
+
+    height:55px;
+
+    margin-top:30px;
+
+    opacity:0;
+
+    transition:opacity .4s ease;
+
+}
+
+#visualizer.active{
+
+    opacity:1;
+
+}
+
+#visualizer span{
+
+    width:6px;
+
+    height:15px;
+
+    border-radius:999px;
+
+    background:var(--accent);
+
+    animation:equalizer .9s infinite ease-in-out;
+
+}
+
+/* Different timings */
+
+#visualizer span:nth-child(1){animation-delay:.1s;}
+#visualizer span:nth-child(2){animation-delay:.5s;}
+#visualizer span:nth-child(3){animation-delay:.2s;}
+#visualizer span:nth-child(4){animation-delay:.8s;}
+#visualizer span:nth-child(5){animation-delay:.4s;}
+#visualizer span:nth-child(6){animation-delay:.7s;}
+#visualizer span:nth-child(7){animation-delay:.3s;}
+#visualizer span:nth-child(8){animation-delay:.6s;}
+#visualizer span:nth-child(9){animation-delay:.15s;}
+#visualizer span:nth-child(10){animation-delay:.45s;}
+
+@keyframes equalizer{
+
+    0%,100%{
+
+        height:12px;
+
+        opacity:.5;
+
+    }
+
+    50%{
+
+        height:45px;
+
+        opacity:1;
+
+    }
+
+}
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+<div id="player">
+
+    <img id="cover" src="Images/cover1.png">
+
+    <div id="info">
+        <h2 id="title">Song One</h2>
+        <p id="artist">Unknown Artist</p>
+    </div>
+
+    <div id="controls">
+
+        <button id="prev">⏮</button>
+
+        <button id="play">▶</button>
+
+        <button id="next">⏭</button>
+
+    </div>
+
+    <div id="timeline">
+
+        <span id="currentTime">0:00</span>
+
+        <div id="progressBar">
+
+            <div id="progressFill"></div>
+
+            <div id="progressThumb"></div>
+
+        </div>
+
+        <span id="duration">0:00</span>
+
+    </div>
+
+    <div id="volumeBar">
+
+        🔊
+
+        <input
+            type="range"
+            id="volume"
+            min="0"
+            max="1"
+            step="0.01"
+            value="0.3">
+
+    </div>
+
+<div id="visualizer">
+
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+
+</div>
+
+</div>
+
+<audio id="audio"></audio>
+
+<script>
+
+const progressBar = document.getElementById("progressBar");
+const progressFill = document.getElementById("progressFill");
+const progressThumb = document.getElementById("progressThumb");
+
+const songs = [
+
+//* Calla -  #5e00b0
+//  Haley -  #a300c0
+//  Hunter - #007d0f
+//  Maddy -  #00def4
+//  Nolan -  #002098 *//
+
+//*Akona*//
+{
+    title: "Introduction to the Snow",
+    artist: "Miracle Musical",
+    file: "Music/Introduction to the Snow.mp3",
+    cover: "Covers/Akona.png",
+    color: "#007d0f"
+},
+
+//*Brett*//
+{
+    title: "Brett",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Brett.png",
+    color: "#007d0f"
+},
+
+//*Brielle*//
+{
+    title: "Dirty Work",
+    artist: "aespa",
+    file: "Music/Dirty Work.mp3",
+    cover: "Covers/Brielle.png",
+    color: "#5e00b0"
+},
+
+//*Cairo*//
+{
+    title: "Cliffy",
+    artist: "Matt Maeson",
+    file: "Music/Cliffy.mp3",
+    cover: "Covers/Cairo.png",
+    color: "#5e00b0"
+},
+
+//*Cale*//
+{
+    title: "Shots",
+    artist: "LMFAO, Lil Jon",
+    file: "Music/Shots.mp3",
+    cover: "Covers/Cale.png",
+    color: "#00def4"
+},
+
+//*Cameron*//
+{
+    title: "Cameron",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Cameron.png",
+    color: "#002098"
+},
+
+//*Cypress*//
+{
+    title: "Cypress",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Cypress.png",
+    color: "#00def4"
+},
+
+//*Daniel "Fymos"*//
+{
+    title: "Daniel",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Daniel.png",
+    color: "#002098"
+},
+
+//*Dash*//
+{
+    title: "Dash",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Daniel.png",
+    color: "#002098"
+},
+
+//*Dominic*//
+{
+    title: "Dominic",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Dominic.png",
+    color: "#002098"
+},
+
+//*Eleazar*//
+{
+    title: "Eleazar",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Eleazar.png",
+    color: "#00def4"
+},
+
+//*Evan*//
+{
+    title: "Evan",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Evan.png",
+    color: "#007d0f"
+},
+
+//*HALEY*//
+{
+    title: "Haley",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Haley.png",
+    color: "#a300c0"
+},
+
+//*Lacey*//
+{
+    title: "Fashion!",
+    artist: "Lady Gaga",
+    file: "Music/Fashion!.mp3",
+    cover: "Covers/Lacey.png",
+    color: "#007d0f"
+},
+
+//*Myles*//
+{
+    title: "Myles",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Myles.png",
+    color: "#00def4"
+},
+
+//*Oakley*//
+{
+    title: "Everyone's A Star!",
+    artist: "5 Seconds of Summer",
+    file: "Music/Everyone's A Star!.mp3",
+    cover: "Covers/Oakley.png",
+    color: "#5e00b0"
+},
+
+//*Scarlett*//
+{
+    title: "Scarlett",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Scarlett.png",
+    color: "#00def4"
+},
+
+//*Soleil*//
+{
+    title: "pretty girl I'll make you famous",
+    artist: "Chandler Leighton",
+    file: "Music/pretty girl i'll make you famous.mp3",
+    cover: "Covers/Soleil.png",
+    color: "#5e00b0"
+},
+
+//*Summer*//
+{
+    title: "Summer",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Summer.png",
+    color: "#007d0f"
+},
+
+//*Xena*//
+{
+    title: "NDA",
+    artist: "Billie Eilish",
+    file: "Music/NDA.mp3",
+    cover: "Covers/Xena.png",
+    color: "#5e00b0"
+},
+
+//*Zara*//
+{
+    title: "Zara",
+    artist: "Unknown Artist",
+    file: "Music/The Perfect Home.mp3",
+    cover: "Covers/Zara.png",
+    color: "#002098"
+},
+
+];
+
+let currentSong = 0;
+
+const audio = document.getElementById("audio");
+
+audio.volume = 0.3;
+volume.value = 0.3;
+
+function loadSong(index){
+
+    currentSong = index;
+
+    // Load audio
+    audio.src = songs[index].file;
+    audio.load();
+
+    // Update album art
+    cover.src = songs[index].cover;
+
+    // Update text
+    title.textContent = songs[index].title;
+    artist.textContent = songs[index].artist;
+
+    // Reset time display
+    currentTime.textContent = "0:00";
+    duration.textContent = "0:00";
+
+    // Reset custom progress bar
+    progressFill.style.width = "0%";
+    progressThumb.style.left = "0%";
+
+    // Change theme
+    document.documentElement.style.setProperty(
+        "--accent",
+        songs[index].color
+    );
+
+    // Immediately recolor the progress bar
+    progressFill.style.background = songs[index].color;
+    progressThumb.style.background = songs[index].color;
+
+}
+
+loadSong(0);
+
+let playing = false;
+
+play.onclick = () => {
+
+    if(playing){
+
+        audio.pause();
+
+        play.textContent = "▶";
+
+        hideVisualizer();
+
+    }else{
+
+        audio.play();
+
+        play.textContent = "⏸";
+
+        showVisualizer(500);
+
+    }
+
+    playing = !playing;
+
+};
+
+next.onclick = ()=>{
+
+    hideVisualizer();
+
+    setTimeout(() => {
+
+        currentSong++;
+
+        if(currentSong >= songs.length)
+            currentSong = 0;
+
+        loadSong(currentSong);
+
+        audio.currentTime = 0;
+
+        audio.play();
+
+        playing = true;
+        play.textContent = "⏸";
+
+        showVisualizer(200);
+
+    },300);
+
+};
+
+prev.onclick = ()=>{
+
+    hideVisualizer();
+
+    setTimeout(() => {
+
+        currentSong--;
+
+        if(currentSong < 0)
+            currentSong = songs.length-1;
+
+        loadSong(currentSong);
+
+        audio.currentTime = 0;
+
+        audio.play();
+
+        playing = true;
+        play.textContent = "⏸";
+
+        showVisualizer(200);
+
+    },300);
+
+};
+
+audio.addEventListener("timeupdate", () => {
+
+    if(!audio.duration) return;
+
+const percent = audio.currentTime / audio.duration;
+const percentText = (percent * 100) + "%";
+
+progressFill.style.width = percentText;
+progressThumb.style.left = percentText;
+
+    currentTime.textContent = formatTime(audio.currentTime);
+
+});
+
+progressBar.addEventListener("click",(e)=>{
+
+    if(!audio.duration) return;
+
+    const rect = progressBar.getBoundingClientRect();
+
+    const percent = (e.clientX - rect.left) / rect.width;
+
+    audio.currentTime = percent * audio.duration;
+
+});
+
+let dragging = false;
+
+progressThumb.addEventListener("mousedown",()=>{
+
+    dragging = true;
+
+});
+
+document.addEventListener("mouseup",()=>{
+
+    dragging = false;
+
+});
+
+document.addEventListener("mousemove",(e)=>{
+
+    if(!dragging) return;
+
+    const rect = progressBar.getBoundingClientRect();
+
+    let percent = (e.clientX - rect.left) / rect.width;
+
+    percent = Math.max(0,Math.min(1,percent));
+
+    audio.currentTime = percent * audio.duration;
+
+});
+
+volume.oninput = ()=>{
+
+    audio.volume = volume.value;
+
+};
+
+audio.onended = ()=>{
+
+    hideVisualizer();
+
+    setTimeout(() => {
+
+        currentSong++;
+
+        if(currentSong >= songs.length)
+            currentSong = 0;
+
+        loadSong(currentSong);
+
+        audio.currentTime = 0;
+
+        audio.play();
+
+        playing = true;
+        play.textContent = "⏸";
+
+        showVisualizer(200);
+
+    },300);
+
+};
+
+function showVisualizer(delay = 0){
+
+    setTimeout(() => {
+
+        document.getElementById("visualizer").classList.add("active");
+
+        document.querySelectorAll("#visualizer span").forEach(bar=>{
+            bar.style.animationPlayState = "running";
+        });
+
+    }, delay);
+
+}
+
+function hideVisualizer(){
+
+    document.getElementById("visualizer").classList.remove("active");
+
+    document.querySelectorAll("#visualizer span").forEach(bar=>{
+        bar.style.animationPlayState = "paused";
+    });
+
+}
+
+function format(seconds){
+
+    const min = Math.floor(seconds / 60);
+
+    const sec = Math.floor(seconds % 60);
+
+    return min + ":" + sec.toString().padStart(2,"0");
+
+}
+
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+
+    return `${minutes}:${secs.toString().padStart(2, "0")}`;
+}
+
+audio.addEventListener("loadedmetadata", () => {
+    duration.textContent = formatTime(audio.duration);
+});
+
+
+</script>
+
+</body>
+</html>
