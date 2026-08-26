@@ -171,7 +171,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Atlas Copeland.jpg" width="184" height="327" >
-<img src="Pictures/V3/8.png" width="150" height="150" >
+<img src="Pictures/BLACK/8.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b>Solstice Models LA:</b> (213)-439-3942</p>
@@ -1173,7 +1173,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Delilah Hart.jpg" width="245.33" height="245.33" >
-<img src="Pictures/V3/14.png" width="150" height="150" >
+<img src="Pictures/BLACK/14.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>San Francisco Police Department:</b> (628)-869-9381</p>
 <p><b>Hart Family:</b> (704)-764-2714</p>
@@ -1442,7 +1442,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Dexter Darnella.png" width="245.33" height="239" >
-<img src="Pictures/V3/9.png" width="150" height="150" >
+<img src="Pictures/BLACK/9.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b><mark class = "black">☐☐☐☐☐☐☐☐ ☐☐☐☐☐☐☐☐</mark>:</b> (213)-550-9535</p>
@@ -2167,7 +2167,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Ginerva Coppola.png" width="245.33" height="346.66" >
-<img src="Pictures/V3/12.png" width="150" height="150" >
+<img src="Pictures/BLACK/12.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p><b>Coppola Family:</b> (626)-767-7831</p>
@@ -2439,7 +2439,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Isabella Tucker.png" width="240" height="320" >
-<img src="Pictures/V3/10.png" width="150" height="150" >
+<img src="Pictures/BLACK/10.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Sacramento Police Department:</b> (916)-522-1217</p>
 <p></p>
@@ -2621,7 +2621,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Jay Garrison.png" width="124.67" height="354.67" >
-<img src="Pictures/V3/16.png" width="150" height="150" >
+<img src="Pictures/BLACK/16.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Pasadena Police Department:</b> (626)-251-5795</p>
 <p></p>
@@ -2712,7 +2712,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Jerreth Fitidel.png" width="188" height="235" >
-<img src="Pictures/V3/5.png" width="150" height="150" >
+<img src="Pictures/BLACK/5.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b>Fitidel Family:</b> (213)-365-6583</p>
@@ -2804,7 +2804,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Jill Revera.png" width="262" height="393.33" >
-<img src="Pictures/V3/13.png" width="150" height="150" >
+<img src="Pictures/BLACK/13.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b>Revera Family:</b> (213)-528-5421</p>
@@ -3170,7 +3170,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Kash Kaiser.png" width="238.4" height="272" >
-<img src="Pictures/V3/21.png" width="150" height="150" >
+<img src="Pictures/BLACK/21.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b><mark class = "black">☐☐☐☐ ☐☐☐☐☐☐☐☐</mark>:</b> (213)-520-1475</p>
@@ -3262,7 +3262,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Koda Hayes.jpg" width="245.33" height="326" >
-<img src="Pictures/V3/3.png" width="150" height="150" >
+<img src="Pictures/BLACK/3.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
@@ -3900,7 +3900,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Lucas Ward.png" width="245.33" height="303" >
-<img src="Pictures/V3/23.png" width="150" height="150" >
+<img src="Pictures/BLACK/23.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Fresno Police Department:</b> (559)-914-9477</p>
 <p><b>Ward Family:</b> (559)-688-2788</p>
@@ -4173,7 +4173,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Marette Ahn.png" width="210.28" height="316.57" >
-<img src="Pictures/V3/1.png" width="150" height="150" >
+<img src="Pictures/BLACK/1.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
@@ -4446,7 +4446,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Fox Cantrell.jpg" width="245.33" height="245.33" >
-<img src="Pictures/V3/4.png" width="150" height="150" >
+<img src="Pictures/BLACK/4.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
@@ -4537,7 +4537,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Noah Patterson.png" width="210" height="278.85" >
-<img src="Pictures/V3/18.png" width="150" height="150" >
+<img src="Pictures/BLACK/18.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Santa Monica Police Department:</b> (424)-837-2269</p>
 <p><b>Patterson Family:</b> (424)-333-3918</p>
@@ -4629,7 +4629,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Nyx Bryon.jpg" width="245.33" height="306.67" >
-<img src="Pictures/V3/11.png" width="150" height="150" >
+<img src="Pictures/BLACK/11.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Anaheim Police Department:</b> (657)-963-9905</p>
 <p></p>
@@ -4991,7 +4991,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/RaeLynn Lawson.png" width="210.28" height="279.14" >
-<img src="Pictures/V3/20.png" width="150" height="150" >
+<img src="Pictures/BLACK/20.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>San Francisco Police Department:</b> (628)-869-9381</p>
 <p></p>
@@ -5082,7 +5082,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Mira Erbin.png" width="210.28" height="319.42" >
-<img src="Pictures/V3/17.png" width="150" height="150" >
+<img src="Pictures/BLACK/17.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Redding Police Department:</b> (530)-813-4299</p>
 <p></p>
@@ -5173,7 +5173,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Reed Williams.png" width="158" height="316.67" >
-<img src="Pictures/V3/15.png" width="150" height="150" >
+<img src="Pictures/BLACK/15.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -5265,7 +5265,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Roger Fabel.png" width="210.67" height="354.67" >
-<img src="Pictures/V3/6.png" width="150" height="150" >
+<img src="Pictures/BLACK/6.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
@@ -5809,7 +5809,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Sebastian Curtis.png" width="225.6" height="321.6" >
-<img src="Pictures/V3/19.png" width="150" height="150" >
+<img src="Pictures/BLACK/19.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p></p>
@@ -5992,7 +5992,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Vendant Talison.png" width="245.33" height="245.33" >
-<img src="Pictures/V3/22.png" width="150" height="150" >
+<img src="Pictures/BLACK/22.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Drakora Police Department:</b> (626)-555-0193</p>
 <p></p>
@@ -6357,7 +6357,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Zayne Doyle.png" width="266.67" height="376.44" >
-<img src="Pictures/V3/7.png" width="150" height="150" >
+<img src="Pictures/BLACK/7.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Los Angeles Police Department:</b> (213)-733-1606</p>
 <p><b>Doyle Family:</b> (213)-371-5816</p>
@@ -6540,7 +6540,7 @@ const articles = {
 <h2><b>MOST RECENT PICTURES</b></h2>
 <p></p>
 <img src="Pictures/V3/Zia Nguyen.png" width="208.67" height="373.33" >
-<img src="Pictures/V3/2.png" width="150" height="150" >
+<img src="Pictures/BLACK/2.png" width="150" height="150" >
 <h2><b>CONTACT INFORMATION</b></h2>
 <p><b>Monrovia Police Department:</b> (626)-287-4917</p>
 <p></p>
