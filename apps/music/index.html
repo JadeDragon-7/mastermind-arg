@@ -806,29 +806,50 @@ progressBar.addEventListener("click",(e)=>{
 
 let dragging = false;
 
-progressThumb.addEventListener("mousedown",()=>{
+progressThumb.addEventListener("pointerdown", (e) => {
 
     dragging = true;
 
-});
+    progressThumb.setPointerCapture(e.pointerId);
 
-document.addEventListener("mouseup",()=>{
-
-    dragging = false;
+    e.preventDefault();
 
 });
 
-document.addEventListener("mousemove",(e)=>{
+progressThumb.addEventListener("pointermove", (e) => {
 
-    if(!dragging) return;
+    if (!dragging) return;
 
     const rect = progressBar.getBoundingClientRect();
 
-    let percent = (e.clientX - rect.left) / rect.width;
+    let percent =
+        (e.clientX - rect.left) /
+        rect.width;
 
-    percent = Math.max(0,Math.min(1,percent));
+    percent =
+        Math.max(
+            0,
+            Math.min(1, percent)
+        );
 
-    audio.currentTime = percent * audio.duration;
+    audio.currentTime =
+        percent * audio.duration;
+
+});
+
+progressThumb.addEventListener("pointerup", (e) => {
+
+    dragging = false;
+
+    progressThumb.releasePointerCapture(
+        e.pointerId
+    );
+
+});
+
+progressThumb.addEventListener("pointercancel", () => {
+
+    dragging = false;
 
 });
 
