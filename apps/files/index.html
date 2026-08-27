@@ -1457,7 +1457,7 @@ function showAccessDenied(file) {
 
 }
 
-function openTextFile(file) {
+function openFile(file) {
 
     if (file.fileType === "image") {
 
@@ -1487,6 +1487,68 @@ function openTextFile(file) {
 
 
     openUnknownFile(file);
+
+}
+
+function openTextFile(file) {
+
+    const viewer =
+        document.createElement("div");
+
+    viewer.id =
+        "fileViewer";
+
+
+    viewer.innerHTML = `
+
+        <div id="viewerWindow">
+
+            <div id="viewerHeader">
+
+                <span>
+                    ${escapeHTML(file.name)}
+                </span>
+
+                <button id="viewerClose">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div id="viewerContent">
+
+                <div class="viewerText">
+                    ${escapeHTML(
+                        file.content ||
+                        "NO CONTENT"
+                    )}
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        viewer
+    );
+
+
+    document
+        .getElementById(
+            "viewerClose"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                viewer.remove();
+
+            }
+        );
 
 }
 
