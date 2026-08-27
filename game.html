@@ -458,6 +458,24 @@
 
 }
 
+.windowButton:disabled {
+
+    color: #444;
+
+    cursor: default;
+
+    background: transparent;
+
+}
+
+.windowButton:disabled:hover {
+
+    background: transparent;
+
+    color: #444;
+
+}
+
 
 /* ========================================
    WINDOW CONTENT
@@ -1328,6 +1346,35 @@ function openApplication(application) {
     buttons.className =
         "windowButtons";
 
+// Back button
+const backButton =
+    document.createElement("button");
+
+backButton.className =
+    "windowButton";
+
+backButton.textContent =
+    "←";
+
+backButton.title =
+    "Back";
+
+
+// Forward button
+const forwardButton =
+    document.createElement("button");
+
+forwardButton.className =
+    "windowButton";
+
+forwardButton.textContent =
+    "→";
+
+forwardButton.title =
+    "Forward";
+
+backButton.disabled = true;
+forwardButton.disabled = true;
 
     /*
      * Minimize
@@ -1371,9 +1418,11 @@ function openApplication(application) {
         "×";
 
 
-    buttons.appendChild(minimize);
-    buttons.appendChild(maximize);
-    buttons.appendChild(close);
+buttons.appendChild(backButton);
+buttons.appendChild(forwardButton);
+buttons.appendChild(minimize);
+buttons.appendChild(maximize);
+buttons.appendChild(close);
 
 
     header.appendChild(title);
@@ -1405,6 +1454,115 @@ console.log(
 );
 
 frame.src = application.url;
+
+let historyStack = [];
+let historyIndex = -1;
+let updatingHistory = false;
+
+
+// Record the first page
+frame.addEventListener("load", () => {
+
+    const currentURL =
+        frame.contentWindow.location.href;
+
+    if (updatingHistory) {
+
+        updatingHistory = false;
+
+        updateNavigationButtons();
+
+        return;
+
+    }
+
+    // Don't add duplicate URLs
+    if (
+        historyStack.length === 0 ||
+        historyStack[historyStack.length - 1] !== currentURL
+    ) {
+
+        // If we went backward and then navigate somewhere new,
+        // remove the old forward history.
+
+        if (
+            historyIndex <
+            historyStack.length - 1
+        ) {
+
+            historyStack =
+                historyStack.slice(
+                    0,
+                    historyIndex + 1
+                );
+
+        }
+
+        historyStack.push(currentURL);
+
+        historyIndex =
+            historyStack.length - 1;
+
+    }
+
+    updateNavigationButtons();
+
+});
+
+
+// BACK
+backButton.addEventListener(
+    "click",
+    () => {
+
+        if (historyIndex <= 0)
+            return;
+
+        historyIndex--;
+
+        updatingHistory = true;
+
+        frame.contentWindow.history.back();
+
+        updateNavigationButtons();
+
+    }
+);
+
+
+// FORWARD
+forwardButton.addEventListener(
+    "click",
+    () => {
+
+        if (
+            historyIndex >=
+            historyStack.length - 1
+        )
+            return;
+
+        historyIndex++;
+
+        updatingHistory = true;
+
+        frame.contentWindow.history.forward();
+
+        updateNavigationButtons();
+
+    }
+);
+
+
+function updateNavigationButtons() {
+
+    backButton.disabled =
+        historyIndex <= 0;
+
+    forwardButton.disabled =
+        historyIndex >=
+        historyStack.length - 1;
+
+}
 
 frame.style.width =
     "100%";
