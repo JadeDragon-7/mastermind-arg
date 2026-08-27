@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>File Explorer</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+html,
+body {
+
+    margin: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #111;
+
+    color: #ddd;
+
+    font-family:
+        Arial,
+        sans-serif;
+
+    overflow: hidden;
+
+}
+
+
+/* ========================================
+   FILE EXPLORER
+======================================== */
+
+#fileExplorer {
+
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: #181818;
+
+}
+
+
+/* ========================================
+   TOOLBAR
+======================================== */
+
+#toolbar {
+
+    height: 44px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    padding: 6px;
+
+    background: #0b0b0b;
+
+    border-bottom: 1px solid #444;
+
+}
+
+
+.toolbarButton {
+
+    width: 32px;
+    height: 30px;
+
+    background: #181818;
+
+    border: 1px solid #444;
+
+    color: #aaa;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+}
+
+
+.toolbarButton:hover {
+
+    background: #303030;
+
+    color: white;
+
+}
+
+
+.toolbarButton:disabled {
+
+    color: #444;
+
+    cursor: default;
+
+    background: #111;
+
+}
+
+
+/* ========================================
+   PATH
+======================================== */
+
+#pathBar {
+
+    height: 34px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 10px;
+
+    background: #111;
+
+    border-bottom: 1px solid #333;
+
+    color: #888;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+}
+
+
+#currentPath {
+
+    color: #bbb;
+
+}
+
+
+/* ========================================
+   CONTENT
+======================================== */
+
+#content {
+
+    flex: 1;
+
+    display: flex;
+
+    overflow: hidden;
+
+}
+
+
+/* ========================================
+   SIDEBAR
+======================================== */
+
+#sidebar {
+
+    width: 180px;
+
+    flex-shrink: 0;
+
+    padding: 12px;
+
+    background: #101010;
+
+    border-right: 1px solid #444;
+
+}
+
+
+.sidebarTitle {
+
+    margin-bottom: 12px;
+
+    color: #777;
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+}
+
+
+.sidebarItem {
+
+    padding: 8px;
+
+    margin-bottom: 3px;
+
+    color: #aaa;
+
+    font-size: 12px;
+
+    cursor: pointer;
+
+}
+
+
+.sidebarItem:hover {
+
+    background: #292929;
+
+    color: white;
+
+}
+
+
+/* ========================================
+   FILE AREA
+======================================== */
+
+#fileArea {
+
+    flex: 1;
+
+    padding: 20px;
+
+    display: flex;
+
+    align-content: flex-start;
+
+    flex-wrap: wrap;
+
+    gap: 20px;
+
+    overflow: auto;
+
+}
+
+
+/* ========================================
+   FILE / FOLDER
+======================================== */
+
+.fileItem {
+
+    width: 100px;
+
+    height: 95px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 8px;
+
+    border: 1px solid transparent;
+
+    cursor: pointer;
+
+    user-select: none;
+
+}
+
+
+.fileItem:hover {
+
+    background: rgba(255,255,255,0.06);
+
+    border-color: #444;
+
+}
+
+
+.fileIcon {
+
+    font-size: 38px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.fileName {
+
+    width: 100%;
+
+    text-align: center;
+
+    color: #bbb;
+
+    font-size: 11px;
+
+    line-height: 1.3;
+
+    word-break: break-word;
+
+}
+
+
+.folder .fileName {
+
+    color: #ddd;
+
+}
+
+
+.lockedFile {
+
+    opacity: 0.35;
+
+    filter: grayscale(1);
+
+}
+
+
+.lockedFile .fileName {
+
+    color: #666;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div id="fileExplorer">
+
+
+    <!-- TOOLBAR -->
+
+    <div id="toolbar">
+
+        <button
+            id="backButton"
+            class="toolbarButton"
+            title="Back">
+
+            ←
+
+        </button>
+
+
+        <button
+            id="forwardButton"
+            class="toolbarButton"
+            title="Forward">
+
+            →
+
+        </button>
+
+    </div>
+
+
+    <!-- PATH -->
+
+    <div id="pathBar">
+
+        PATH:&nbsp;
+
+        <span id="currentPath">
+            C:\
+        </span>
+
+    </div>
+
+
+    <!-- CONTENT -->
+
+    <div id="content">
+
+
+        <!-- SIDEBAR -->
+
+        <div id="sidebar">
+
+            <div class="sidebarTitle">
+                LOCATIONS
+            </div>
+
+
+            <div
+                class="sidebarItem"
+                onclick="openFolder('root')">
+
+                💻 COMPUTER
+
+            </div>
+
+
+            <div
+                class="sidebarItem"
+                onclick="openFolder('system')">
+
+                ⚙ SYSTEM
+
+            </div>
+
+
+            <div
+                class="sidebarItem"
+                onclick="openFolder('users')">
+
+                👤 USERS
+
+            </div>
+
+
+            <div
+                class="sidebarItem"
+                onclick="openFolder('archives')">
+
+                📦 ARCHIVES
+
+            </div>
+
+
+        </div>
+
+
+        <!-- FILE AREA -->
+
+        <div id="fileArea"></div>
+
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+/* ========================================
+   FILE SYSTEM
+======================================== */
+
+
+const fileSystem = {
+
+
+    root: {
+
+        name: "C:\\",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "system",
+                name: "SYSTEM",
+                type: "folder"
+            },
+
+            {
+                id: "users",
+                name: "USERS",
+                type: "folder"
+            },
+
+            {
+                id: "archives",
+                name: "ARCHIVES",
+                type: "folder"
+            },
+
+            {
+                id: "reports",
+                name: "REPORTS",
+                type: "folder"
+            },
+
+            {
+                id: "media",
+                name: "MEDIA",
+                type: "folder"
+            },
+
+            {
+                id: "deleted",
+                name: "DELETED",
+                type: "folder"
+            }
+
+        ]
+
+    },
+
+
+    system: {
+
+        name: "SYSTEM",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "system_logs",
+                name: "SYSTEM.LOG",
+                type: "file"
+            },
+
+            {
+                id: "configuration",
+                name: "CONFIG.TXT",
+                type: "file"
+            }
+
+        ]
+
+    },
+
+
+    users: {
+
+        name: "USERS",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "user001",
+                name: "USER_001",
+                type: "folder"
+            },
+
+            {
+                id: "user002",
+                name: "USER_002",
+                type: "folder"
+            }
+
+        ]
+
+    },
+
+
+    archives: {
+
+        name: "ARCHIVES",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "archive2019",
+                name: "2019",
+                type: "folder"
+            },
+
+            {
+                id: "archive2020",
+                name: "2020",
+                type: "folder"
+            }
+
+        ]
+
+    },
+
+
+    reports: {
+
+        name: "REPORTS",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "report001",
+                name: "REPORT_001.TXT",
+                type: "file"
+            },
+
+            {
+                id: "report002",
+                name: "REPORT_002.TXT",
+                type: "file"
+            }
+
+        ]
+
+    },
+
+
+    media: {
+
+        name: "MEDIA",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "photos",
+                name: "PHOTOS",
+                type: "folder"
+            },
+
+            {
+                id: "audio",
+                name: "AUDIO",
+                type: "folder"
+            }
+
+        ]
+
+    },
+
+
+    deleted: {
+
+        name: "DELETED",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "deleted001",
+                name: "OLD_REPORT.TXT",
+                type: "file"
+            }
+
+        ]
+
+    },
+
+
+    user001: {
+
+        name: "USER_001",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "notes001",
+                name: "NOTES.TXT",
+                type: "file"
+            }
+
+        ]
+
+    },
+
+
+    user002: {
+
+        name: "USER_002",
+
+        type: "folder",
+
+        children: []
+
+    },
+
+
+    archive2019: {
+
+        name: "2019",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "incident004",
+                name: "INCIDENT_004",
+                type: "folder"
+            }
+
+        ]
+
+    },
+
+
+    archive2020: {
+
+        name: "2020",
+
+        type: "folder",
+
+        children: []
+
+    },
+
+
+    incident004: {
+
+        name: "INCIDENT_004",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "incidentReport",
+                name: "REPORT.TXT",
+                type: "file"
+            },
+
+            {
+                id: "incidentPhoto",
+                name: "PHOTO.PNG",
+                type: "file"
+            }
+
+        ]
+
+    },
+
+
+    photos: {
+
+        name: "PHOTOS",
+
+        type: "folder",
+
+        children: []
+
+    },
+
+
+    audio: {
+
+        name: "AUDIO",
+
+        type: "folder",
+
+        children: []
+
+    }
+
+};
+
+
+/* ========================================
+   STATE
+======================================== */
+
+let currentFolder = "root";
+
+let history = ["root"];
+
+let historyIndex = 0;
+
+
+/* ========================================
+   ELEMENTS
+======================================== */
+
+const fileArea =
+    document.getElementById(
+        "fileArea"
+    );
+
+
+const currentPath =
+    document.getElementById(
+        "currentPath"
+    );
+
+
+const backButton =
+    document.getElementById(
+        "backButton"
+    );
+
+
+const forwardButton =
+    document.getElementById(
+        "forwardButton"
+    );
+
+
+/* ========================================
+   OPEN FOLDER
+======================================== */
+
+function openFolder(id) {
+
+    currentFolder = id;
+
+    renderFolder();
+
+}
+
+
+/* ========================================
+   RENDER FOLDER
+======================================== */
+
+function renderFolder() {
+
+    const folder =
+        fileSystem[currentFolder];
+
+    fileArea.innerHTML = "";
+
+
+    currentPath.textContent =
+        buildPath();
+
+
+    folder.children.forEach(
+        item => {
+
+            const element =
+                document.createElement(
+                    "div"
+                );
+
+            element.className =
+                "fileItem";
+
+
+            if (
+                item.type ===
+                "folder"
+            ) {
+
+                element.classList.add(
+                    "folder"
+                );
+
+            }
+
+
+            const icon =
+                document.createElement(
+                    "div"
+                );
+
+            icon.className =
+                "fileIcon";
+
+
+            icon.textContent =
+                item.type === "folder"
+                    ? "📁"
+                    : "📄";
+
+
+            const name =
+                document.createElement(
+                    "div"
+                );
+
+            name.className =
+                "fileName";
+
+
+            name.textContent =
+                item.name;
+
+
+            element.appendChild(icon);
+
+            element.appendChild(name);
+
+
+            element.addEventListener(
+                "dblclick",
+                () => {
+
+                    if (
+                        item.type ===
+                        "folder"
+                    ) {
+
+                        navigateTo(
+                            item.id
+                        );
+
+                    }
+
+                }
+            );
+
+
+            fileArea.appendChild(
+                element
+            );
+
+        }
+    );
+
+
+    updateNavigationButtons();
+
+}
+
+
+/* ========================================
+   NAVIGATION
+======================================== */
+
+function navigateTo(id) {
+
+    history =
+        history.slice(
+            0,
+            historyIndex + 1
+        );
+
+    history.push(id);
+
+    historyIndex =
+        history.length - 1;
+
+    currentFolder = id;
+
+    renderFolder();
+
+}
+
+
+function goBack() {
+
+    if (historyIndex <= 0)
+        return;
+
+    historyIndex--;
+
+    currentFolder =
+        history[
+            historyIndex
+        ];
+
+    renderFolder();
+
+}
+
+
+function goForward() {
+
+    if (
+        historyIndex >=
+        history.length - 1
+    )
+        return;
+
+    historyIndex++;
+
+    currentFolder =
+        history[
+            historyIndex
+        ];
+
+    renderFolder();
+
+}
+
+
+/* ========================================
+   PATH
+======================================== */
+
+function buildPath() {
+
+    if (
+        currentFolder ===
+        "root"
+    ) {
+
+        return "C:\\";
+
+    }
+
+
+    return (
+        "C:\\..." +
+        fileSystem[
+            currentFolder
+        ].name +
+        "\\"
+    );
+
+}
+
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+backButton.addEventListener(
+    "click",
+    goBack
+);
+
+
+forwardButton.addEventListener(
+    "click",
+    goForward
+);
+
+
+/* ========================================
+   START
+======================================== */
+
+renderFolder();
+
+
+</script>
+
+
+</body>
+
+</html>
