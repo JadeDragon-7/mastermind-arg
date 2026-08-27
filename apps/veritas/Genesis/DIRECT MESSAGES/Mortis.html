@@ -1,0 +1,425 @@
+<html>
+<head>
+<title>Mortis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:#7a2300;
+    background-color:#000000;
+}
+
+/* Genesis Name */
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+}
+
+/* Deut Name */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(122, 35, 0);
+    background-color: #000000;
+}
+
+/* Texting */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Dates */
+
+h6 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Timing Texts */
+
+div.a {
+    text-indent: 50px;
+}
+
+div.b {
+    line-height: 20px;
+}
+
+div.c {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:50px;
+}
+
+div.status {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deut {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(122, 35, 0);
+    background-color: #000000;
+    line-height: 0px;
+    opacity: 70%;
+}
+
+div.genesis {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deleted {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(170, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    text-indent: 50px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* Genesis Profile */
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Mortis Profile*/
+
+#popupMortis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(122, 35, 0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactMortis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+
+</style>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Political Activist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Mortis Profile-->
+
+    <div id="ContactMortis"></div>
+    <div id="popupMortis">
+        <p class = "one"><span style = "color:rgb(122, 35, 0); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Mortis</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Merchant | Narcotic Facilitator</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — December 12th, 2009</b></span></p>
+        <button onclick="closeFnMortis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnMortis() {
+            document.getElementById(
+                "ContactMortis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupMortis"
+            ).style.display = "block";
+        }
+        function closeFnMortis() {
+            document.getElementById(
+                "ContactMortis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupMortis"
+            ).style.display = "none";
+        }
+    </script>
+
+
+<div class = "fade-in-text">
+<h1>Mortis</h1>
+
+
+<h6>February 8th, 2022
+    <div class = "status"><b>Online - 1</b></div>
+</h6>
+<h6>Mortis has created a new chat.
+    <div class = "genesis"><button onclick="popupFnGenesis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Genesis</b>
+    </button></div>
+</h6>
+<h6>Mortis has added Genesis.
+    <div class = "status"><b><br>Offline - 1</b></div>
+</h6>
+<h6>Mortis has authorized transactional payments.
+    <div class = "deut"><button onclick="popupFnMortis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(122, 35, 0); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Mortis</b>
+    </button></div>
+</h6>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 12:07:35 AM</span></h3>
+<div class = "a"><h5>We've heard some rumours between a few pharmaceutical merchants you're looking to buy some... difficult to find substances.</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:34:57 AM</span></h3>
+<div class = "a"><h5>Please don't mistunderstand. This is not a threat, but an offer.</h5></div>
+<div class = "a"><h5>We are more well-versed than the majority of merchants, and we have an interest in doing business with you.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:35:55 AM</span></h2>
+<div class = "a"><h5>What's in it for you other than a single order?</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:36:45 AM</span></h3>
+<div class = "a"><h5>We have connections to an interested benefactor.</h5></div>
+<div class = "a"><h5>But we're getting ahead of ourselves.</h5></div>
+<div class = "a"><h5>What pharmaceuticals do you still need to find?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:39:26 AM</span></h2>
+<div class = "a"><h5>200 μg of Enkephalins</h5></div>
+<div class = "a"><h5>40 mg/kg of Ketamine</h5></div>
+<div class = "a"><h5>20 mg of Scopolamine</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:43:40 AM</span></h3>
+<div class = "a"><h5>You're fortunate that we reached out.</h5></div>
+<div class = "a"><h5>We can fulfill your entire order.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:44:11 AM</span></h2>
+<div class = "a"><h5>At a discounted price, I'm assuming?</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:44:41 AM</span></h3>
+<div class = "a"><h5>Incorrect.</h5></div>
+<div class = "a"><h5>In exchange for your business, we'll put you in contact with an exclusive ghost benefactor that has been showing interest in your... beliefs.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:45:29 AM</span></h2>
+<div class = "a"><h5>And what beliefs are those?</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:47:56 AM</span></h3>
+<div class = "a"><h5>Let's not be coy.</h5></div>
+<div class = "a"><h5>We either do business or we don't.</h5></div>
+<div class = "a"><h5>But good luck finding those pharmaceuticals anywhere else.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:50:25 AM</span></h2>
+<div class = "a"><h5>What pricing are we looking at?</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:53:52 AM</span></h3>
+<div class = "a"><h5>200 μg of Enkephalins — ($2,399.00 USD)</h5></div>
+<div class = "a"><h5>40 mg/kg of Ketamine — ($1,599.00 USD)</h5></div>
+<div class = "a"><h5>20 mg of Scopolamine — ($4,799.00 USD)</h5></div>
+<div class = "a"><h5>Tax — ($439.85 USD)</h5></div>
+<div class = "a"><h5>Total — (<span style = "color:crimson;">$9,236.85 USD</span>)</div></h5>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:54:22 AM</span></h2>
+<div class = "a"><h5>Pricey.</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:54:46 AM</span></h3>
+<div class = "a"><h5>You won't find cheaper anywhere else, even if you are able to find another merchant who sells these certain.. products.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:55:00 AM</span></h2>
+<div class = "a"><h5>And this ghost benefactor?</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:55:11 AM</span></h3>
+<div class = "a"><h5>They'll reach out shortly.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:55:43 AM</span></h2>
+<div class = "a"><h5>So why do I need to buy from you if they're already showing interest?</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:57:09 AM</span></h3>
+<div class = "a"><h5>This certain benefactor is closely tied to our organization.</h5></div>
+<div class = "a"><h5>If we put in a.. less than positive review about you, they will not reach out.</h5></div>
+<div class = "a"><h5>If we recommend you, you'll be a priority on their list.</h5></div>
+
+<div class = "c">
+    Genesis has transferred $9,236.85 USD to Mortis.
+</div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:59:14 AM</span></h3>
+<div class = "a"><h5>Smart choice.</h5></div>
+<div class = "a"><h5>We run any and all shipments through our bound courier, Visus.</h5></div>
+<div class = "a"><h5>Your order ID is AXTGZ-8.QOZ-14.260.13-15-18.7-5-14</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 2:03:36 AM</span></h2>
+<div class = "a"><h5>Thank you.</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 2:03:50 AM</span></h3>
+<div class = "a"><h5>No, thank you.</h5></div>
+
+<div class = "c">
+    Genesis has de-authorized transactional payments.
+</div>
+
+<br>
+<br>
+<h6>May 3rd, 2023</h6>
+<h6>Mortis has authorized transactional payments.</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:09:41 AM</span></h2>
+<div class = "a"><h5>I see someone was prepared.</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:10:02 AM</span></h3>
+<div class = "a"><h5>A little birdie told us you would be ordering tonight.</h5></div>
+<div class = "a"><h5>What would you like?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:10:29 AM</span></h2>
+<div class = "a"><h5>30 mg of Scopolamine.</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:11:12 AM</span></h3>
+<div class = "a"><h5>That's all?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:11:33 AM</span></h2>
+<div class = "a"><h5>That's all.</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:14:12 AM</span></h3>
+<div class = "a"><h5>30 mg of Scopolamine — ($5,999.00 USD)</h5></div>
+<div class = "a"><h5>Tax — ($299.95 USD)</h5></div>
+<div class = "a"><h5>Total — (<span style = "color:crimson;">$6,298.95 USD</span>)</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:14:36 AM</span></h2>
+<div class = "a"><h5>What, no discount?</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:14:59 AM</span></h3>
+<div class = "a"><h5>Take it up with your benefactor, not us.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:15:19 AM</span></h2>
+<div class = "a"><h5>Noted.</h5></div>
+
+<div class = "c">
+    Genesis has transferred $6,298.95 USD to Mortis.
+</div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:17:37 AM</span></h3>
+<div class = "a"><h5>Your order identification is XUQDW-5.DBM-1.30.13-15-18.7-5-14</h5></div>
+<div class = "a"><h5>Visus will reach out shortly. You know the drill.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:17:54 AM</span></h2>
+<div class = "a"><h5>Thank you.</h5></div>
+
+<h3>Mortis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 12:18:04 AM</span></h3>
+<div class = "a"><h5>Anytime.</h5></div>
+
+<div class = "c">
+    Genesis has de-authorized transactional payments.
+</div>
+
+<br>
+<br>

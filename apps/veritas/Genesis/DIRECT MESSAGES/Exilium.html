@@ -1,0 +1,359 @@
+<html>
+<head>
+<title>Exilium</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:#ad5ff7;
+    background-color:#000000;
+}
+
+/* Genesis Name */
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+}
+
+/* Deut Name */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(173, 95, 247);
+    background-color: #000000;
+}
+
+/* Texting */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Dates */
+
+h6 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Timing Texts */
+
+div.a {
+    text-indent: 50px;
+}
+
+div.b {
+    line-height: 20px;
+}
+
+div.c {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:50px;
+}
+
+div.status {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deut {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(173, 95, 247);
+    background-color: #000000;
+    line-height: 0px;
+    opacity: 100%;
+}
+
+div.genesis {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deleted {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(170, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    text-indent: 50px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* Genesis Profile */
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Exilium Profile*/
+
+#popupExilium {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(173, 95, 247);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactExilium {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+
+</style>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Political Activist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Exilium Profile-->
+
+    <div id="ContactExilium"></div>
+    <div id="popupExilium">
+        <p class = "one"><span style = "color:rgb(173, 95, 247); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Exilium</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Merchant | Neurochemical Curator</b></span></p>
+                <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — February 25th, 2019</b></span></p>
+        <button onclick="closeFnExilium()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnExilium() {
+            document.getElementById(
+                "ContactExilium"
+            ).style.display = "block";
+            document.getElementById(
+                "popupExilium"
+            ).style.display = "block";
+        }
+        function closeFnExilium() {
+            document.getElementById(
+                "ContactExilium"
+            ).style.display = "none";
+            document.getElementById(
+                "popupExilium"
+            ).style.display = "none";
+        }
+    </script>
+
+
+<div class = "fade-in-text">
+<h1>Exilium</h1>
+
+
+<h6>December 30th, 2021
+    <div class = "status"><b>Online - 2</b></div>
+</h6>
+<h6>Exilium has created a new chat.
+    <div class = "genesis"><button onclick="popupFnGenesis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Genesis</b>
+    </button></div>
+</h6>
+<h6>Exilium has added Genesis.
+    <div class = "deut"><button onclick="popupFnExilium()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(173, 95, 247); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Exilium</b>
+    </button></div>
+</h6>
+<h6>Exilium has authorized transactional payments.
+    <div class = "status"><b><br>Offline - 0</b></div>
+</h6>
+
+<h3>Exilium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 2:48:34 PM</span></h3>
+<div class = "a"><h5>Order confirmation?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 3:37:33 PM</span></h2>
+<div class = "a"><h5>URNAT-2.GEP-4.5000.5-24-9.7-5-14</h5></div>
+
+<h3>Exilium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 3:46:20 PM</span></h3>
+<div class = "a"><h5>Order confirmed. Pricing will be restated to prevent any inaccuracies.</h5></div>
+<div class = "a"><h5>2000 µg of Galanin — ($4,199.00 USD)</h5></div>
+<div class = "a"><h5>3000 mg of Gamma-Aminobutryic Acid — ($2,899.00 USD)</h5></div>
+<div class = "a"><h5>Tax — ($354.90 USD)</h5></div>
+<div class = "a"><h5>Total — (<span style = "color:crimson">$7,452.90 USD</span>)</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 3:52:12 PM</span></h2>
+<div class = "a"><h5>That is correct.</h5></div>
+
+<h3>Exilium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 3:52:54 PM</span></h3>
+<div class = "a"><h5>Please proceed with payment.</h5></div>
+
+<div class = "c">
+    Genesis has transferred $7,452.90 USD to Exilium.
+</div>
+
+<h3>Exilium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 3:56:09 PM</span></h3>
+<div class = "a"><h5>Will this order be picked up in person, or do you require us to provide you an unbound courier?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 3:59:35 PM</span></h2>
+<div class = "a"><h5>I've already made arrangements with an unbound courier. They will reach out to you very soon.</h5></div>
+
+<h3>Exilium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 4:00:32 PM</span></h3>
+<div class = "a"><h5>Thank you for your purchases.</h5></div>
+
+<div class = "c">
+    Exilium has de-authorized transactional payments.
+</div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 4:02:05 PM</span></h2>
+<div class = "a"><h5>Do you happen to be well informed about other pharmaceutical merchants?</h5></div>
+
+<h3>Exilium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 4:17:17 PM</span></h3>
+<div class = "a"><h5>On certain merchants, yes.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 4:20:55 PM</span></h2>
+<div class = "a"><h5>I'm looking for a merchant who sells Enkephalins, Ketamine, and Scopolamine.</h5></div>
+
+<h3>Exilium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 4:28:41 PM</span></h3>
+<div class = "a"><h5>Those certain pharmaceuticals are extremely limited, we do not have any knowledge on who might sell those.</h5></div>
+<div class = "a"><h5>Apologies.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 30th, 2021, 4:29:05 PM</span></h2>
+<div class = "a"><h5>Thank you for your time.</h5></div>
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

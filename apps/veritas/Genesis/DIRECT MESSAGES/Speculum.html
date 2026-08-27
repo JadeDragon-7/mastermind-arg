@@ -1,0 +1,372 @@
+<html>
+<head>
+<title>Speculum</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:#ffb618;
+    background-color:#000000;
+}
+
+/* Genesis Name */
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+}
+
+/* Speculum Name */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(255, 182, 24);
+    background-color: #000000;
+}
+
+/* Texting */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Dates */
+
+h6 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Timing Texts */
+
+div.a {
+    text-indent: 50px;
+}
+
+div.b {
+    line-height: 20px;
+}
+
+div.c {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:50px;
+}
+
+div.status {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deut {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(255, 182, 24);
+    background-color: #000000;
+    line-height: 0px;
+    opacity: 100%;
+}
+
+div.genesis {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deleted {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(170, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    text-indent: 50px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* Genesis Profile */
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Speculum Profile*/
+
+#popupSpeculum {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(255, 182, 24);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactSpeculum {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+
+
+</style>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Political Activist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Speculum Profile-->
+
+    <div id="ContactSpeculum"></div>
+    <div id="popupSpeculum">
+        <p class = "one"><span style = "color:rgb(255, 182, 24); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Speculum</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Service Provider | Bound Courier</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Closed</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — November 18th, 2021</b></span></p>
+        <button onclick="closeFnSpeculum()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnSpeculum() {
+            document.getElementById(
+                "ContactSpeculum"
+            ).style.display = "block";
+            document.getElementById(
+                "popupSpeculum"
+            ).style.display = "block";
+        }
+        function closeFnSpeculum() {
+            document.getElementById(
+                "ContactSpeculum"
+            ).style.display = "none";
+            document.getElementById(
+                "popupSpeculum"
+            ).style.display = "none";
+        }
+    </script>
+
+
+<div class = "fade-in-text">
+<h1>Speculum</h1>
+
+
+<h6>December 5th, 2021
+    <div class = "status"><b>Online - 2</b></div>
+</h6>
+<h6>Speculum has created a new chat.
+    <div class = "genesis"><button onclick="popupFnGenesis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Genesis</b>
+    </button></div>
+</h6>
+<h6>Speculum has added Genesis.
+    <div class = "deut"><button onclick="popupFnSpeculum()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(255, 182, 24); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Speculum</b>
+    </button></div>
+</h6>
+<h6>Speculum has authorized transactional payments.
+    <div class = "status"><b><br>Offline - 0</b></div>
+</h6>
+
+<h3>Speculum <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 5th, 2021, 9:12:56 PM</span></h3>
+<div class = "a"><h5>We're reaching out on behalf of Remedium.</h5></div>
+<div class = "a"><h5>Please confirm with your order identification code before we proceed with this transaction.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 5th, 2021, 9:31:37 PM</span></h2>
+<div class = "a"><h5>WTPCV-4.KIT-8.8900.18-5-13.7-5-14</h5></div>
+
+<h3>Speculum <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 5th, 2021, 9:32:25 PM</span></h3>
+<div class = "a"><h5>Order confirmed.</h5></div>
+<div class = "a"><h5>What date and time would you like to pick up your shipment?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 5th, 2021, 9:36:59 PM</span></h2>
+<div class = "a"><h5>Is December 14th, 9:00 PM a reasonable length of time to give you?</h5></div>
+
+<h3>Speculum <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 5th, 2021, 9:39:12 PM</span></h3>
+<div class = "a"><h5>That is within our range of capabilities.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 5th, 2021, 9:40:51 PM</span></h2>
+<div class = "a"><h5>Good. What's your pricing?</h5></div>
+
+<h3>Speculum <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 5th, 2021, 9:42:24 PM</span></h3>
+<div class = "a"><h5>Due to the size and urgency of this order, we require (<span style = "color:crimson;">$945.00 USD</span>).</h5></div>
+
+<div class = "c">
+    Genesis has transferred $945.00 USD to Speculum.
+</div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 5th, 2021, 9:46:50 PM</span></h2>
+<div class = "a"><h5>It's been a pleasure doing business with you.</h5></div>
+
+<h3>Speculum <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 5th, 2021, 9:49:43 PM</span></h3>
+<div class = "a"><h5>Likewise.</h5></div>
+
+<div class = "c">
+    Genesis has de-authorized transactional payments.
+</div>
+
+<br>
+<br>
+<h6><div class = "b">December 14th, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>April 17th, 2023</h6>
+
+<div class = "c">
+    Speculum has authorized transactional payments.
+</div>
+
+<h3>Speculum <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 17th, 2023, 6:11:29 PM</span></h3>
+<div class = "a"><h5>Please confirm your order number to proceed.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 17th, 2023, 6:27:39 PM</span></h2>
+<div class = "a"><h5>EBXKD-12.MKV-10.10800.18-5-13.7-5-14</h5></div>
+
+<h3>Speculum <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 17th, 2023, 6:29:26 PM</span></h3>
+<div class = "a"><h5>Order confirmed. What date and time would you  like to pick up your shipment?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 17th, 2023, 6:29:49 PM</span></h2>
+<div class = "a"><h5>April 30th, any time.</h5></div>
+
+<h3>Speculum <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 17th, 2023, 6:30:31 PM</span></h3>
+<div class = "a"><h5>That can be arranged.</h5></div>
+<div class = "a"><h5>Transportation of this order will cost (<span style = "color:crimson;">$997.50</span> USD).</h5></div>
+
+<div class = "c">
+    Genesis has transferred $997.50 to Speculum.
+</div>
+
+<h3>Speculum <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 17th, 2023, 6:33:48 PM</span></h3>
+<div class = "a"><h5>Payment confirmed.</h5></div>
+<div class = "a"><h5>We will reach out on April 30th to arrange pickup details.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 17th, 2023, 6:34:17 PM</span></h2>
+<div class = "a"><h5>Thank you.</h5></div>
+
+<div class = "c">
+    Genesis has de-authorized transactional payments.
+</div>
+
+<br>
+<br>
+<h6><div class = "b">April 30th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+

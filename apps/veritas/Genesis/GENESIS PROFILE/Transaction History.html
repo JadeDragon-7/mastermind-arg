@@ -1,0 +1,307 @@
+<html>
+<head>
+<title>Transaction History</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:rgb(140, 0, 255);
+    background-color:#000000;
+    font-size: 45px;
+}
+
+/* Right Text */
+
+h2 {
+    text-align:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Left Text */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:10px;
+}
+
+/* Title Thingy */
+
+h4 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Title Thingy */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 18px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+div.a {
+    text-indent: 50px;
+    line-height: 15px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+
+</style>
+</head>
+
+<div class = "fade-in-text">
+
+<h1><u>GENESIS</u></h1>
+
+
+<h4><u>Transaction History
+    <h2>Amount Loaded — <span style = "color: yellow;">$0.00 USD</span></h2>
+</u></h4>
+<br>
+<h5>October 10th, 2020</h5>
+<h3><div class = "a">SPTMZO-1.JHKKLS-7.FOREIGN.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0)">+$75,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$75,000.00 USD</span></div></h3>
+<br>
+<h5>November 21st, 2021</h5>
+<h3><div class = "a">VSOBU-3.HFQ-5.860.3-21-18.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">$6,926.85 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$68,073.15 USD</span></div></h3>
+<br>
+<h3><div class = "a">EQWT-2.IGR-6.UB.16-15-18.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$630.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$67,443.15 USD</span></div></h3>
+<br>
+<h5>December 4th, 2021</h5>
+<h3><div class = "a">WTPCV-4.KIT-8.8900.18-5-13.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$9,129.75 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$58,313.40 USD</span></div></h3>
+<br>
+<h5>December 5th, 2021</h5>
+<h3><div class = "a">JVBY-7.DBM-1.B.19-16-5.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$945.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$57,368.40 USD</span></div></h3>
+<br>
+<h5>December 19th, 2021</h5>
+<h3><div class = "a">DPVS-1.ECN-2.UB.14-15-3.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$262.50 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$57,105.90 USD</span></div></h3>
+<br>
+<h5>December 30th, 2021</h5>
+<h3><div class = "a">URNAT-2.GEP-4.5000.5-24-9.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$7452.90 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$49,653.00 USD</span></div></h3>
+<br>
+<h5>January 1st, 2022</h5>
+<h3><div class = "a">LXDA-9.JHS-7.UB.14-15-3.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$840.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$48,813.00 USD</span></div></h3>
+<br>
+<h5>January 15th, 2022</h5>
+<h3><div class = "a">TQMZS-1.IGR-6.190.19-15-13.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$10,600.80 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$38,212.20 USD</span></div></h3>
+<br>
+<h5>January 16th, 2022</h5>
+<h3><div class = "a">OAGD-12.PNY-13.UB.14-15-3.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$1,050.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$37,162.20 USD</span></div></h3>
+<br>
+<h5>February 8th, 2022</h5>
+<h3><div class = "a">AXTGZ-8.QOZ-14.260.13-15-18.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$9,236.85 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$27,925.35 USD</span></div></h3>
+<br>
+<h5>February 10th, 2022</h5>
+<h3><div class = "a">DPVS-1.IGR-6.B.22-9-19.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$1,155.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$26,770.35 USD</span></div></h3>
+<br>
+<h5>February 23rd, 2022</h5>
+<h3><div class = "a">DPHEVT-2.FDO-3.3-1-18.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$4,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$30,770.35 USD</span></div></h3>
+<br>
+<h5>September 1st, 2022</h5>
+<h3><div class = "a">KWOLCA-9.KIT-8.3-1-18.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$16,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$46,770.35 USD</span></div></h3>
+<br>
+<h5>April 15th, 2023</h5>
+<h3><div class = "a">EBXKD-12.MKV-10.10800.18-5-13.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$9,446.85 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$37,323.50 USD</span></div></h3>
+<br>
+<h5>April 17th, 2023</h5>
+<h3><div class = "a">JVBY-7.ECN-2.B.19-16-5.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$997.50 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$36,326.00 USD</span></div></h3>
+<br>
+<h5>March 2nd, 2023</h5>
+<h3><div class = "a">VSOBU-3.IGR-6.150.19-15-13.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$11,336.85 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$24,989.15 USD</span></div></h3>
+<br>
+<h5>March 3rd, 2023</h5>
+<h3><div class = "a">IUAX-6.ECN-2.UB.14-15-3.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$420.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$24,569.15 USD</span></div></h3>
+<br>
+<h5>May 3rd, 2023</h5>
+<h3><div class = "a">XUQDW-5.DBM-1.30.13-15-18.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$6,298.95 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$18,270.20 USD</span></div></h3>
+<br>
+<h5>May 4th, 2023</h5>
+<h3><div class = "a">IUAX-6.KIT-8.UB.22-9-19.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$367.50 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$17,902.70 USD</span></div></h3>
+<br>
+<h5>May 6th, 2023</h5>
+<h3><div class = "a">JVNKBZ-8.USD-18.3-1-18.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$3,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$20,902.70 USD</span></div></h3>
+<br>
+<h5>June 1st, 2023</h5>
+<h3><div class = "a">SEWTKI-17.MKV-10.3-1-18.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$19,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$39,902.70 USD</span></div></h3>
+<br>
+<h5>June 2nd, 2023</h5>
+<h3><div class = "a">DPHEVT-2.GEP-4.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$4,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$43,902.70 USD</span></div></h3>
+<br>
+<h5>June 6th, 2023</h5>
+<h3><div class = "a">IUMJAY-7.HFQ-5.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$8,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$51,902.70 USD</span></div></h3>
+<br>
+<h5>June 7th, 2023</h5>
+<h3><div class = "a">FRJGXV-4.KIT-8.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$4,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$55,902.70 USD</span></div></h3>
+<br>
+<h5>June 8th, 2023</h5>
+<h3><div class = "a">KWOLCA-9.JHS-7.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$2,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$57,902.70 USD</span></div></h3>
+<br>
+<h5>June 11th, 2023</h5>
+<h3><div class = "a">MYQNEC-11.PNY-13.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$2,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$59,902.70 USD</span></div></h3>
+<br>
+<h5>June 12th, 2023</h5>
+<h3><div class = "a">COGDUS-1.OMX-12.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$2,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$61,902.70 USD</span></div></h3>
+<br>
+<h5>June 13th, 2023</h5>
+<h3><div class = "a">HTLIZX-6.ECN-2.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$2,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$63,902.70 USD</span></div></h3>
+<br>
+<h5>June 14th, 2023</h5>
+<h3><div class = "a">FRJGXV-4.IGR-6.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$2,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$65,902.70 USD</span></div></h3>
+<br>
+<h5>June 16th, 2023</h5>
+<h3><div class = "a">QCURIG-15.NLW-11.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$4,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$69,902.70 USD</span></div></h3>
+<br>
+<h5>June 17th, 2023</h5>
+<h3><div class = "a">GSKHYW-5.JHS-7.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$2,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$71,902.70 USD</span></div></h3>
+<br>
+<h5>June 19th, 2023</h5>
+<h3><div class = "a">FRJGXV-4.PNY-13.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$2,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$73,902.70 USD</span></div></h3>
+<br>
+<h5>June 21st, 2023</h5>
+<h3><div class = "a">EQIFWU-3.DBM-1.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$4,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$77,902.70 USD</span></div></h3>
+<br>
+<h5>June 23rd, 2023</h5>
+<h3><div class = "a">GSKHYW-5.SQB-16.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$4,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$81,902.70 USD</span></div></h3>
+<br>
+<h5>June 26th, 2023</h5>
+<h3><div class = "a">SEWTKI-17.BZK-25.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$2,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$83,902.70 USD</span></div></h3>
+<br>
+<h5>June 27th, 2023</h5>
+<h3><div class = "a">SEWTKI-17.BZK-25.15-3-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: rgb(0, 211, 0);">+$2,000.00 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$85,902.70 USD</span></div></h3>
+<br>
+<h3><div class = "a">RAOPV-2.SQB-16.4-5-21.7-5-14</div></h3>
+<h3><div class = "a"><span style = "color: crimson;">-$85,902.70 USD</span></div></h3>
+<h3><div class = "a">Account — <span style = "color: yellow;">$0.00 USD</span></div></h3>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,400 @@
+<html>
+<head>
+<title>Remedium</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:#4245ff;
+    background-color:#000000;
+}
+
+/* Genesis Name */
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+}
+
+/* Deut Name */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(66, 69, 255);
+    background-color: #000000;
+}
+
+/* Texting */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Dates */
+
+h6 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Timing Texts */
+
+div.a {
+    text-indent: 50px;
+}
+
+div.b {
+    line-height: 20px;
+}
+
+div.c {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:50px;
+}
+
+div.status {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deut {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(66, 69, 255);
+    background-color: #000000;
+    line-height: 0px;
+    opacity: 60%;
+}
+
+div.genesis {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deleted {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(170, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    text-indent: 50px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* Genesis Profile */
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Remedium Profile*/
+
+#popupRemedium {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(66, 69, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactRemedium {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+
+</style>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Political Activist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Remedium Profile-->
+
+    <div id="ContactRemedium"></div>
+    <div id="popupRemedium">
+        <p class = "one"><span style = "color:rgb(66, 69, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Remedium</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Merchant | Neurochemical Curator</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messsages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — September 23rd, 2018</b></span></p>
+        <button onclick="closeFnRemedium()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnRemedium() {
+            document.getElementById(
+                "ContactRemedium"
+            ).style.display = "block";
+            document.getElementById(
+                "popupRemedium"
+            ).style.display = "block";
+        }
+        function closeFnRemedium() {
+            document.getElementById(
+                "ContactRemedium"
+            ).style.display = "none";
+            document.getElementById(
+                "popupRemedium"
+            ).style.display = "none";
+        }
+    </script>
+
+
+<div class = "fade-in-text">
+<h1>Remedium</h1>
+
+
+<h6>December 4th, 2021
+    <div class = "status"><b>Online - 1</b></div>
+</h6>
+<h6>Genesis has created a new chat.
+    <div class = "genesis"><button onclick="popupFnGenesis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Genesis</b>
+    </button></div>
+</h6>
+<h6>Genesis has added Remedium.
+    <div class = "status"><b><br>Offline - 1</b></div>
+</h6>
+<h6>Genesis has authorized transactional payments.
+    <div class = "deut"><button onclick="popupFnRemedium()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(66, 69, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Remedium</b>
+    </button></div>
+</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 6:12:06 AM</span></h2>
+<div class = "a"><h5>ID: WTPCV-4.KIT-8.8900.18-5-13.7-5-14</h5></div>
+
+<h3>Remedium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:01:21 AM</span></h3>
+<div class = "a"><h5>Reviewing your order now.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:08:59 AM</span></h2>
+<div class = "a"><h5>Thank you.</h5></div>
+
+<h3>Remedium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:16:19 AM</span></h3>
+<div class = "a"><h5>We can fulfill your order with no time delay.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:18:36 AM</span></h2>
+<div class = "a"><h5>I'd like it as soon as possible.</h5></div>
+
+<h3>Remedium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:23:02 AM</span></h3>
+<div class = "a"><h5>As soon as payments are organized, we can coordinate the shipment.</h5></div>
+<div class = "a"><h5>Payments Required:</h5></div>
+<div class = "a"><h5>8000 mg of Dopamine — ($3,799.00 USD)</h5></div>
+<div class = "a"><h5>200 µg of Histamine — ($1,399.00 USD)</h5></div>
+<div class = "a"><h5>100 mg of 5-Hydroxytryptamine — ($899.00 USD)</h5></div>
+<div class = "a"><h5>400 mg of N-Acetyl-5-Methoxytryptamine — ($1,199.00 USD)</h5></div>
+<div class = "a"><h5>200 µg of Orexin — ($1,399.00 USD)</h5></div>
+<div class = "a"><h5>Tax — ($434.75 USD)</h5></div>
+<div class = "a"><h5>Total — (<span style = "color:crimson;">$9,129.75 USD</span>)</h5></div>
+
+<div class = "c">
+    Genesis has transferred $9,129.75 USD to Remedium.
+</div>
+
+<h3>Remedium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:27:11 AM</span></h3>
+<div class = "a"><h5>Payment has been processed.</h5></div>
+<div class = "a"><h5>Are you familiar with using courier services?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:28:49 AM</span></h2>
+<div class = "a"><h5>Yes, I am.</h5></div>
+
+<h3>Remedium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:30:28 AM</span></h3>
+<div class = "a"><h5>We will forward your order to our exclusive courier.</h5></div>
+<div class = "a"><h5>They should contact you in a couple days with details about your order.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:33:17 AM</span></h2>
+<div class = "a"><h5>Understood.</h5></div>
+
+<div class = "c">
+    Remedium has de-authorized transactional payments.
+</div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:35:55 AM</span></h2>
+<div class = "a"><h5>One last question.</h5></div>
+<div class = "a"><h5>I'm having difficulty locating a merchant who sells Enkephalins, Ketamine, and Scopolamine.</h5></div>
+<div class = "a"><h5>Do you know of a merchant who sells those?</h5></div>
+
+<h3>Remedium <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:46:10 AM</span></h3>
+<div class = "a"><h5>Unfortunately, the market for those certain pharmaceuticals is extremely small.</h5></div>
+<div class = "a"><h5>We don't have any information to help.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 7:47:05 AM</span></h2>
+<div class = "a"><h5>Thank you for your time.</h5></div>
+
+<br>
+<br>
+<h6>April 15th, 2023</h6>
+
+<div class = "c">
+    Genesis has authorized transactional payments.
+</div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 15th, 2023, 1:03:16 PM</span></h2>
+<div class = "a"><h5>EBXKD-12.MKV-10.10800.18-5-13.7-5-14</h5></div>
+
+<h3>Remedium <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 15th, 2023, 2:59:04 PM</span></h3>
+<div class = "a"><h5>We will review your order shortly. Please stand by.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 15th, 2023, 3:03:30 PM</span></h2>
+<div class = "a"><h5>Standing by.</h5></div>
+
+<h3>Remedium <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 15th, 2023, 3:11:56 PM</span></h3>
+<div class = "a"><h5>For confirmation, your order is:</h5></div>
+<div class = "a"><h5>10,000 mg of Dopamine — ($4,499.00 USD)</h5></div>
+<div class = "a"><h5>300 µg of Histamine — ($2,799.00 USD)</h5></div>
+<div class = "a"><h5>500 mg of N-Acetyl-5-Methoxytryptamine — ($1,699.00 USD)</h5></div>
+<div class = "a"><h5>Tax — ($449.85 USD)</h5></div>
+<div class = "a"><h5>Total Owed — (<span style = "color:crimson;">$9,446.85 USD</span>)</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 15th, 2023, 3:14:03 PM</span></h2>
+<div class = "a"><h5>That is correct.</h5></div>
+
+<h3>Remedium <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 15th, 2023, 3:16:53 PM</span></h3>
+<div class = "a"><h5>We can fulfill your order as soon as we have recieved a viable payment.</h5></div>
+
+<div class = "c">
+    Genesis has transferred $9,446.85 USD to Remedium.
+</div>
+
+<h3>Remedium <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 15th, 2023, 3:19:37 PM</span></h3>
+<div class = "a"><h5>Thank you for your purchase.</h5></div>
+<div class = "a"><h5>We will forward your order information to our exclusive courier. They will contact you soon.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 15th, 2023, 3:20:58 PM</span></h2>
+<div class = "a"><h5>Thank you.</h5></div>
+
+<div class = "c">
+    Remedium has de-authorized transactional payments.
+</div>
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+</div>

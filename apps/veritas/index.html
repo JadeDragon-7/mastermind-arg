@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Veritas</title>
+
+<!-- Disable CTRL U -->
+<script>
+  document.onkeydown = function(e) {
+    if (e.ctrlKey && e.keyCode === 85) {
+      return false;
+    }
+  };
+</script>
+
+<style>
+body {background-color:rgb(27, 27, 27)}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+  padding: 12px 30px;
+  width: 20%;
+  margin: 8px 0;  
+  display: inline-block;
+  border: 3px solid rgb(35, 42, 56);
+  box-sizing: padding-box;
+  background-color: rgb(73, 89, 119);
+}
+
+
+/* Set a style for all buttons */
+button {
+  background-color: #04AA6D;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+</style>
+</head>
+<body>
+
+<form action="Genesis/Loading Screen.html" onsubmit="return authenticate()" autocomplete="off">
+    <div style = "text-align: left;">
+      <label style="font-family: 'Courier New', Courier, monospace; font-size: 30px; color:#757575"
+      for="username"><b>Username</b></label>
+      </div>
+      <!-- added IDs to the inputs -->
+      <input
+        id="username"
+        type="text"
+        placeholder="Enter Username"
+        name="username"
+        required
+      />
+      <div style = "text-align: left;">
+      <label style="font-family: 'Courier New', Courier, monospace; font-size: 30px; color:#757575"
+      for="password"><b>Password</b></label>
+      </div>
+      <input
+        id="password"
+        type="password"
+        placeholder="Enter Password"
+        name="password"
+        required
+      />
+      <br> <button type="submit">Submit</button>
+    </form>
+    
+    <script>
+    
+    //Following function gets values of the username and password fields and checks to see if they match a hard coded username and password 
+      function authenticate(){
+        var authorised;
+        
+        //get input values
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        
+        //check to see if the password and username match
+        if(username == "Genesis" && password == "Test"){
+          authorised = true;
+        }else{ // username or password do not match
+          authorised = false;
+          //alert user
+          alert("Username or password incorrect.");
+        }
+        //return result
+        return authorised;
+      }
+
+      
+
+
+</script>
+
+</body>
+</html>

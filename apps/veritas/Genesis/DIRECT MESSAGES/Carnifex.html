@@ -1,0 +1,562 @@
+<html>
+<head>
+<title>Carnifex</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:#750000;
+    background-color:#000000;
+}
+
+/* Genesis Name */
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+}
+
+/* Carnifex Name */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(117, 0, 0);
+    background-color: #000000;
+}
+
+/* Texting */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Dates */
+
+h6 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Timing Texts */
+
+div.a {
+    text-indent: 50px;
+}
+
+div.b {
+    line-height: 20px;
+}
+
+div.c {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:50px;
+}
+
+div.status {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deut {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(117, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    opacity: 100%;
+}
+
+div.genesis {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deleted {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(170, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    text-indent: 50px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* Genesis Profile */
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Carnifex Profile*/
+
+#popupCarnifex {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(117, 0, 0);
+            box-shadow: 0 4px 8px rgba(129, 4, 4, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactCarnifex {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+
+</style>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Political Activist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Carnifex Profile-->
+
+    <div id="ContactCarnifex"></div>
+    <div id="popupCarnifex">
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(117, 0, 0); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Carnifex</b></span></p>
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Provider | Ghost Benefactor</b></span></p>
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Closed</b></span></p>
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — January 1st, 2006</b></span></p>
+        <button onclick="closeFnCarnifex()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnCarnifex() {
+            document.getElementById(
+                "ContactCarnifex"
+            ).style.display = "block";
+            document.getElementById(
+                "popupCarnifex"
+            ).style.display = "block";
+        }
+        function closeFnCarnifex() {
+            document.getElementById(
+                "ContactCarnifex"
+            ).style.display = "none";
+            document.getElementById(
+                "popupCarnifex"
+            ).style.display = "none";
+        }
+    </script>
+
+
+<div class = "fade-in-text">
+<h1>Carnifex</h1>
+
+
+<h6>February 23rd, 2022
+    <div class = "status"><b>Online - 2</b></div>
+</h6>
+<h6>Carnifex has created a new chat.
+    <div class = "genesis"><button onclick="popupFnGenesis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Genesis</b>
+    </button></div>
+</h6>
+<h6>Carnifex has added Genesis.
+    <div class = "deut"><button onclick="popupFnCarnifex()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(117, 0, 0); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Carnifex</b>
+    </button></div>
+</h6>
+<h6>Carnifex has authorized available payments.
+    <div class = "status"><b><br>Offline - 0</b></div>
+</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:21:07 AM</span></h2>
+<div class = "a"><h5>The mysterious benefactor, I assume?</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:21:29 AM</span></h3>
+<div class = "a"><h5>Potentially.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:21:58 AM</span></h2>
+<div class = "a"><h5>What do you know?</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:22:27 AM</span></h3>
+<div class = "a"><h5>Rumours start spreading when a new anonymous party starts bulk buying pharmaceuticals.</h5></div>
+<div class = "a"><h5>You shouldn't be surprised when people start to piece things together.</h5></div>
+<div class = "a"><h5>Your attempts to spread out the orders is admirable, but considering the products you seem interested in?</h5></div>
+<div class = "a"><h5>People take notice. Or the smart ones do, at least.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:24:14 AM</span></h2>
+<div class = "a"><h5>And?</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:24:26 AM</span></h3>
+<div class = "a"><h5>We'd like to sponsor you, depending on what you share with us.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:24:49 AM</span></h2>
+<div class = "a"><h5>Why?</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:26:40 AM</span></h3>
+<div class = "a"><h5>We will explain our motivations if they continue to align with your goals.</h5></div>
+<div class = "a"><h5>Like yourself, we're hesitant to use a messaging service to discuss our future plans, no matter how secure it is.</h5></div>
+<div class = "a"><h5>We'd like to arrange a meeting in the future.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:29:30 AM</span></h2>
+<div class = "a"><h5>I'd be interested.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:30:14 AM</span></h3>
+<div class = "a"><h5>We're glad to hear it.</h5></div>
+<div class = "a"><h5>We'll contact you soon to arrange a meeting.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:31:45 AM</span></h2>
+<div class = "a"><h5>I look forward to it.</h5></div>
+
+<div class = "c">
+    Carnifex has transferred $4,000.00 USD to Genesis.
+</div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:33:22 AM</span></h3>
+<div class = "a"><h5>A little something to prove our interest, and to offset a portion of the cost of ordering from Mortis.</h5></div>
+
+<div class = "c">
+    Genesis has de-authorized transactional payments.
+</div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:34:57 AM</span></h2>
+<div class = "a"><h5>I'm not going to be trapped into owing you anything.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 23rd, 2022, 2:35:36 AM</span></h3>
+<div class = "a"><h5>Don't misunderstand.</h5></div>
+<div class = "a"><h5>You owe us nothing.</h5></div>
+<div class = "a"><h5>We'll discuss the details in the future.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">February 25th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">March 12th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">May 28th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">July 10th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>August 7th, 2022</h6>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 7th, 2022, 11:14:56 PM</span></h3>
+<div class = "a"><h5>Remember our deal.</h5></div>
+<div class = "a"><h5>Good luck.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 7th, 2022, 11:21:50 PM</span></h2>
+<div class = "a"><h5>The deal is a little sick and twisted.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 7th, 2022, 11:22:19 PM</span></h3>
+<div class = "a"><h5>That's what makes it fun.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 7th, 2022, 11:22:34 PM</span></h2>
+<div class = "a"><h5>$1,000 per successful, correct?</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 7th, 2022, 11:22:53 PM</span></h3>
+<div class = "a"><h5>Correct.</h5></div>
+
+<br>
+<br>
+<h6>August 15th, 2022</h6>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 15th, 2022, 7:55:00 PM</span></h3>
+<div class = "a"><h5>Nice touch with the journalist.</h5></div>
+<div class = "a"><h5>Real subtle.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 15th, 2022, 8:03:33 PM</span></h2>
+<div class = "a"><h5>Nobody will miss her.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 15th, 2022, 8:03:44 PM</span></h3>
+<div class = "a"><h5>True.</h5></div>
+
+<br>
+<br>
+<h6>September 1st, 2022</h6>
+
+<div class = "c">
+    Genesis has authorized transactional payments.
+</div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> September 1st, 2022, 10:37:50 PM</span></h3>
+<div class = "a"><h5>Smiled a little when I read the news.</h5></div>
+
+<div class = "c">
+    Carnifex has transferred $16,000.00 USD to Genesis.
+</div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> September 1st, 2022, 10:40:47 PM</span></h2>
+<div class = "a"><h5>I'll be offline until everything concludes.</h5></div>
+<div class = "a"><h5>Please contact Deut if you need anything.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> September 1st, 2022, 10:41:03 PM</span></h3>
+<div class = "a"><h5>Will do.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">October 22nd, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">November 1st, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">January 14th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">February 1st, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">March 5th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">March 8th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">April 11th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>April 23rd, 2023</h6>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 22nd, 2023, 5:18:50 AM</span></h3>
+<div class = "a"><h5>Might've found a solution to your video problem.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 22nd, 2023, 8:23:10 AM</span></h2>
+<div class = "a"><h5>Go on?</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 22nd, 2023, 8:25:57 AM</span></h3>
+<div class = "a"><h5>Did you just wake up?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 22nd, 2023, 8:26:40 AM</span></h2>
+<div class = "a"><h5>Are you going to elaborate or not.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 22nd, 2023, 8:28:09 AM</span></h3>
+<div class = "a"><h5>Grumpy. But anyways.</h5></div>
+<div class = "a"><h5>There's another interested benefactor.</h5></div>
+<div class = "a"><h5>Usually I don't like to share my little... "projects", but I think all parties would benefit.</h5></div>
+<div class = "a"><h5>They specialize in online media, especially on the dark web.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 22nd, 2023, 8:30:31 AM</span></h2>
+<div class = "a"><h5>I see where this is going.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 22nd, 2023, 8:30:55 AM</span></h3>
+<div class = "a"><h5>You'd have to work out the details with them.</h5></div>
+<div class = "a"><h5>From what we've discussed, they'd do your dirty work, and pay you for it.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 22nd, 2023, 8:31:25 AM</span></h2>
+<div class = "a"><h5>Sounds too good to be true.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 22nd, 2023, 8:31:45 AM</span></h3>
+<div class = "a"><h5>I'll put you in touch.</h5></div>
+<div class = "a"><h5>You can make the final decision.</h5></div>
+
+<br>
+<br>
+<h6>May 6th, 2023</h6>
+
+<div class = "c">
+    Carnifex has transferred $3,000.00 USD to Genesis.
+</div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 6th, 2023, 4:10:55 AM</span></h3>
+<div class = "a"><h5>A little something to offset the cost of ordering from Mortis.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 6th, 2023, 8:51:24 AM</span></h2>
+<div class = "a"><h5>Thank you.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">May 13th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">May 22nd, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>June 1st, 2023</h6>
+
+<div class = "c">
+    Carnifex has transferred $19,000.00 USD to Genesis.
+</div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 6:34:42 AM</span></h3>
+<div class = "a"><h5>Merry Christmas.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 6:46:20 AM</span></h2>
+<div class = "a"><h5>I still don't really understand what you're getting out of this deal.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 6:46:56 AM</span></h3>
+<div class = "a"><h5>I've told you before.</h5></div>
+<div class = "a"><h5>We agree with your views.</h5></div>
+<div class = "a"><h5>And I have money to burn.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 6:48:50 AM</span></h2>
+<div class = "a"><h5>Must be nice.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 6:49:16 AM</span></h3>
+<div class = "a"><h5>Oh please, I know about your inheritance.</h5></div>
+<div class = "a"><h5>You'd be able to run a game or two without help.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 6:49:06 AM</span></h2>
+<div class = "a"><h5>But not more than that.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 6:49:42 AM</span></h3>
+<div class = "a"><h5>Maybe so. But you've said yourself you won't be around that long.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 6:50:32 AM</span></h2>
+<div class = "a"><h5>Others will be.</h5></div>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 6:50:49 AM</span></h3>
+<div class = "a"><h5>And I'll be around to support them as well.</h5></div>
+
+<br>
+<br>
+<h6>~~~~~~~~~~~~~~~~~~ 2 Unread Messages ~~~~~~~~~~~~~~~~~~</h6>
+
+<h3>Carnifex <span style="color: rgb(105, 105, 105); font-size: 15px;"> 9:32:21 AM</span></h3>
+<div class = "a"><h5>Goodbye. I'll miss our little talks.</h5></div>
+<br>
+<h6>Carnifex has de-authorized transactional payments.</h6>
+<br>
+<br>
+
+
+</div>

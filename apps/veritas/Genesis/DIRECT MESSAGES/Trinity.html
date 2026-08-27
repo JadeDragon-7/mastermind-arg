@@ -1,0 +1,2674 @@
+<html>
+<head>
+<title>Trinity</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:rgb(140, 0, 255);
+    background-color:#000000;
+}
+
+/* Genesis Name */
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+}
+
+/* Deut Name */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(255, 94, 0);
+    background-color: #000000;
+}
+
+/* Mentem Name */
+
+h4 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: #0099ff;
+    background-color: #000000;
+}
+
+/* Texting */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Dates */
+
+h6 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Timing Texts */
+
+div.a {
+    text-indent: 50px;
+}
+
+div.b {
+    line-height: 20px;
+}
+
+div.status {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deut {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(255, 94, 0);
+    background-color: #000000;
+    line-height: 0px;
+    opacity: 40%;
+}
+
+div.mentem {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(0, 153, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.genesis {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deleted {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(170, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    text-indent: 50px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* Genesis Profile */
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/* Mentem Profile */
+
+#popupMentem {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(0, 153, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactMentem {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/* Deut Profile */
+
+#popupDeut {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(255, 94, 0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactDeut {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Camper Profile*/
+
+#popupCamper {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #000000;
+            border: 5px solid #000000;
+            box-shadow: 0 4px 8px #000000;
+            z-index: 1000;
+
+        }
+
+#ContactCamper {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000; /* <-- solid black background */
+    z-index: 999;
+}
+
+/*Eleven Profile*/
+
+#popupEleven {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #000000;
+            border: 5px solid #000000;
+            box-shadow: 0 4px 8px #000000;
+            z-index: 1000;
+
+        }
+
+#ContactEleven {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000; /* <-- solid black background */
+    z-index: 999;
+}
+
+
+</style>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Political Activist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Mentem Profile-->
+
+    <div id="ContactMentem"></div>
+    <div id="popupMentem">
+        <p><span style = "color:rgb(0, 153, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Mentem</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Neurochemical Engineer</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — April 4th, 2019</b></span></p>
+        <button onclick="closeFnMentem()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnMentem() {
+            document.getElementById(
+                "ContactMentem"
+            ).style.display = "block";
+            document.getElementById(
+                "popupMentem"
+            ).style.display = "block";
+        }
+        function closeFnMentem() {
+            document.getElementById(
+                "ContactMentem"
+            ).style.display = "none";
+            document.getElementById(
+                "popupMentem"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Deut Profile-->
+
+    <div id="ContactDeut"></div>
+    <div id="popupDeut">
+        <p><span style = "color:rgb(255, 94, 0); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Deut</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Bound Enforcer</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 12th, 2020</b></span></p>
+        <button onclick="closeFnDeut()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnDeut() {
+            document.getElementById(
+                "ContactDeut"
+            ).style.display = "block";
+            document.getElementById(
+                "popupDeut"
+            ).style.display = "block";
+        }
+        function closeFnDeut() {
+            document.getElementById(
+                "ContactDeut"
+            ).style.display = "none";
+            document.getElementById(
+                "popupDeut"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Camper Profile-->
+
+<div id="ContactCamper"></div>
+<div id="popupCamper">
+    <img src="Oculus/Camper_Files.png" alt="Camper Profile" style="max-width: 100%; max-height: 80vh; display: block; margin: 0 auto;">
+<button onclick="closeFnCamper()" style="
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto;">
+    <b>Close</b>
+</button>
+</div>
+    </div>
+    <script>
+        function popupFnCamper() {
+            document.getElementById(
+                "ContactCamper"
+            ).style.display = "block";
+            document.getElementById(
+                "popupCamper"
+            ).style.display = "block";
+        }
+        function closeFnCamper() {
+            document.getElementById(
+                "ContactCamper"
+            ).style.display = "none";
+            document.getElementById(
+                "popupCamper"
+            ).style.display = "none";
+        }
+
+
+    </script>
+
+<!--Eleven Profile-->
+
+<div id="ContactEleven"></div>
+<div id="popupEleven">
+    <img src="DO NOT OPEN/11.png" alt="Eleven Profile" style="max-width: 100%; max-height: 80vh; display: block; margin: 0 auto;">
+<button onclick="closeFnEleven()" style="
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    display: block;
+    margin: 10px auto;">
+    <b>Close</b>
+</button>
+</div>
+    </div>
+    <script>
+        function popupFnEleven() {
+            document.getElementById(
+                "ContactEleven"
+            ).style.display = "block";
+            document.getElementById(
+                "popupEleven"
+            ).style.display = "block";
+        }
+        function closeFnEleven() {
+            document.getElementById(
+                "ContactEleven"
+            ).style.display = "none";
+            document.getElementById(
+                "popupEleven"
+            ).style.display = "none";
+        }
+
+
+    </script>
+
+
+<div class = "fade-in-text">
+<h1>Trinity</h1>
+
+
+<h6>October 13th, 2020
+    <div class = "status"><b>Online - 2</b></div>
+</h6>
+<h6>Genesis has created a new chat.
+    <div class = "genesis"><button onclick="popupFnGenesis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Genesis</b>
+    </button></div>
+</h6>
+<h6>Genesis has added Deut.
+    <div class = "mentem"><button onclick="popupFnMentem()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(0, 153, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Mentem</b>
+    </button></div>
+</h6>
+<h6>Genesis has added Mentem.
+    <div class = "status"><b><br>Offline - 1</b></div>
+</h6>
+<h6>Deut has renamed the chat to Trinity.
+    <div class = "deut"><button onclick="popupFnDeut()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(255, 94, 0); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Deut</b>
+    </button></div>
+</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 13th, 2020, 9:46:24 PM</span>
+
+</h2>
+<div class = "a"><h5>Use this sparingly. Don't ever use our names, keep everything about us untraceable.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 13th, 2020, 9:51:03 PM</span></h3>
+<div class = "a"><h5>Isn't this website supposed to be completely secure?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 13th, 2020, 9:51:47 PM</span></h2>
+<div class = "a"><h5>We're not taking any chances.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 13th, 2020, 9:57:32 PM</span></h4>
+<div class = "a"><h5>How's your new job?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 13th, 2020, 10:01:22 PM</span></h2>
+<div class = "a"><h5>Informative.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 13th, 2020, 10:01:59 PM</span></h4>
+<div class = "a"><h5>Keep us updated.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">October 29th, 2020</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">November 10th, 2020</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>December 2nd, 2020</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 2nd, 2020, 7:12:17 PM</span></h2>
+<div class = "a"><h5>Progress?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 2nd, 2020, 8:34:41 PM</span></h4>
+<div class = "a"><h5>Slow.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 2nd, 2020, 8:37:21 PM</span></h2>
+<div class = "a"><h5>That's not what I wanted to hear.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">December 3rd, 2020</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">December 15th, 2020</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">February 13th, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">March 30th, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">May 4th, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>June 9th, 2021</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 9th, 2021, 1:12:07 AM</span></h4>
+<div class = "a"><h5>It's starting to work.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 9th, 2021, 6:59:31 AM</span></h2>
+<div class = "a"><h5>About time.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 9th, 2021, 9:04:47 AM</span></h3>
+<div class = "a"><h5>Your deranged plan depends on Mentem's work, be a little fucking grateful.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 9th, 2021, 5:52:20 PM</span></h2>
+<div class = "a"><h5>Thank you, Mentem.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">June 21st, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">August 18th, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>September 3rd, 2021</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> September 3rd, 2021, 2:43:54 PM</span></h4>
+<div class = "a"><h5>DTK is fully functional.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> September 3rd, 2021, 8:29:10 PM</span></h2>
+<div class = "a"><h5>Good job.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> September 3rd, 2021, 8:51:29 PM</span></h3>
+<div class = "a"><h5>I can't believe you're actually going through with this.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">September 12th, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">October 2nd, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">October 31st, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>November 16th, 2021</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 16th, 2021, 6:38:09 AM</span></h2>
+<div class = "a"><h5>What do you need?</h5></div>
+<div class = "a"><h5>If we're bulk purchasing, we need to start now and spread out the purchases to cover our tracks.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 16th, 2021, 9:12:47 AM</span></h4>
+<div class = "a"><h5>Acetylcholine, Adenosine, Dopamine, Enkephalins, Etomidate, Galanin, </h5></div>
+<div class = "a"><h5>Gamma-Aminobutyric, Gamma-Hydroxybutyrate, Histamine, 5-Hydroxytryptamine, Ketamine, </h5></div>
+<div class = "a"><h5>N-acetyl-5-methoxytryptamine, Noradrenaline, Orexin, Propofol, Scopolamine.</h5></div>
+<div class = "a"><h5>Maybe more. Maybe less.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 16th, 2021, 9:14:31 AM</span></h3>
+<div class = "a"><h5>Holy shit.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 16th, 2021, 5:51:57 PM</span></h2>
+<div class = "a"><h5>I regret asking.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 16th, 2021, 5:54:19 PM</span></h4>
+<div class = "a"><h5>I'm preparing a full document with names, amounts, and where you should start looking.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 16th, 2021, 6:03:23 PM</span></h2>
+<div class = "a"><h5>Appreciate it. I'll start reaching out to some buyers.</h5></div>
+
+<br>
+<br>
+<h6>November 19th, 2021</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 19th, 2021, 10:17:41 PM</span></h4>
+<div class = "a"><h5>I sent the file over.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 19th, 2021, 10:22:12 PM</span></h2>
+<div class = "a"><h5>I'll start working on it right away.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 19th, 2021, 10:27:31 PM</span></h3>
+<div class = "a"><h5>I can't wait to drive across the country to pick up your chemical shit.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 19th, 2021, 10:28:05 PM</span></h4>
+<div class = "a"><h5>Would you rather being doing the biology, chemistry, neurology, AND coding for this "shit"?</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 19th, 2021, 10:31:19 PM</span></h3>
+<div class = "a"><h5>I'll go fill the car up with gas.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 19th, 2021, 10:31:59 PM</span></h4>
+<div class = "a"><h5>That's what I thought.</h5></div>
+
+<br>
+<br>
+<h6>November 21st, 2021</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 6:34:04 PM</span></h2>
+<div class = "a"><h5>Bought the first batch from a buyer.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 6:47:10 PM</span></h4>
+<div class = "a"><h5>That was fast.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 6:49:44 PM</span></h2>
+<div class = "a"><h5>We need to work fast.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">November 24th, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>November 29th, 2021</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 29th, 2021, 7:06:42 AM</span></h2>
+<div class = "a"><h5>Portitorem just arranged the time for pickup.</h5></div>
+<div class = "a"><h5>Deut?</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 29th, 2021, 7:23:00 AM</span></h3>
+<div class = "a"><h5>On it. Text me the details.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">December 2nd, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>December 4th, 2021</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 8:10:26 AM</span></h2>
+<div class = "a"><h5>Just ordered from Remedium. It'll be an exclusive courier.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 4th, 2021, 8:31:40 AM</span></h3>
+<div class = "a"><h5>Yaaaaaaay.</h5></div>
+
+<br>
+<br>
+<h6>December 14th, 2021</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 14th, 2021, 6:44:51 AM</span></h2>
+<div class = "a"><h5>Hey Deut, guess what.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 14th, 2021, 6:58:12 AM</span></h3>
+<div class = "a"><h5>Field trip?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 14th, 2021, 6:58:35 AM</span></h2>
+<div class = "a"><h5>Yup.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 14th, 2021, 6:59:13 AM</span></h4>
+<div class = "a"><h5>Have so much fun.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 14th, 2021, 6:59:19 AM</span></h3>
+<div class = "a"><h5>Fuck you.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 14th, 2021, 7:00:16 AM</span></h2>
+<div class = "a"><h5>Sent you the details.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">December 18th, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>December 31st, 2021</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 31st, 2021, 5:09:59 PM</span></h2>
+<div class = "a"><h5>Ordered a batch from Exilium.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 31st, 2021, 5:14:13 PM</span></h3>
+<div class = "a"><h5>I'm so excited.</h5></div>
+<div class = "a"><h5>(Can you sense my sarcasm?)</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 31st, 2021, 5:16:31 PM</span></h4>
+<div class = "a"><h5>Stop bitching.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 31st, 2021, 5:19:20 PM</span></h2>
+<div class = "a"><h5>Still no luck on finding anyone who sells Enkephalins, Ketamine, or Scopolamine.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 31st, 2021, 5:20:35 PM</span></h4>
+<div class = "a"><h5>We need to figure that out fast.</h5></div>
+<div class = "a"><h5>I NEED those chemicals.</h5></div>
+<div class = "a"><h5>The Game will not fucking work without those.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 31st, 2021, 5:20:56 PM</span></h2>
+<div class = "a"><h5>I'll keep looking.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">January 3rd, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>January 6th, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 6th, 2022 6:19:30 AM</span></h2>
+<div class = "a"><h5>Pickup from Noctem Cursor today.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 6th, 2022, 6:47:09 AM</span></h3>
+<div class = "a"><h5>I'm still out of town. Can either of you make it?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 6th, 2022, 6:52:55 AM</span></h4>
+<div class = "a"><h5>I have entire programs to code still. Genesis has work.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 6th, 2022 6:54:06 AM</span></h2>
+<div class = "a"><h5>I'll send Zaide.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">January 7th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>January 15th, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 15th, 2022 11:16:38 PM</span></h2>
+<div class = "a"><h5>Another order. Pickup will be in a couple days.</h5></div>
+<div class = "a"><h5>Will you be back in town?</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 15th, 2022, 11:23:34 PM</span></h3>
+<div class = "a"><h5>Yeah, I got it.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 15th, 2022, 11:31:51 PM</span></h4>
+<div class = "a"><h5>Any luck on the final chemicals?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 15th, 2022 11:32:19 PM</span></h2>
+<div class = "a"><h5>I'm still looking.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 15th, 2022, 11:32:49 PM</span></h4>
+<div class = "a"><h5>Fuck.</h5></div>
+
+<br>
+<br>
+<h6>January 21st, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 21st, 2022 5:34:26 AM</span></h2>
+<div class = "a"><h5>Noctem pickup today.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 21st, 2022, 7:01:15 AM</span></h3>
+<div class = "a"><h5>Got it.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 21st, 2022, 7:09:29 AM</span></h4>
+<div class = "a"><h5>Look who just woke up.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 21st, 2022, 7:10:44 AM</span></h3>
+<div class = "a"><h5>Kys.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">January 27th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">January 30th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>February 8th, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022 1:04:33 AM</span></h2>
+<div class = "a"><h5>Good news and bad news.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:19:04 AM</span></h4>
+<div class = "a"><h5>What happened.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022 1:21:48 AM</span></h2>
+<div class = "a"><h5>Good news, I bought those final drugs.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:22:18 AM</span></h4>
+<div class = "a"><h5>And the bad news?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022 1:22:52 AM</span></h2>
+<div class = "a"><h5>I got a creepy fucking DM.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:23:04 AM</span></h4>
+<div class = "a"><h5>??????</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022 1:24:56 AM</span></h2>
+<div class = "a"><h5>A narcotics facilitator wanted me to buy from them.</h5></div>
+<div class = "a"><h5>In exchange, they talked about some mysterious benefactor.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:26:50 AM</span></h4>
+<div class = "a"><h5>Did you just get scammed on the black market.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022 1:28:38 AM</span></h2>
+<div class = "a"><h5>I didn't have much of a choice.</h5></div>
+<div class = "a"><h5>We needed those drugs, and fast.</h5></div>
+<div class = "a"><h5>Plus, we can't really turn down the offer of a benefactor.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:29:29 AM</span></h4>
+<div class = "a"><h5>Just be careful.</h5></div>
+<div class = "a"><h5>We've come too far to lose everything now.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022 1:31:03 AM</span></h2>
+<div class = "a"><h5>Where's Deut?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 1:31:25 AM</span></h4>
+<div class = "a"><h5>Sleeping.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022 1:31:59 AM</span></h2>
+<div class = "a"><h5>I want him to do some investigation into Mortis.</h5></div>
+<div class = "a"><h5>We need to know what we're getting into.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 8th, 2022, 7:04:58 AM</span></h3>
+<div class = "a"><h5>What the fuck did I miss.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">February 9th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">February 13th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>February 17th, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 17th, 2022 7:15:47 AM</span></h2>
+<div class = "a"><h5>Good news, we didn't get scammed.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 17th, 2022, 7:16:56 AM</span></h4>
+<div class = "a"><h5>And the bad news?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 17th, 2022 7:17:13 AM</span></h2>
+<div class = "a"><h5>Deut has to fill his car up with gas.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 17th, 2022, 7:17:30 AM</span></h3>
+<div class = "a"><h5>Dude.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 17th, 2022 7:18:40 AM</span></h2>
+<div class = "a"><h5>Pickup from Visus today.</h5></div>
+<div class = "a"><h5>I sent you the details.</h5></div>
+<div class = "a"><h5>Be extra careful.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">February 20th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>February 25th, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 25th, 2022 7:48:05 AM</span></h2>
+<div class = "a"><h5>Deut, I need you to accompany me today.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 25th, 2022, 7:56:09 AM</span></h3>
+<div class = "a"><h5>What's going on?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 25th, 2022 7:56:41 AM</span></h2>
+<div class = "a"><h5>We're going to meet with that benefactor.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 25th, 2022, 7:57:17 AM</span></h3>
+<div class = "a"><h5>Tf do they want to sponser, us killing kids?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 25th, 2022, 7:58:41 AM</span></h4>
+<div class = "a"><h5>Technically, none of them should die.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 25th, 2022, 7:59:11 AM</span></h3>
+<div class = "a"><h5>Fine, fine.</h5></div>
+<div class = "a"><h5>Tf do they want to sponser, us KIDNAPPING kids?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 25th, 2022 8:01:08 AM</span></h2>
+<div class = "a"><h5>We'll find out today.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">February 26th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>March 1st, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 1st, 2022 6:18:11 PM</span></h2>
+<div class = "a"><h5>Mentem do you have everything you need?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 1st, 2022, 6:49:37 PM</span></h4>
+<div class = "a"><h5>I just need time.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 1st, 2022 6:50:32 PM</span></h2>
+<div class = "a"><h5>Can't help with that.</h5></div>
+<div class = "a"><h5>Shutdown will happen in May.</h5></div>
+<div class = "a"><h5>Any longer and we won't get construction done in time.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 1st, 2022, 6:53:28 PM</span></h4>
+<div class = "a"><h5>I'm doing my best.</h5></div>
+<div class = "a"><h5>Tell Deut to stop ignoring my texts and bring me some fucking takeout.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 1st, 2022 6:53:37 PM</span></h2>
+<div class = "a"><h5>On it.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">March 8th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">March 17th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>March 24th, 2022</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 24th, 2022, 6:48:37 PM</span></h4>
+<div class = "a"><h5>Is Koa going to be an issue.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 24th, 2022, 6:49:10 PM</span></h3>
+<div class = "a"><h5>Yes.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 24th, 2022, 6:49:14 PM</span></h2>
+<div class = "a"><h5>No.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 24th, 2022, 6:50:17 PM</span></h4>
+<div class = "a"><h5>Great.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 24th, 2022, 6:51:02 PM</span></h2>
+<div class = "a"><h5>He won't find out. I have it handled.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">April 16th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>April 29th, 2022</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 29th, 2022, 11:07:59 PM</span></h3>
+<div class = "a"><h5>So... What was that about Koa not being an issue?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 29th, 2022, 11:09:26 PM</span></h2>
+<div class = "a"><h5>We're continuing as planned. I'll deal with Koa.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 29th, 2022, 11:14:10 PM</span></h4>
+<div class = "a"><h5>And if they find the body before The Game starts?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 29th, 2022, 11:16:54 PM</span></h2>
+<div class = "a"><h5>They won't. Trust me.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">May 2nd, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">May 5th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>May 7th, 2022</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 7th, 2022, 9:34:12 PM</span></h4>
+<div class = "a"><h5>If you're going to keep being a pussy, just let Deut kill him.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 7th, 2022, 9:36:06 PM</span></h2>
+<div class = "a"><h5>Get your fucking work done.</h5></div>
+<div class = "a"><h5>I want to be the one to do it.</h5></div>
+
+<br>
+<br>
+<h6>May 8th, 2022</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 8th, 2022, 11:22:52 PM</span></h4>
+<div class = "a"><h5>Are you alive?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 8th, 2022, 11:38:47 PM</span></h2>
+<div class = "a"><h5>Yes.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 8th, 2022, 11:39:15 PM</span></h3>
+<div class = "a"><h5>Is Koa?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 8th, 2022, 11:39:47 PM</span></h2>
+<div class = "a"><h5>No.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 8th, 2022, 11:40:01 PM</span></h3>
+<div class = "a"><h5>Yay?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 8th, 2022, 11:41:42 PM</span></h2>
+<div class = "a"><h5>School shuts down tomorrow.</h5></div>
+<div class = "a"><h5>Stay clear.</h5></div>
+
+<br>
+<br>
+<h6>May 9th, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 9th, 2022, 9:55:20 AM</span></h2>
+<div class = "a"><h5>School is closed.</h5></div>
+<div class = "a"><h5>We need to stay away for a couple days.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 9th, 2022, 10:02:57 AM</span></h4>
+<div class = "a"><h5>Media is going crazy.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 9th, 2022, 10:03:09 AM</span></h3>
+<div class = "a"><h5>They'll lose interest soon.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">May 11th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>May 18th, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 18th, 2022, 8:12:37 AM</span></h2>
+<div class = "a"><h5>We need to start construction.</h5></div>
+<div class = "a"><h5>We only have a couple months.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 18th, 2022, 9:10:25 AM</span></h3>
+<div class = "a"><h5>I'll start on it today.</h5></div>
+<div class = "a"><h5>If I could borrow "Milo" and Zaide, that would be great.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 18th, 2022, 9:11:41 AM</span></h4>
+<div class = "a"><h5>Mm, child labour.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 18th, 2022, 9:12:22 AM</span></h3>
+<div class = "a"><h5>Of our extensive list of crimes, that is definitely on the bottom.</h5></div>
+<div class = "a"><h5>Genesis has a whole ass fake identity.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 18th, 2022, 9:12:44 AM</span></h4>
+<div class = "a"><h5>Pretty sure murder trumps that.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 18th, 2022, 9:14:00 AM</span></h2>
+<div class = "a"><h5>Focus.</h5></div>
+<div class = "a"><h5>Carnifex is sending over some workers.</h5></div>
+<div class = "a"><h5>Milo and Zaide will meet you in the school.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 18th, 2022, 9:14:28 AM</span></h3>
+<div class = "a"><h5>GOD BLESS CARNIFEX.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">May 24th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">June 1st, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">June 7th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">June 19th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">June 21st, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">July 2nd, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">July 20th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">July 29th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">August 4th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>August 10th, 2022</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 10th, 2022, 3:10:47 PM</span></h4>
+<div class = "a"><h5>We need to deal with Koa's stupid girlfriend.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 10th, 2022, 5:13:29 PM</span></h3>
+<div class = "a"><h5>She's still poking around?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 10th, 2022, 5:14:45 PM</span></h2>
+<div class = "a"><h5>I'm sending Zaide to deal with Brynn.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 10th, 2022, 5:18:38 PM</span></h4>
+<div class = "a"><h5>Zaide????</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 10th, 2022, 5:19:52 PM</span></h2>
+<div class = "a"><h5>They're getting a little antsy for my liking.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 10th, 2022, 5:20:32 PM</span></h3>
+<div class = "a"><h5>Nothing like a good old murder to reinforce loyalty.</h5></div>
+
+<br>
+<br>
+<h6>August 13th, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 13th, 2022, 11:56:43 PM</span></h2>
+<div class = "a"><h5>Zaide did it.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 13th, 2022, 11:59:09 PM</span></h4>
+<div class = "a"><h5>I'll keep an eye on the news.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">August 15th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>August 17th, 2022</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 17th, 2022, 5:41:30 AM</span></h4>
+<div class = "a"><h5>We have a SERIOUS fucking problem.</h5></div>
+<div class = "a"><h5>Zaide called the police.</h5></div>
+<div class = "a"><h5>They think it's a prank call right now.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 17th, 2022, 5:44:26 AM</span></h2>
+<div class = "a"><h5>I have them sedated.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 17th, 2022, 5:44:46 AM</span></h4>
+<div class = "a"><h5>Thank fucking God.</h5></div>
+<div class = "a"><h5>What do we do now?</h5></div>
+<div class = "a"><h5>Do we use Milo instead?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 17th, 2022, 5:45:52 AM</span></h2>
+<div class = "a"><h5>No. Zaide is still useful. I'll just talk to them.</h5></div>
+<div class = "a"><h5>We need start way sooner than expected.</h5></div>
+<div class = "a"><h5>Everything is ready, right?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 17th, 2022, 5:46:11 AM</span></h4>
+<div class = "a"><h5>Yes.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 17th, 2022, 5:46:33 AM</span></h2>
+<div class = "a"><h5>Wake Deut up. I'll meet you at the school.</h5></div>
+<div class = "a"><h5>We need to start planning who we take first.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">August 20th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">August 21st, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">August 22nd, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">August 23rd, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">August 25th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">August 26th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">August 27th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">August 29th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>August 30th, 2022</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 30th, 2022, 1:56:32 PM</span></h4>
+<div class = "a"><h5>You need to take Zaide out of the game.</h5></div>
+<div class = "a"><h5>Use Milo.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 30th, 2022, 2:00:05 PM</span></h2>
+<div class = "a"><h5>What's going on?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 30th, 2022, 2:00:23 PM</span></h4>
+<div class = "a"><h5>They're DTK is INSANELY high.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 30th, 2022, 2:00:54 PM</span></h3>
+<div class = "a"><h5>How high is insanely high?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 30th, 2022, 2:01:22 PM</span></h4>
+<div class = "a"><h5>91.37%</h5></div>
+<div class = "a"><h5>Trial prep is anything over 65%.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 30th, 2022, 2:02:31 PM</span></h2>
+<div class = "a"><h5>Do I need to prep for an immediate trial??</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 30th, 2022, 2:03:57 PM</span></h4>
+<div class = "a"><h5>I think it's directed towards YOU.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 30th, 2022, 2:04:46 PM</span></h2>
+<div class = "a"><h5>Fuck.</h5></div>
+<div class = "a"><h5>I'll deal with them.</h5></div>
+<div class = "a"><h5>We don't have time to prep everything for Milo instead.</h5></div>
+
+<br>
+<br>
+<h6>August 31st, 2022</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 31st, 2022, 9:11:16 PM</span></h4>
+<div class = "a"><h5>Do you have everything you need?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 31st, 2022, 9:14:52 PM</span></h2>
+<div class = "a"><h5>It's all set up, don't worry.</h5></div>
+<div class = "a"><h5>All of you have access to the cameras.</h5></div>
+<div class = "a"><h5>Just sit back and enjoy the show.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 31st, 2022, 9:16:59 PM</span></h3>
+<div class = "a"><h5>I bought so much shitty popcorn.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 31st, 2022, 9:18:11 PM</span></h2>
+<div class = "a"><h5>I'll be offline until it's over.</h5></div>
+<div class = "a"><h5>Start v2 planning while you have free time.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 31st, 2022, 9:19:57 PM</span></h4>
+<div class = "a"><h5>Be careful.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 31st, 2022, 9:20:46 PM</span></h2>
+<div class = "a"><h5>I always am.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> August 31st, 2022, 9:21:08 PM</span></h3>
+<div class = "a"><h5>Good luck.</h5></div>
+
+<br>
+<br>
+<h6>October 22nd, 2022</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 22nd, 2022, 3:36:03 AM</span></h3>
+<div class = "a"><h5>What the fuck is happening.</h5></div>
+<div class = "a"><h5>Do we need to pull you out?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 22nd, 2022, 3:38:41 AM</span></h2>
+<div class = "a"><h5>I'm re-coding everything.</h5></div>
+<div class = "a"><h5>I have four more hours, don't bother me.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 22nd, 2022, 3:39:48 AM</span></h4>
+<div class = "a"><h5>Are you sure you can do it?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 22nd, 2022, 3:40:24 AM</span></h2>
+<div class = "a"><h5>It'll be rough.</h5></div>
+<div class = "a"><h5>I've watched you do it enough I can brute force it.</h5></div>
+<div class = "a"><h5>It just needs to last the day.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 22nd, 2022, 3:41:20 AM</span></h3>
+<div class = "a"><h5>This is why the game will never work.</h5></div>
+<div class = "a"><h5>We should go back to my old idea.</h5></div>
+<div class = "a"><h5>Let them actually kill each other.</h5></div>
+<div class = "a"><h5>It'll have more impact.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 22nd, 2022, 3:41:30 AM</span></h2>
+<div class = "a"><h5>I know.</h5></div>
+<div class = "a"><h5>I've already decided we'll do that for the next game.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 22nd, 2022, 3:41:51 AM</span></h3>
+<div class = "a"><h5>Seriously?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 22nd, 2022, 3:42:27 AM</span></h2>
+<div class = "a"><h5>We'll talk after everything is over.</h5></div>
+<div class = "a"><h5>Stay offline. Stay away from the school.</h5></div>
+<div class = "a"><h5>I'll find you when it's safe.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 22nd, 2022, 3:42:38 AM</span></h4>
+<div class = "a"><h5>Be safe please.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">October 23rd, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 25th, 2022, 2:01:04 AM</span></h4>
+<div class = "a"><h5>Police and FBI are searching for "Elijah Caddel".</h5></div>
+<div class = "a"><h5>They've already interrogated both Arthur and Katrina.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 25th, 2022, 2:06:10 AM</span></h2>
+<div class = "a"><h5>We knew this would happen.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 25th, 2022, 2:07:09 AM</span></h3>
+<div class = "a"><h5>Yeah but now your fancy fake identity is blown.</h5></div>
+<div class = "a"><h5>Better hope you don't get pulled over driving to the camp.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 25th, 2022, 2:08:58 AM</span></h2>
+<div class = "a"><h5>"Elijah Caddel" has existed since 2016.</h5></div>
+<div class = "a"><h5>They'll follow that lead for months before giving up eventually.</h5></div>
+<div class = "a"><h5>They won't find anything.</h5></div>
+<div class = "a"><h5>By the time they realize he doesn't exist, v2 will be underway.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 25th, 2022, 2:10:24 AM</span></h4>
+<div class = "a"><h5>Can you forge a new identity as strong as this one?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> October 25th, 2022, 2:08:58 AM</span></h2>
+<div class = "a"><h5>The person who did it for me is dead, so no.</h5></div>
+<div class = "a"><h5>It's too risky to go to those lengths again.</h5></div>
+<div class = "a"><h5>I'll just stay off the grid.</h5></div>
+
+
+<br>
+<br>
+<h6><div class = "b">October 30th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">November 3rd, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>November 7th, 2022</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 7th, 2022, 1:12:04 PM</span></h3>
+<div class = "a"><h5>The camp is a fucking mess.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 7th, 2022, 1:49:25 PM</span></h2>
+<div class = "a"><h5>Start taking inventory and planning what we need to repair and rebuild.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 7th, 2022, 1:50:46 PM</span></h3>
+<div class = "a"><h5>We can use most of the old layout with minimal changes, thank fuck.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 7th, 2022, 1:58:21 PM</span></h4>
+<div class = "a"><h5>We still need quite a few more people.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 7th, 2022, 1:59:58 PM</span></h2>
+<div class = "a"><h5>What do we have so far?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 7th, 2022, 2:02:35 PM</span></h4>
+<div class = "a"><h5>Sports, medicine, hypnotism, outdoors shit..</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 7th, 2022, 2:04:57 PM</span></h2>
+<div class = "a"><h5>What about military?</h5></div>
+<div class = "a"><h5>That could spice things up.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 7th, 2022, 2:05:15 PM</span></h4>
+<div class = "a"><h5>I'll look into it.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">November 15th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>November 19th, 2022</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 19th, 2022, 8:39:30 PM</span></h3>
+<div class = "a"><h5>What about a lawyer?</h5></div>
+<div class = "a"><h5>Just read about this hotshot Ultimate lawyer.</h5></div>
+<div class = "a"><h5>He's young, lives alone.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 19th, 2022, 9:05:31 PM</span></h2>
+<div class = "a"><h5>Sounds perfect.</h5></div>
+<div class = "a"><h5>Look into him more.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">November 25th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>December 1st, 2022</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 1st, 2022, 10:40:54 AM</span></h4>
+<div class = "a"><h5>Have we considered looking at targets from the Drakora mafia?</h5></div>
+<div class = "a"><h5>We could use the research we did on Ruby Ivera as a starting place.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 1st, 2022, 10:44:00 AM</span></h2>
+<div class = "a"><h5>That's fucking genius.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 1st, 2022, 10:59:10 AM</span></h3>
+<div class = "a"><h5>I'll start looking into it.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">December 8th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">December 16th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>December 22nd, 2022</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 22nd, 2022, 2:55:50 PM</span></h4>
+<div class = "a"><h5>I could track us down an Ultimate Mimic.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 22nd, 2022, 3:13:18 PM</span></h3>
+<div class = "a"><h5>Track down????</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 22nd, 2022, 3:14:29 PM</span></h4>
+<div class = "a"><h5>It'd be difficult to get them.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 22nd, 2022, 3:28:58 PM</span></h2>
+<div class = "a"><h5>But absolutely worth it.</h5></div>
+<div class = "a"><h5>Do what you can.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">December 29th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>January 2nd, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 2nd, 2022, 9:39:32 PM</span></h4>
+<div class = "a"><h5>Don't we think the rock climber is a little.. young??</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 2nd, 2022, 9:52:12 PM</span></h2>
+<div class = "a"><h5>That's the point.</h5></div>
+<div class = "a"><h5>When they're torn apart by a mafia member with an Ultimate, people will be outraged.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">January 12th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">January 24th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>January 28th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 28th, 2023, 9:40:58 AM</span></h2>
+<div class = "a"><h5>Is the list finalized?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 28th, 2023, 9:53:42 AM</span></h4>
+<div class = "a"><h5>Yes. 20 including Milo.</h5></div>
+<div class = "a"><h5>I've already started the coding for the chips.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 28th, 2023, 10:11:24 AM</span></h3>
+<div class = "a"><h5>How tf?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 28th, 2023, 10:28:41 AM</span></h4>
+<div class = "a"><h5>You think medical records are hard to hack into?</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 28th, 2023, 10:30:53 AM</span></h3>
+<div class = "a"><h5>Forget I asked.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">February 5th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>February 9th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 9th, 2023, 2:21:48 PM</span></h3>
+<div class = "a"><h5>You'll never guess what we found at the camp.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 9th, 2023, 2:38:03 PM</span></h4>
+<div class = "a"><h5>Skeletons?</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 9th, 2023, 2:40:12 PM</span></h3>
+<div class = "a"><h5>Untouched camper notebooks.</h5></div>
+<div class = "a"><h5>Cain's and Lorelei's. And Axel's bible and letters that were confiscated.</h5></div>
+<div class = "a"><h5>Should I burn everything?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 9th, 2023, 2:40:59 PM</span></h2>
+<div class = "a"><h5>No. Keep them.</h5></div>
+<div class = "a"><h5>We can use them.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">February 14th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>February 19th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 19th, 2023, 6:19:26 PM</span></h2>
+<div class = "a"><h5>Mentem I have a job for you.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 19th, 2023, 6:27:20 PM</span></h4>
+<div class = "a"><h5>???</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 19th, 2023, 6:29:52 PM</span></h2>
+<div class = "a"><h5>Fill these out.</h5></div>
+<div class = "a"><h5><button onclick="popupFnCamper()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(55, 92, 255); font-family: 'Courier New', Courier, monospace; font-size: 15px; line-height: 0px; padding: 6px 0px;">Camper_Files.png</button></h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 19th, 2023, 6:31:26 PM</span></h3>
+<div class = "a"><h5>Are they really going to believe that shit??</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 19th, 2023, 6:33:29 PM</span></h2>
+<div class = "a"><h5>If it's believable enough.</h5></div>
+<div class = "a"><h5>It'll keep them invested, and lead them to the truth.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 19th, 2023, 6:35:11 PM</span></h4>
+<div class = "a"><h5>How accurate do you want them to be?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 19th, 2023, 6:36:58 PM</span></h2>
+<div class = "a"><h5>As accurate as they can be without.. y'know.</h5></div>
+<div class = "a"><h5>Don't spoil Milo or my real identities.</h5></div>
+<div class = "a"><h5>Throw in a couple mistakes just for fun.</h5></div>
+<div class = "a"><h5>I'm curious if they'll notice.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 19th, 2023, 6:37:37 PM</span></h4>
+<div class = "a"><h5>Got it.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">February 22nd, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">February 26th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>February 28th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 28th, 2023, 10:43:12 PM</span></h2>
+<div class = "a"><h5>Deut, I need you and Mentem to head to Drakora and take over construction for v3.</h5></div>
+<div class = "a"><h5>I'll finish up at the camp.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 28th, 2023, 10:51:17 PM</span></h3>
+<div class = "a"><h5>The lack of emojis on this app is pissing me off.</h5></div>
+<div class = "a"><h5>*thumbs up*</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 28th, 2023, 10:51:19 PM</span></h4>
+<div class = "a"><h5>...</h5></div>
+
+<br>
+<br>
+<h6>March 2nd, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 2nd, 2023, 8:31:52 AM</span></h2>
+<div class = "a"><h5>I'm starting to place orders for v2.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 2nd, 2023, 8:44:15 AM</span></h3>
+<div class = "a"><h5>Keep me updated for pickups.</h5></div>
+
+<br>
+<br>
+<h6>March 3rd, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 3rd, 2023, 7:19:41 AM</span></h3>
+<div class = "a"><h5>Construction has started.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 3rd, 2023, 7:34:35 AM</span></h2>
+<div class = "a"><h5>I'll come check on progress in a couple weeks.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 3rd, 2023, 7:36:09 AM</span></h4>
+<div class = "a"><h5>We have the foundations and framework for the basement set up.</h5></div>
+<div class = "a"><h5>We might need more workers.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 3rd, 2023, 7:37:54 AM</span></h2>
+<div class = "a"><h5>I'll text Carnifex.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">March 8th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>March 10th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 10th, 2023, 8:02:26 AM</span></h2>
+<div class = "a"><h5>Pickup from Noctem Cursor today.</h5></div>
+<div class = "a"><h5>Can you make it?</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 10th, 2023, 8:14:40 AM</span></h3>
+<div class = "a"><h5>Yeah. Text me the details.</h5></div>
+
+<br>
+<br>
+<h6>March 12th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 12th, 2023, 9:13:49 PM</span></h2>
+<div class = "a"><h5>Progress?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 12th, 2023, 10:07:46 PM</span></h4>
+<div class = "a"><h5>Slow, but steady. Electrical is taking a while. The building is extremely outdated.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 12th, 2023, 10:09:53 PM</span></h3>
+<div class = "a"><h5>Do you need help at the camp?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 12th, 2023, 10:14:45 PM</span></h2>
+<div class = "a"><h5>I have it handled. I'll need you here closer to May.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 12th, 2023, 10:15:09 PM</span></h3>
+<div class = "a"><h5>Obviously.</h5></div>
+
+<br>
+<br>
+<h6>March 17th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 8:41:03 AM</span></h2>
+<div class = "a"><h5>We need to start looking for players for the third game.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 8:58:12 AM</span></h3>
+<div class = "a"><h5>Anyone specific in mind yet?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 8:59:43 AM</span></h2>
+<div class = "a"><h5>A couple. We need 23 in total.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:03:19 AM</span></h4>
+<div class = "a"><h5>I thought the blueprints had 24 rooms.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:06:25 AM</span></h2>
+<div class = "a"><h5>The 24th is the traitor's.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:07:42 AM</span></h3>
+<div class = "a"><h5>Have you decided on a traitor yet? It could be Milo again if the news doesn't mention him after v2 ends.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:10:12 AM</span></h2>
+<div class = "a"><h5>Mentem will be the traitor.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:10:18 AM</span></h4>
+<div class = "a"><h5>Excuse me?</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:10:20 AM</span></h3>
+<div class = "a"><h5>Absolutely not.</h5></div>
+<div class = "a"><h5>I told you when we started this.</h5></div>
+<div class = "a"><h5>That is not happening.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:10:47 AM</span></h2>
+<div class = "a"><h5>Mentem will be fine.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:11:16 AM</span></h4>
+<div class = "a"><h5>You can't guarantee my safety.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:12:02 AM</span></h2>
+<div class = "a"><h5>Yes, I can.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:12:20 AM</span></h3>
+<div class = "a"><h5>Like you guaranteed Zaide's?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:12:26 AM</span></h4>
+<div class = "a"><h5>Or like you're going to "guarentee" Milo's?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:13:43 AM</span></h2>
+<div class = "a"><h5>That's different. Mentem is going in.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:14:36 AM</span></h3>
+<div class = "a"><h5>If anything happens, I'll fucking kill you.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:15:35 AM</span></h2>
+<div class = "a"><h5>We both know I'm not going to be around for v3.</h5></div>
+<div class = "a"><h5>We need someone whose not insane, and someone that we can trust completely.</h5></div>
+<div class = "a"><h5>Mentem is perfect.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:17:01</span></h4>
+<div class = "a"><h5>I'll do it.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:17:09 AM</span></h3>
+<div class = "a"><h5>Are you fucking kidding me.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 17th, 2023, 9:17:17</span></h4>
+<div class = "a"><h5>It's my choice.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">March 18, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">March 24th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>March 29th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 29th, 2023, 5:49:14 AM</span></h3>
+<div class = "a"><h5>Leaving for the camp now. Mentem is handling construction for v3.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 29th, 2023, 6:01:40 AM</span></h2>
+<div class = "a"><h5>See you soon.</h5></div>
+
+<br>
+<br>
+<h6>March 31st, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 31st, 2023, 2:21:04 AM</span></h4>
+<div class = "a"><h5>I sent over a couple candidates for v3.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 31st, 2023, 5:42:06 AM</span></h2>
+<div class = "a"><h5>I'll look them over.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">April 2nd, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">April 3rd, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">April 6th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>April 7th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 7th, 2023, 2:34:01 PM</span></h3>
+<div class = "a"><h5>I still think you should reconsider.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 7th, 2023, 4:39:07 PM</span></h2>
+<div class = "a"><h5>I already told you no.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 7th, 2023, 4:52:25 PM</span></h4>
+<div class = "a"><h5>You have to admit she'd be a perfect player for the game.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 7th, 2023, 4:53:35 PM</span></h2>
+<div class = "a"><h5>It goes against everything we stand for. Every reason we do this.</h5></div>
+<div class = "a"><h5>I will not drag her family into this.</h5></div>
+<div class = "a"><h5>She went through fucking hell and lost her life.</h5></div>
+<div class = "a"><h5>I'm disgusted you would even suggest it.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 7th, 2023, 4:54:25 PM</span></h4>
+<div class = "a"><h5>You won't drag her family into this, but you'll drag his?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 7th, 2023, 4:56:35 PM</span></h2>
+<div class = "a"><h5>That's completely different and you know it.</h5></div>
+<div class = "a"><h5>Drop it. That's final.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 7th, 2023, 4:57:25 PM</span></h3>
+<div class = "a"><h5>Jesus Christ, fine. No need to freak out.</h5></div>
+
+<br>
+<br>
+<h6>April 15th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 15th, 2023, 7:12:47 PM</span></h2>
+<div class = "a"><h5>Just ordered from Remedium.</h5></div>
+<div class = "a"><h5>Mentem, will you be able to pick it up?</h5></div>
+<div class = "a"><h5>You're the only one in Drakora right now.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 15th, 2023, 7:15:03 PM</span></h4>
+<div class = "a"><h5>Yeah, I have time.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">April 17th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>April 19th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 19th, 2023, 12:29:34 PM</span></h3>
+<div class = "a"><h5>Have we figured out our whole security camera plan yet?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 19th, 2023, 12:41:07 PM</span></h2>
+<div class = "a"><h5>Not yet.</h5></div>
+
+<br>
+<br>
+<h6>April 20th, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 20th, 2023, 8:39:14 PM</span></h4>
+<div class = "a"><h5>How many more are we looking for. I might have one.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 20th, 2023, 10:02:18 PM</span></h2>
+<div class = "a"><h5>Current count is 19. End goal is 23.</h5></div>
+<div class = "a"><h5>Send the details to me.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 20th, 2023, 10:14:04 PM</span></h4>
+<div class = "a"><h5>Got it.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">April 22nd, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>April 23rd, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 23rd, 2023, 11:06:17 PM</span></h2>
+<div class = "a"><h5>Security footage is dealt with.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 23rd, 2023, 11:09:21 PM</span></h3>
+<div class = "a"><h5>What's the plan?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 23rd, 2023, 11:10:11 PM</span></h2>
+<div class = "a"><h5>We're sending the footage to a new benefactor.</h5></div>
+<div class = "a"><h5>They'll spread it around the web.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 23rd, 2023, 11:12:56 PM</span></h4>
+<div class = "a"><h5>It won't get traced back to the camp?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 23rd, 2023, 11:13:26 PM</span></h2>
+<div class = "a"><h5>Shouldn't.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 23rd, 2023, 11:13:42 PM</span></h3>
+<div class = "a"><h5>That sounds incredibly reassuring.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">April 25th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>April 27th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 27th, 2023, 4:01:28 PM</span></h3>
+<div class = "a"><h5>Are you serious? How the hell do you expect us to get #15.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 27th, 2023, 4:13:09 PM</span></h4>
+<div class = "a"><h5>He's exactly the kind of filth we're looking for.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 27th, 2023, 4:27:13 PM</span></h2>
+<div class = "a"><h5>What Mentem said.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 27th, 2023, 4:33:17 PM</span></h3>
+<div class = "a"><h5>That's going to take some serious planning to even get him in the game.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 27th, 2023, 4:34:39 PM</span></h4>
+<div class = "a"><h5>Oh no, planning. It's almost as if we've done months of planning and we're going to do months more.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 27th, 2023, 4:35:08 PM</span></h3>
+<div class = "a"><h5>Stfu.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 27th, 2023, 4:37:25 PM</span></h2>
+<div class = "a"><h5>It'll be difficult, but not impossible.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 27th, 2023, 4:39:31 PM</span></h3>
+<div class = "a"><h5>I'm just saying, even in the game, if there was ever a moment that he was in the same room with us, he could fucking kill us.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 27th, 2023, 4:40:05 PM</span></h4>
+<div class = "a"><h5>Stop being a baby.</h5></div>
+
+<br>
+<br>
+<h6>April 30th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 30th, 2023, 5:28:17 AM</span></h2>
+<div class = "a"><h5>Pickup from Speculum.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 30th, 2023, 5:39:18 AM</span></h4>
+<div class = "a"><h5>I got it.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> April 30th, 2023, 5:40:56 AM</span></h2>
+<div class = "a"><h5>Just texted you the details.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">May 1st, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>May 2nd, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 2nd, 2023, 2:09:17 AM</span></h4>
+<div class = "a"><h5>I finished TTOL planning. Sent it over.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 2nd, 2023, 2:10:43 AM</span></h3>
+<div class = "a"><h5>WE finished TTOL planning.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 2nd, 2023, 7:42:20 AM</span></h2>
+<div class = "a"><h5>I'll look over it tonight.</h5></div>
+
+<br>
+<br>
+<h6>May 3rd, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 3:32:51 PM</span></h2>
+<div class = "a"><h5>I ordered from Mortis.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 3:47:43 PM</span></h3>
+<div class = "a"><h5>Oh great.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 3:49:33 PM</span></h4>
+<div class = "a"><h5>What's your problem with Mortis?</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 3:50:06 PM</span></h3>
+<div class = "a"><h5>Their couriers are fucking creepy.</h5></div>
+<div class = "a"><h5>They just STARE at you.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 3rd, 2023, 3:50:46 PM</span></h4>
+<div class = "a"><h5>Just stare back.</h5></div>
+
+<br>
+<br>
+<h6>May 5th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 5th, 11:35:32 AM</span></h3>
+<div class = "a"><h5>Can we please stop choosing players who could kill us.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 5th, 2023, 11:52:59 AM</span></h4>
+<div class = "a"><h5>Stop being a fucking baby.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">May 7th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">May 10th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>May 12th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 12th, 2023, 6:22:46 AM</span></h2>
+<div class = "a"><h5>The last pickup for v2 is today.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 12th, 2023, 6:22:51 AM</span></h4>
+<div class = "a"><h5>Not it.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 12th, 6:22:57 AM</span></h3>
+<div class = "a"><h5>AND I'M THE BABY IN THE GROUP!?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 12th, 2023, 6:23:08 AM</span></h2>
+<div class = "a"><h5>Not it.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 12th, 6:23:19 AM</span></h3>
+<div class = "a"><h5>I hate both of you.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 12th, 2023, 6:23:26 AM</span></h4>
+<div class = "a"><h5>:)</h5></div>
+
+<br>
+<br>
+<h6>May 13th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 13th, 2023, 9:17:48 PM</span></h2>
+<div class = "a"><h5>Construction has finished at the camp. Game starts June 1st.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 13th, 9:21:03 PM</span></h3>
+<div class = "a"><h5>Everything on my end is prepared.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 13th, 2023, 9:22:31 PM</span></h4>
+<div class = "a"><h5>Anesthetics are ready.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 13th, 9:23:17 PM</span></h3>
+<div class = "a"><h5>Just say the word and we'll start making the grabs.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 13th, 2023, 9:26:23 PM</span></h2>
+<div class = "a"><h5>We're starting on May 24th. Any earlier and we'll have difficulties keeping them asleep.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 13th, 9:27:23 PM</span></h3>
+<div class = "a"><h5>Yessirrr.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 13th, 2023, 9:27:52 PM</span></h2>
+<div class = "a"><h5>...</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 13th, 2023, 9:27:59 PM</span></h4>
+<div class = "a"><h5>...</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 13th, 9:28:50 PM</span></h3>
+<div class = "a"><h5>That was weird, I'm sorry.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">May 16th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>May 23rd, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 23rd, 2023, 12:37:18 AM</span></h2>
+<div class = "a"><h5>Does everyone know the plan?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 23rd, 2023, 12:38:45 AM</span></h4>
+<div class = "a"><h5>I'm in Vegas. One tomorrow.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 23rd, 12:40:28 AM</span></h3>
+<div class = "a"><h5>Anaheim. Two tomorrow.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 23rd, 2023, 12:41:47 AM</span></h2>
+<div class = "a"><h5>Good. I'm in San Francisco for one tomorrow, and Milo will take one from Drakora.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 23rd, 12:43:03 AM</span></h3>
+<div class = "a"><h5>You trust Milo with this?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 23rd, 2023, 12:44:35 AM</span></h4>
+<div class = "a"><h5>It's Caspian. He's built like a twig, there's no way to fuck it up.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 23rd, 12:46:51 AM</span></h3>
+<div class = "a"><h5>Let's fucking hope.</h5></div>
+
+<br>
+<br>
+<h6>May 24th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 24th, 4:13:36 PM</span></h3>
+<div class = "a"><h5>Samantha secured.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 24th, 2023, 4:29:54 PM</span></h2>
+<div class = "a"><h5>Milo secured Caspian.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 24th, 6:49:38 PM</span></h3>
+<div class = "a"><h5>Dustin secured.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 24th, 2023, 9:57:26 PM</span></h4>
+<div class = "a"><h5>Declan secured.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 24th, 2023, 10:17:50 PM</span></h2>
+<div class = "a"><h5>Basil secured.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 24th, 2023, 11:57:11 PM</span></h2>
+<div class = "a"><h5>Tomorrow we're laying low. Deut, only one from Los Angeles. Mentem, get the one from Alturas.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 24th, 2023, 11:57:59 PM</span></h4>
+<div class = "a"><h5>Sounds good.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 24th, 11:59:39 PM</span></h3>
+<div class = "a"><h5>Buckle up guys, we're about to start making the headlines.</h5></div>
+
+<br>
+<br>
+<h6>May 25th, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 25th, 2023, 3:54:36 PM</span></h4>
+<div class = "a"><h5>Elia secured.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 25th, 10:23:32 PM</span></h3>
+<div class = "a"><h5>Everett secured.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 25th, 2023, 10:54:02 PM</span></h2>
+<div class = "a"><h5>Any problems with Everett?</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 25th, 10:59:20 PM</span></h3>
+<div class = "a"><h5>He nearly broke my fucking arm.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 25th, 2023, 11:00:32 PM</span></h2>
+<div class = "a"><h5>Yikes. You're sure he's secure?</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 25th, 11:02:09 PM</span></h3>
+<div class = "a"><h5>He's on enough GHB to knock out a horse.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 25th, 2023, 11:05:28 PM</span></h4>
+<div class = "a"><h5>Two missing reports already.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 25th, 11:06:24 PM</span></h3>
+<div class = "a"><h5>That was faster then we'd hoped.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 25th, 2023, 11:08:39 PM</span></h2>
+<div class = "a"><h5>We prepared for that.</h5></div>
+<div class = "a"><h5>Big day tomorrow.</h5></div>
+<div class = "a"><h5>Deut, stay in Los Angeles, only one. Mentem, head to Sacramento for one. I'll take one from Anaheim.</h5></div>
+<div class = "a"><h5>Milo will keep watch and administer doses to the ones we already have.</h5></div>
+
+<br>
+<br>
+<h6>May 26th, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 26th, 2023, 6:39:51 AM</span></h4>
+<div class = "a"><h5>Basil and Everett were reported missing.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 26th, 2023, 6:41:23 AM</span></h2>
+<div class = "a"><h5>Stay focused.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 26th, 1:17:22 PM</span></h3>
+<div class = "a"><h5>Iyu secured.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 26th, 2023, 3:02:05 PM</span></h2>
+<div class = "a"><h5>Masumi secured.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 26th, 2023, 7:31:22 PM</span></h4>
+<div class = "a"><h5>Yosefine secured.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 26th, 2023, 10:58:28 PM</span></h2>
+<div class = "a"><h5>We're picking up the pace tomorrow.</h5></div>
+<div class = "a"><h5>Deut, you're getting two from Los Angeles.</h5></div>
+<div class = "a"><h5>Mentem, you're on East La Mirada and Pasadena.</h5></div>
+<div class = "a"><h5>I'll take Drakora with Milo and then Riverside.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 26th, 10:59:53 PM</span></h3>
+<div class = "a"><h5>I can take Riverside, I have enough time.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 26th, 2023, 11:01:55 PM</span></h2>
+<div class = "a"><h5>Riverside is mine.</h5></div>
+
+<br>
+<br>
+<h6>May 27th, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 27th, 2023, 7:18:27 AM</span></h4>
+<div class = "a"><h5>Elena secured.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 27th, 9:01:37 AM</span></h3>
+<div class = "a"><h5>Avery secured.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 27th, 2023, 11:30:46 AM</span></h2>
+<div class = "a"><h5>Derrick secured.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 27th, 2:15:26 PM</span></h3>
+<div class = "a"><h5>Matthew secured.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 27th, 2023, 4:55:29 PM</span></h4>
+<div class = "a"><h5>Elivia secured.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 27th, 2023, 6:05:53 PM</span></h2>
+<div class = "a"><h5>Sarah secured.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 27th, 10:42:35 PM</span></h3>
+<div class = "a"><h5>I've paid more in gas in the past three days then I have in my entire life.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 27th, 2023, 10:45:48 PM</span></h4>
+<div class = "a"><h5>That's a lie.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 27th, 2023, 12:02:55 PM</span></h2>
+<div class = "a"><h5>Haven secured.</h5></div>
+<div class = "a"><h5>Deut, only one from Los Angeles tomorrow.</h5></div>
+
+<br>
+<br>
+<h6>May 28th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 28th, 5:41:49 AM</span></h3>
+<div class = "a"><h5>Londyn secured.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 28th, 2023, 7:01:56 AM</span></h4>
+<div class = "a"><h5>We're clear of reports so far.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 28th, 2023, 8:37:24 AM</span></h2>
+<div class = "a"><h5>Mentem and Deut, both of you in Santa Monica tomorrow for the last one.</h5></div>
+
+<br>
+<br>
+<h6>May 29th, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 29th, 2023, 6:06:22 AM</span></h4>
+<div class = "a"><h5>Zier secured.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 29th, 2023, 9:59:53 AM</span></h2>
+<div class = "a"><h5>Only one report since yesterday.</h5></div>
+
+<br>
+<br>
+<h6>May 30th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 30th, 10:43:06 AM</span></h3>
+<div class = "a"><h5>Two more reports.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 30th, 2023, 11:34:56 AM</span></h2>
+<div class = "a"><h5>Mentem, is everything ready for tomorrow?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 30th, 2023, 12:31:33 PM</span></h4>
+<div class = "a"><h5>Histamine is ready to be administered. We'll be in Section 5 if you need us.</h5></div>
+
+<br>
+<br>
+<h6>June 1st, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 3:41:24 PM</span></h3>
+<div class = "a"><h5>I need some fucking popcorn.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 1st, 2023, 3:52:32 PM</span></h4>
+<div class = "a"><h5>It's mildly entertaining.</h5></div>
+
+<br>
+<br>
+<h6>June 2nd, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 2nd, 2023, 11:28:29 AM</span></h3>
+<div class = "a"><h5>Trial incoming?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 2nd, 2023, 11:29:44 AM</span></h2>
+<div class = "a"><h5>No. Avery won't die because they're in sight of their tablet.</h5></div>
+<div class = "a"><h5>It's all for nothing.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 2nd, 2023, 11:30:52 AM</span></h4>
+<div class = "a"><h5>But it's fun as hell to watch.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">June 4th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6><div class = "b">June 5th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>June 6th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 6th, 2023, 2:26:16 PM</span></h2>
+<div class = "a"><h5>Trial ongoing. Clear those bodies.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 6th, 2023, 2:27:50 PM</span></h3>
+<div class = "a"><h5>Hooray.</h5></div>
+
+<br>
+<br>
+<h6>June 8th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 8th, 2023, 10:15:40 AM</span></h3>
+<div class = "a"><h5>Is Caspian's DTK high?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 8th, 2023, 10:18:51 AM</span></h4>
+<div class = "a"><h5>Only for a moment. I've never seen that happen before. It was high for a split second, but now it's low.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 8th, 2023, 10:19:11 AM</span></h2>
+<div class = "a"><h5>He's not going to kill?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 8th, 2023, 10:20:32 AM</span></h4>
+<div class = "a"><h5>Not a chance. I'll let you  know if anything changes.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 8th, 2023, 10:22:22 AM</span></h3>
+<div class = "a"><h5>I'm surprised. I thought he would.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 8th, 2023, 10:25:31 AM</span></h4>
+<div class = "a"><h5>Every single player has now been reported missing.</h5></div>
+<div class = "a"><h5>We're in the clear, the police have no leads.</h5></div>
+<div class = "a"><h5>There's no way they can trace it back to us, or the camp.</h5></div>
+<div class = "a"><h5>By the time they do, the game will be over.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 8th, 2023, 10:27:22 AM</span></h2>
+<div class = "a"><h5>Good. Keep an eye on it.</h5></div>
+
+<br>
+<br>
+<h6>June 9th, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 9th, 2023, 12:10:42 PM</span></h4>
+<div class = "a"><h5>Derrick's DTK has been climbing steadily.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 9th, 2023, 12:14:49 PM</span></h2>
+<div class = "a"><h5>Should we be prepping for a trial?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 9th, 2023, 12:16:44 PM</span></h4>
+<div class = "a"><h5>Not yet.</h5></div>
+<div class = "a"><h5>I can't identify who the DTK is targetted at.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 9th, 2023, 12:17:38 PM</span></h2>
+<div class = "a"><h5>keep me updated.</h5></div>
+
+<br>
+<br>
+<h6>June 10th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 10th, 2023, 10:19:29 AM</span></h3>
+<div class = "a"><h5>So am I getting the body?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 10th, 2023, 10:21:33 AM</span></h2>
+<div class = "a"><h5>Don't bother, there's no opening. Derrick has it.</h5></div>
+
+<br>
+<br>
+<h6>June 11th, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 11th, 2023, 1:31:37 AM</span></h4>
+<div class = "a"><h5>Incoming kill, Saige will be the blackened.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 11th, 2023, 2:24:11 AM</span></h3>
+<div class = "a"><h5>So? Who'd they kill?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 11th, 2023, 2:26:43 AM</span></h2>
+<div class = "a"><h5>How the fuck did that just happen.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 11th, 2023, 2:27:01 AM</span></h4>
+<div class = "a"><h5>I did not see that coming.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 11th, 2023, 2:29:21 AM</span></h3>
+<div class = "a"><h5>Dude someone tell me what's happening.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 11th, 2023, 2:32:47 AM</span></h4>
+<div class = "a"><h5>Saige is dead, Avery killed them. Prepare for the trial tomorrow morning.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 11th, 2023, 2:35:27 AM</span></h3>
+<div class = "a"><h5>Holy shit.</h5></div>
+
+<br>
+<br>
+<h6>June 12th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 12th, 2023, 3:21:17 PM</span></h2>
+<div class = "a"><h5>Trial ongoing.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 12th, 2023, 3:28:07 PM</span></h3>
+<div class = "a"><h5>On my way to the archery range.</h5></div>
+
+<br>
+<br>
+<h6>June 14th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 14th, 2023, 11:40:03 AM</span></h2>
+<div class = "a"><h5>Levels?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 14th, 2023, 11:44:52 AM</span></h4>
+<div class = "a"><h5>Probably Iyu.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 14th, 2023, 11:47:11 AM</span></h3>
+<div class = "a"><h5>You owe me $20.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 14th, 2023, 11:49:18 AM</span></h4>
+<div class = "a"><h5>Only if he kills.</h5></div>
+
+<br>
+<br>
+<h6>June 16th, 2023</h6>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 16th, 2023, 3:27:13 AM</span></h3>
+<div class = "a"><h5>How the fuck am I meant to clean this up.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 16th, 2023, 3:31:05 AM</span></h2>
+<div class = "a"><h5>Quickly.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 16th, 2023, 3:34:58 AM</span></h4>
+<div class = "a"><h5>Glad it's not me.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 16th, 2023, 3:39:14 AM</span></h3>
+<div class = "a"><h5>You owe me $20, by the way.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 16th, 2023, 9:58:25 AM</span></h2>
+<div class = "a"><h5>Trial ongoing.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 16th, 2023, 10:01:02 AM</span></h3>
+<div class = "a"><h5>I'm going, I'm going.</h5></div>
+
+<br>
+<br>
+<h6>June 18th, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 18th, 2023, 10:07:45 PM</span></h4>
+<div class = "a"><h5>Is Milo fucking insane.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 18th, 2023, 10:13:28 PM</span></h3>
+<div class = "a"><h5>What happened?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 18th, 2023, 10:17:16 PM</span></h4>
+<div class = "a"><h5>He just threatened Basil. He just basically revealed himself as the Traitor.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 18th, 2023, 10:18:53 PM</span></h3>
+<div class = "a"><h5>Holy shit.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 18th, 2023, 10:19:31 PM</span></h2>
+<div class = "a"><h5>He's desperate.</h5></div>
+<div class = "a"><h5>Basil already has strong suspicions, and Basil practically leads this damn group.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 18th, 2023, 10:21:30 PM</span></h4>
+<div class = "a"><h5>Threatening Haven was smart. Basil might stay quiet.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 18th, 2023, 10:22:21 PM</span></h3>
+<div class = "a"><h5>Trial soon?</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 18th, 2023, 10:24:15 PM</span></h4>
+<div class = "a"><h5>His DTK is 97.21%. It's always been high, but he's going to kill Haven soon.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 18th, 2023, 10:26:22 PM</span></h2>
+<div class = "a"><h5>Hopefully.</h5></div>
+
+<br>
+<br>
+<h6>June 19th, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 19th, 2023, 4:04:38 PM</span></h4>
+<div class = "a"><h5>Tell Milo that Basil and Haven have the cyanide.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 19th, 2023, 4:33:17 PM</span></h4>
+<div class = "a"><h5>They're hiding it in Axel's grave.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 19th, 2023, 4:34:42 PM</span></h3>
+<div class = "a"><h5>Jesus, that's actually fucked up.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 19th, 2023, 4:46:07 PM</span></h2>
+<div class = "a"><h5>I'll tell him tonight.</h5></div>
+
+<br>
+<br>
+<h6>June 21st, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 2:08:03 AM</span></h2>
+<div class = "a"><h5>Milo killed Declan. Get prepped.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 2:09:46 AM</span></h3>
+<div class = "a"><h5>What are you going to do.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 2:11:08 AM</span></h2>
+<div class = "a"><h5>The trial runs as usual.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 2:12:03 AM</span></h4>
+<div class = "a"><h5>Even the execution?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 2:14:24 AM</span></h2>
+<div class = "a"><h5>It's my job to worry about that.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 2:15:02 AM</span></h4>
+<div class = "a"><h5>Okay.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 3:39:02 PM</span></h4>
+<div class = "a"><h5>Do I even want to ask.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 4:01:29 PM</span></h2>
+<div class = "a"><h5>No.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 4:03:44 PM</span></h3>
+<div class = "a"><h5>He was already on the edge.</h5></div>
+<div class = "a"><h5>There's no telling how much longer he could stay in the game before he cracked.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 4:09:04 PM</span></h4>
+<div class = "a"><h5>So.....</h5></div>
+<div class = "a"><h5>Am I on bell duty?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 4:11:27 PM</span></h2>
+<div class = "a"><h5>It's too obvious now. Let them think he was the only one helping me.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 21st, 2023, 7:49:13 PM</span></h4>
+<div class = "a"><h5>Happy birthday, by the way.</h5></div>
+
+<br>
+<br>
+<h6>June 22nd, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 22nd, 2023, 11:42:12 AM</span></h4>
+<div class = "a"><h5>Derrick is spiking.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 22nd, 2023, 1:34:01 PM</span></h2>
+<div class = "a"><h5>About time.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 22nd, 2023, 8:42:34 PM</span></h4>
+<div class = "a"><h5>He's giving away personal items.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 22nd, 2023, 9:22:04 PM</span></h2>
+<div class = "a"><h5>That changes things.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 22nd, 2023, 9:26:27 PM</span></h3>
+<div class = "a"><h5>Someone needs to dumb it down for me.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 22nd, 2023, 9:28:28 PM</span></h2>
+<div class = "a"><h5>Prep for a trial. Blackened and victim will be the same person.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 22nd, 2023, 9:30:21 PM</span></h3>
+<div class = "a"><h5>OHHHHH.</h5></div>
+
+<br>
+<br>
+<h6>June 23rd, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 23rd, 2023, 3:49:46 AM</span></h4>
+<div class = "a"><h5>Oh my fucking God.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 23rd, 2023, 3:51:44 AM</span></h3>
+<div class = "a"><h5>Yeah I didn't see that one coming.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 23rd, 2023, 3:54:28 AM</span></h4>
+<div class = "a"><h5>What are we going to do about the rules? All the bodies will be found at the exact same time.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 23rd, 2023, 3:57:54 AM</span></h2>
+<div class = "a"><h5>Two blackeneds. We'll have to fix this for v3.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 23rd, 2023, 2:04:03 PM</span></h2>
+<div class = "a"><h5>Clear the bodies NOW. This will be a fast trial.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 23rd, 2023, 2:05:45 PM</span></h3>
+<div class = "a"><h5>Already on my way.</h5></div>
+
+<br>
+<br>
+<h6>June 25th, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:01:57 AM</span></h2>
+<div class = "a"><h5>Lock the doors. Now. They're all in the office.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:02:46 AM</span></h3>
+<div class = "a"><h5>We're going as fast as we can, asshat.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:03:06 AM</span></h2>
+<div class = "a"><h5>I can only stall for so long.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:03:58 AM</span></h4>
+<div class = "a"><h5>Cabins are locked.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:04:46 AM</span></h3>
+<div class = "a"><h5>The rest of Section 1 is locked.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:06:49 AM</span></h4>
+<div class = "a"><h5>Section 2 is locked.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:07:03 AM</span></h2>
+<div class = "a"><h5>They're leaving the Office now.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:08:07 AM</span></h3>
+<div class = "a"><h5>Section 3 is locked.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:09:01 AM</span></h4>
+<div class = "a"><h5>All sections are locked.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:09:30 AM</span></h3>
+<div class = "a"><h5>Holy shit that was stressful.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 25th, 2023, 10:10:02 AM</span></h2>
+<div class = "a"><h5>Good job.</h5></div>
+<div class = "a"><h5>Get to the Office when it's safe.</h5></div>
+
+<br>
+<br>
+<h6>June 27th, 2023</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 3:46:24 PM</span></h4>
+<div class = "a"><h5>I hate selfless people.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 3:51:59 PM</span></h3>
+<div class = "a"><h5>Ruins all the fun.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 3:54:15 PM</span></h2>
+<div class = "a"><h5>It was predictable.</h5></div>
+<div class = "a"><h5>And a close fucking call.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 3:56:18 PM</span></h3>
+<div class = "a"><h5>You're lucky we reinforced that damn door.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 11:24:59 PM</span></h3>
+<div class = "a"><h5>We're off the property. Good luck.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 11:27:17 PM</span></h2>
+<div class = "a"><h5>Stay quiet for a while. Lay low.</h5></div>
+<div class = "a"><h5>Whatever happens, the public will find the camp soon.</h5></div>
+<div class = "a"><h5>Keep v3 work to a minimum for a couple months until this settles.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 11:30:08 PM</span></h4>
+<div class = "a"><h5>Of course.</h5></div>
+<div class = "a"><h5>Are you sure you want to go through with this?</h5></div>
+<div class = "a"><h5>We could just kill them and be done with it.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 11:34:02 PM</span></h2>
+<div class = "a"><h5>Survivors serve a purpose.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 11:34:52 PM</span></h3>
+<div class = "a"><h5>Survivors are also a liability.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 11:39:36 PM</span></h2>
+<div class = "a"><h5>Survivors give people hope.</h5></div>
+<div class = "a"><h5>With the next batch, they need to know there's a chance to survive.</h5></div>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 11:41:19 PM</span></h4>
+<div class = "a"><h5>Desperation makess everything more fun.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> June 27th, 2023, 11:43:08 PM</span></h2>
+<div class = "a"><h5>Well, we'll see how this plays out.</h5></div>
+
+<br>
+<br>
+<h6>~~~~~~~~~~~~~~~~~~ Unread Messages ~~~~~~~~~~~~~~~~~~</h6>
+
+<h4>Mentem <span style="color: rgb(105, 105, 105); font-size: 15px;"> 6:55:12 AM</span></h4>
+<div class = "a"><h5>Just say the word if you don't want to go through with it. Good luck.</h5></div>
+
+<h3>Deut <span style="color: rgb(105, 105, 105); font-size: 15px;"> 6:55:16 AM</span></h3>
+<div class = "a"><h5>Goodbye, E.</h5></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+</div>
+</head>
+</html>

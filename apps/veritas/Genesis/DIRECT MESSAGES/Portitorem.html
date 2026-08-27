@@ -1,0 +1,337 @@
+<html>
+<head>
+<title>Portitorem</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:#ff45b8;
+    background-color:#000000;
+}
+
+/* Genesis Name */
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+}
+
+/* Portitorem Name */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(255, 69, 184);
+    background-color: #000000;
+}
+
+/* Texting */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Dates */
+
+h6 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Timing Texts */
+
+div.a {
+    text-indent: 50px;
+}
+
+div.b {
+    line-height: 20px;
+}
+
+div.c {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:50px;
+}
+
+div.status {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deut {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(255, 69, 184);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.genesis {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deleted {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(170, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    text-indent: 50px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* Genesis Profile */
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/* Portitorem Profile */
+
+#popupPortitorem {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(255, 69, 184);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactPortitorem {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+
+</style>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Political Activist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Curator Corporis Profile-->
+
+    <div id="ContactPortitorem"></div>
+    <div id="popupPortitorem">
+        <p class = "one"><span style = "color:rgb(255, 69, 184); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Portitorem</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Service Provider | Unbound Courier</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — August 6th, 2019</b></span></p>
+        <button onclick="closeFnPortitorem()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnPortitorem() {
+            document.getElementById(
+                "ContactPortitorem"
+            ).style.display = "block";
+            document.getElementById(
+                "popupPortitorem"
+            ).style.display = "block";
+        }
+        function closeFnPortitorem() {
+            document.getElementById(
+                "ContactPortitorem"
+            ).style.display = "none";
+            document.getElementById(
+                "popupPortitorem"
+            ).style.display = "none";
+        }
+    </script>
+
+
+<div class = "fade-in-text">
+<h1>Portitorem</h1>
+
+
+<h6>November 20th, 2021
+    <div class = "status"><b>Online - 2</b></div>
+</h6>
+<h6>Genesis has created a new chat.
+    <div class = "genesis"><button onclick="popupFnGenesis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Genesis</b>
+    </button></div>
+</h6>
+<h6>Genesis has added Portitorem.
+        <div class = "deut"><button onclick="popupFnPortitorem()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(255, 69, 184); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Portitorem</b>
+    </button></div>
+</h6>
+<h6>Genesis has authorized transactional payments.
+        <div class = "status"><b>Offline - 0</b></div>
+</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 20th, 2021, 7:39:46 PM</span></h2>
+<div class = "a"><h5>I'm looking for a courier to move a shipment of pharmaceuticals.</h5></div>
+
+<h3>Portitorem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 20th, 2021, 7:52:58 PM</span></h3>
+<div class = "a"><h5>We can move from any merchant, as long as they do not already have an exclusive contract with another courier.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 20th, 2021, 7:54:56 PM</span></h2>
+<div class = "a"><h5>I'm placing an order with Curator Corporis. Is that within your range and capabilities?</h5></div>
+
+<h3>Portitorem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 20th, 2021, 7:57:26 PM</span></h3>
+<div class = "a"><h5>Yes, it is.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 20th, 2021, 7:59:39 PM</span></h2>
+<div class = "a"><h5>I'll confirm with you when the order has been placed.</h5></div>
+
+<br>
+<br>
+<h6>November 21st, 2021</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 9:19:39 PM</span></h2>
+<div class = "a"><h5>The order has been placed.</h5></div>
+<div class = "a"><h5>ID: VSOBU-3.HFQ-5.860.3-21-18.7-5-14</h5></div>
+
+<h3>Portitorem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 9:27:25 PM</span></h3>
+<div class = "a"><h5>For that order size and distance, the price for transporting your order will be (<span style = "color:crimson;">$630.00 USD</span>), after tax.</h5></div>
+
+<div class = "c">
+Genesis has transferred $630.00 USD to Portitorem.
+</div>
+
+<h3>Portitorem <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 9:31:34 PM</span></h3>
+<div class = "a"><h5>We will get in contact with Curator Corporis on your behalf to arrange the delivery.</h5></div>
+<div class = "a"><h5>We'll be in contact soon regarding the location and date of delivery.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 9:33:17 PM</span></h2>
+<div class = "a"><h5>Thank you.</h5></div>
+
+<div class = "c">
+Portitorem has de-authorized transactional payments.
+</div>
+
+<br>
+<br>
+<h6><div class = "b">November 29th, 2021</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+
+
+
+
+
+
+
+</div>

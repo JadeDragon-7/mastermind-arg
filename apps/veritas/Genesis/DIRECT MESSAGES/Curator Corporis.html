@@ -1,0 +1,360 @@
+<html>
+<head>
+<title>Curator Corporis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:#71f771;
+    background-color:#000000;
+}
+
+/* Genesis Name */
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: #8c00ff;
+    background-color: #000000;
+}
+
+/* Deut Name */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(113, 247, 113);
+    background-color: #000000;
+}
+
+/* Texting */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Dates */
+
+h6 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Timing Texts */
+
+div.a {
+    text-indent: 50px;
+}
+
+div.b {
+    line-height: 20px;
+}
+
+div.c {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:50px;
+}
+
+div.status {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deut {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(113, 247, 113);
+    background-color: #000000;
+    line-height: 0px;
+    opacity: 40%;
+}
+
+div.genesis {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deleted {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(170, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    text-indent: 50px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* Genesis Profile */
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/* Curator Corporis Profile */
+
+#popupCorporis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(113, 247, 113);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactCorporis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+
+</style>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Political Activist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Curator Corporis Profile-->
+
+    <div id="ContactCorporis"></div>
+    <div id="popupCorporis">
+        <p><span style = "color:rgb(113, 247, 113); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Curator Corporis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Merchant | Pharmaceutical Specialist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — December 11th, 2016</b></span></p>
+        <button onclick="closeFnCorporis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnCorporis() {
+            document.getElementById(
+                "ContactCorporis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupCorporis"
+            ).style.display = "block";
+        }
+        function closeFnCorporis() {
+            document.getElementById(
+                "ContactCorporis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupCorporis"
+            ).style.display = "none";
+        }
+    </script>
+
+
+<div class = "fade-in-text">
+<h1>Curator Corporis</h1>
+
+
+<h6>November 21st, 2021
+    <div class = "status"><b>Online - 1</b></div>
+</h6>
+<h6>Curator Corporis has created a new chat.
+    <div class = "genesis"><button onclick="popupFnGenesis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Genesis</b>
+    </button></div>
+</h6>
+<h6>Curator Corporis has added Genesis.
+    <div class = "status"><b><br>Offline - 1</b></div>
+</h6>
+<h6>Curator Corporis has authorized transactional payments.
+    <div class = "deut"><button onclick="popupFnCorporis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(113, 247, 113); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Curator Corporis</b>
+    </button></div>
+</h6>
+
+<h3>Curator Corporis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 4:31:09 PM</span></h3>
+<div class = "a"><h5>We've accepted your order request.</h5></div>
+<div class = "a"><h5>Please reconfirm what you would like to order.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 4:34:40 PM</span></h2>
+<div class = "a"><h5>20 mL of 1% Acetylcholine</h5></div>
+<div class = "a"><h5>240 mg of Adenosine</h5></div>
+<div class = "a"><h5>600 μg of Noradrenaline</h5></div>
+
+<h3>Curator Corporis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 4:36:55 PM</span></h3>
+<div class = "a"><h5>Your order has been noted.</h5></div>
+<div class = "a"><h5>Please be aware of the side effects of the supplies ordered.</h5></div>
+<div class = "a"><h5>We are not responsible for any unexpected altercations when using our pharmaceutical products.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 4:37:36 PM</span></h2>
+<div class = "a"><h5>I understand.</h5></div>
+
+<h3>Curator Corporis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 4:45:47 PM</span></h3>
+<div class = "a"><h5>The pricing is as follows:</h5></div>
+<div class = "a"><h5>20 mL of 1% Acetylcholine — ($3,599.00 USD)</h5></div>
+<div class = "a"><h5>240 mg of Adenosine — ($2,199.00 USD)</h5></div>
+<div class = "a"><h5>600 μg of Noradrenaline — ($799.00 USD)</h5></div>
+<div class = "a"><h5>Tax — ($329.85 USD)</h5></div>
+<div class = "a"><h5>Total — (<span style="color:crimson">$6,926.85 USD</span>)</h5></div>
+
+<div class = "c">
+Genesis has transferred $6,926.85 USD to Curator Corporis.
+</div>
+
+<h3>Curator Corporis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 4:51:18 PM</span></h3>
+<div class = "a"><h5>Your order ID is VSOBU-3.HFQ-5.860.3-21-18.7-5-14</h5></div>
+<div class = "a"><h5>For transportation, we'd recommend hiring an unbound courier. If you want to pick up the order personally, arrangements can also be made.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 4:53:30 PM</span></h2>
+<div class = "a"><h5>I've already been in contact with Portitorem, are you familiar with them?</h5></div>
+
+<h3>Curator Corporis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 4:55:08 PM</span></h3>
+<div class = "a"><h5>We are. We've done work with them in the past.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 4:56:15 PM</span></h2>
+<div class = "a"><h5>Perfect, they should get in contact with you in a couple days.</h5></div>
+
+<h3>Curator Corporis <span style="color: rgb(105, 105, 105); font-size: 15px;"> November 21st, 2021, 4:57:35 PM</span></h3>
+<div class = "a"><h5>It's been a pleasure doing business with you.</h5></div>
+
+<div class = "c">
+Curator Corporis has de-authorized transactional payments.
+</div>
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

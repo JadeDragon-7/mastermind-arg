@@ -1,0 +1,364 @@
+<html>
+<head>
+<title>Visus</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:#ff4747;
+    background-color:#000000;
+}
+
+/* Genesis Name */
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+}
+
+/* Deut Name */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(255, 71, 71);
+    background-color: #000000;
+}
+
+/* Texting */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Dates */
+
+h6 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Timing Texts */
+
+div.a {
+    text-indent: 50px;
+}
+
+div.b {
+    line-height: 20px;
+}
+
+div.c {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:50px;
+}
+
+div.status {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deut {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(255, 71, 71);
+    background-color: #000000;
+    line-height: 0px;
+    opacity: 100%;
+}
+
+div.genesis {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deleted {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(170, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    text-indent: 50px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* Genesis Profile */
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Visus Profile*/
+
+#popupVisus {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(255, 71, 71);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactVisus {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+</style>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Political Activist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Visus Profile-->
+
+    <div id="ContactVisus"></div>
+    <div id="popupVisus">
+        <p class = "one"><span style = "color:rgb(255, 71, 71); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Visus</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Service Provider | Bound Courier</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Closed</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — June 9th, 2008</b></span></p>
+        <button onclick="closeFnVisus()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnVisus() {
+            document.getElementById(
+                "ContactVisus"
+            ).style.display = "block";
+            document.getElementById(
+                "popupVisus"
+            ).style.display = "block";
+        }
+        function closeFnVisus() {
+            document.getElementById(
+                "ContactVisus"
+            ).style.display = "none";
+            document.getElementById(
+                "popupVisus"
+            ).style.display = "none";
+        }
+    </script>
+
+
+<div class = "fade-in-text">
+<h1>Visus</h1>
+
+
+<h6>February 10th, 2022
+    <div class = "status"><b>Online - 2</b></div>
+</h6>
+<h6>Visus has created a new chat.
+    <div class = "genesis"><button onclick="popupFnGenesis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Genesis</b>
+    </button></div>
+</h6>
+<h6>Visus has added Genesis.
+    <div class = "deut"><button onclick="popupFnVisus()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(255, 71, 71); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Visus</b>
+    </button></div>
+</h6>
+<h6>Visus has authorized transactional payments.
+    <div class = "status"><b><br>Offline - 0</b></div>
+</h6>
+
+<h3>Visus <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 10th, 2022, 1:45:13 PM</span></h3>
+<div class = "a"><h5>We're reaching out on behalf of Mortis.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 10th, 2022, 4:12:30 PM</span></h2>
+<div class = "a"><h5>AXTGZ-8.QOZ-14.260.13-15-18.7-5-14</h5></div>
+
+<h3>Visus <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 10th, 2022, 4:14:36 PM</span></h3>
+<div class = "a"><h5>Due to the nature of the purchases, the price for moving them will be (<span style = "color:crimson;">$1,050.00 USD</span>).</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 10th, 2022, 4:17:08 PM</span></h2>
+<div class = "a"><h5>I need them within nine days.</h5></div>
+
+<h3>Visus <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 10th, 2022, 4:20:39 PM</span></h3>
+<div class = "a"><h5>We can meet that condition for (<span style = "color:crimson;">$1,155.00 USD</span>).</h5></div>
+
+<div class = "c">
+    Genesis has transferred $1,155.00 USD to Visus.
+</div>
+
+<h3>Visus <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 10th, 2022, 4:22:49 PM</span></h3>
+<div class = "a"><h5>It's been a pleasure doing business with you.</h5></div>
+<div class = "a"><h5>I'm sure we'll be talking again very soon.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 10th, 2022, 4:23:06 PM</span></h2>
+<div class = "a"><h5>We'll see.</h5></div>
+
+<div class = "c">
+    Visus has de-authorized transactional payments.
+</div>
+
+<br>
+<br>
+<h6><div class = "b">February 17th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>May 4th, 2023</h6>
+<h6>Visus has authorized transactional payments.</h6>
+
+<h3>Visus <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 4th, 2023, 6:22:06 AM</span></h3>
+<div class = "a"><h5>We're reaching out on behalf of Mortis. But you know that already.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 4th, 2023, 6:41:53 AM</span></h2>
+<div class = "a"><h5>XUQDW-5.DBM-1.30.13-15-18.7-5-14</h5></div>
+
+<h3>Visus <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 4th, 2023, 6:46:42 AM</span></h3>
+<div class = "a"><h5>The price for moving the order will be (<span style = "color:crimson;">$367.50 USD</span>)</h5></div>
+
+<div class = "c">
+    Genesis has transferred $367.50 USD to Visus.
+</div>
+
+<h3>Visus <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 4th, 2023, 6:48:18 AM</span></h3>
+<div class = "a"><h5>We will be in contact soon.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> May 4th, 2023, 6:48:39 AM</span></h2>
+<div class = "a"><h5>Understood.</h5></div>
+
+<h6>Visus has de-authorized transactional payments.</h6>
+
+<br>
+<br>
+<h6><div class = "b">May 12th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

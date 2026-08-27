@@ -1,0 +1,427 @@
+<html>
+<head>
+<title>Noctem Cursor</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:#001aff;
+    background-color:#000000;
+}
+
+/* Genesis Name */
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+}
+
+/* Deut Name */
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(0, 26, 255);
+    background-color: #000000;
+}
+
+/* Texting */
+
+h5 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Dates */
+
+h6 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:0px;
+}
+
+/* Timing Texts */
+
+div.a {
+    text-indent: 50px;
+}
+
+div.b {
+    line-height: 20px;
+}
+
+div.c {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height:50px;
+}
+
+div.status {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deut {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(0, 26, 255);
+    background-color: #000000;
+    line-height: 0px;
+    opacity: 70%;
+}
+
+div.genesis {
+    float:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(140, 0, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.deleted {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(170, 0, 0);
+    background-color: #000000;
+    line-height: 0px;
+    text-indent: 50px;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+/* Genesis Profile */
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Noctem Cursor Profile*/
+
+#popupNoctem {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(0, 26, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactNoctem {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+</style>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Political Activist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Noctem Cursor Profile-->
+
+    <div id="ContactNoctem"></div>
+    <div id="popupNoctem">
+        <p class = "one"><span style = "color:rgb(0, 26, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Noctem Cursor</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Service Provider | Unbound Courier</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — May 2nd, 2020</b></span></p>
+        <button onclick="closeFnNoctem()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnNoctem() {
+            document.getElementById(
+                "ContactNoctem"
+            ).style.display = "block";
+            document.getElementById(
+                "popupNoctem"
+            ).style.display = "block";
+        }
+        function closeFnNoctem() {
+            document.getElementById(
+                "ContactNoctem"
+            ).style.display = "none";
+            document.getElementById(
+                "popupNoctem"
+            ).style.display = "none";
+        }
+    </script>
+
+
+<div class = "fade-in-text">
+<h1>Noctem Cursor</h1>
+
+
+<h6>December 19th, 2021
+    <div class = "status"><b>Online - 1</b></div>
+</h6>
+<h6>Genesis has created a new chat.
+    <div class = "genesis"><button onclick="popupFnGenesis()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Genesis</b>
+    </button></div>
+</h6>
+<h6>Genesis has added Noctem Cursor.
+    <div class = "status"><b><br>Offline - 1</b></div>
+</h6>
+<h6>Genesis has authorized transactional payments.
+    <div class = "deut"><button onclick="popupFnNoctem()" style = "background-color:rgb(0, 0, 0); border-color: #000000; border-width: 0px; color: rgb(0, 26, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 0px;">
+        <b>Noctem Cursor</b>
+    </button></div>
+</h6>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 19th, 2021, 10:24:37 PM</span></h3>
+<div class = "a"><h5>I assume this is about moving shipments of pharmaceutical products?</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 19th, 2021, 10:25:21 PM</span></h2>
+<div class = "a"><h5>Correct. Are you able to do business with Exilium or Somnus?</h5></div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 19th, 2021, 10:29:03 PM</span></h3>
+<div class = "a"><h5>Both are possible.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 19th, 2021, 10:33:11 PM</span></h2>
+<div class = "a"><h5>I'm placing orders with both in a few months.</h5></div>
+<div class = "a"><h5>Am I able to guarantee you'll be able to move the shipments to my location quickly?</h5></div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 19th, 2021, 10:39:24 PM</span></h3>
+<div class = "a"><h5>If you pay a reservation fee of (<span style = "color:crimson;">$262.50 USD</span>), we will reserve you as "on call" for the next two months.</h5></div>
+<div class = "a"><h5>We'll give you priority and get shipments to you within 7 days after order placement.</h5></div>
+
+<div class = "c">
+    Genesis has transferred $262.50 USD to Noctem Cursor.
+</div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 19th, 2021, 10:47:05 PM</span></h3>
+<div class = "a"><h5>Looking forward to doing business with you. Reach out to us the moment the orders are placed.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> December 19th, 2021, 10:48:59 PM</span></h2>
+<div class = "a"><h5>Will do.</h5></div>
+
+<br>
+<br>
+<h6>January 1st, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 1st, 2022, 6:42:03 PM</span></h2>
+<div class = "a"><h5>ID: URNAT-2.GEP-4.5000.5-24-9.7-5-14</h5></div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 1st, 2022, 6:46:08 PM</span></h3>
+<div class = "a"><h5>Delivery will be within seven days on confirming payment of (<span style = "color:crimson">$840.00 USD</span>).</h5></div>
+
+<div class = "c">
+    Genesis has transferred $840.00 USD to Noctem Cursor.
+</div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 1st, 2022, 6:50:05 PM</span></h3>
+<div class = "a"><h5>We'll be in touch.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">January 6th, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>January 16th, 2022</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 16th, 2022, 11:14:45 PM</span></h2>
+<div class = "a"><h5>ID: TQMZS-1.IGR-6.190.19-15-13.7-5-14</h5></div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 16th, 2022, 11:17:23 PM</span></h3>
+<div class = "a"><h5>Like before, delivery will be within seven days of confirming payment of (<span style = "color:crimson">$1,050.00 USD</span>).</h5></div>
+
+<div class = "c">
+    Genesis has transferred $1,050.00 USD to Noctem Cursor.
+</div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 16th, 2022, 11:23:57 PM</span></h3>
+<div class = "a"><h5>You know the drill. We'll be in touch.</h5></div>
+
+<br>
+<br>
+<h6><div class = "b">January 21st, 2022</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+<h6>January 22nd, 2022</h6>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 22nd, 2022, 8:08:15 PM</span></h3>
+<div class = "a"><h5>It was a pleasure doing business with you.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 22nd, 2022, 8:17:30 PM</span></h2>
+<div class = "a"><h5>Likewise.</h5></div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 22nd, 2022, 8:19:48 PM</span></h3>
+<div class = "a"><h5>If you have any need for an unbound courier in the future, please don't hesitate to reach out.</h5></div>
+<div class = "a"><h5>There's possible discounts to be discussed.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> January 22nd, 2022, 8:22:52 PM</span></h2>
+<div class = "a"><h5>I may take you up on that.</h5></div>
+
+<div class = "c">
+    Noctem Cursor has de-authorized transactional payments.
+</div>
+
+<br>
+<br>
+<h6>February 24th, 2023</h6>
+<h6>Genesis has authorized transactional payments.</h6>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 24th, 2023, 2:19:00 PM</span></h3>
+<div class = "a"><h5>We were wondering if you would be returning as a customer.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 24th, 2023, 2:19:31 PM</span></h2>
+<div class = "a"><h5>You can count on it.</h5></div>
+<div class = "a"><h5>Only one supplier this time, Somnus.</h5></div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 24th, 2023, 2:20:33 PM</span></h3>
+<div class = "a"><h5>No need for a reservation payment. We value your loyalty.</h5></div>
+<div class = "a"><h5>Reach out when you've placed the order.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> February 24th, 2023, 2:20:47 PM</span></h2>
+<div class = "a"><h5>Will do.</h5></div>
+<div class = "a"><h5>Thank you.</h5></div>
+
+<br>
+<br>
+<h6>March 3rd, 2023</h6>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 3rd, 2023, 4:05:52 PM</span></h2>
+<div class = "a"><h5>VSOBU-3.IGR-6.150.19-15-13.7-5-14</h5></div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 3rd, 2023, 4:09:42 PM</span></h3>
+<div class = "a"><h5>Delivery will be within seven days upon confirming payment of (<span style = "color:crimson">$420.00 USD</span>).</h5></div>
+
+<div class = "c">
+    Genesis has transferred $420.00 USD to Noctem Cursor.
+</div>
+
+<h3>Noctem Cursor <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 3rd, 2023, 4:12:08 PM</span></h3>
+<div class = "a"><h5>We will reach out with the exchange details in a few days.</h5></div>
+
+<h2>Genesis <span style="color: rgb(105, 105, 105); font-size: 15px;"> March 3rd, 2023, 4:12:28 PM</span></h2>
+<div class = "a"><h5>Thank you.</h5></div>
+
+<div class = "c">
+    Noctem Cursor has de-authorized transactional payments.
+</div>
+
+<br>
+<br>
+<h6><div class = "b">March 10th, 2023</div></h6>
+<div class = "deleted">Chat history has been deleted.</div>
+
+<br>
+<br>
+
+
+
+</div>

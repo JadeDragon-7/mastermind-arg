@@ -1,0 +1,1240 @@
+<html>
+<head>
+<title>Main Menu</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:rgb(140, 0, 255);
+    background-color:#000000;
+}
+
+/* Contacts */
+
+h2 {
+    text-align:right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    color: green;
+    background-color: #000000;
+    border: 0px;
+}
+
+/* Unread Messages Notification */
+
+h3 {
+    text-align:center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 25px;
+    color:darkred;
+    background-color: #000000;
+    line-height: 0px;
+}
+
+/* Group Chat Title */
+
+h4 {
+    text-align: left;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 25px;
+    color:rgb(255, 255, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+/* Group Chats */
+
+h5 {
+    text-align: left;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 20px;
+    color:rgb(255, 255, 255);
+    background-color: #000000;
+}
+
+/* Direct Messages */
+
+h6 {
+    text-align: left;
+    font-family:'Courier New', Courier, monospace;
+    font-size: 25px;
+    color:rgb(255, 255, 255);
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.online {
+    float: right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(105, 105, 105);
+    background-color: rgb(0, 0, 0);
+    line-height: 0px;
+    border: 0px;
+    border-width: 0px;
+}
+
+div.contacts {
+    float: right;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: green;
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.unread {
+    text-align: left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: darkred;
+    background-color: #000000;
+    line-height: 0px;
+}
+
+div.status {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(105, 105, 105);
+    background-color: rgb(49, 49, 49);
+    line-height: 0px;
+    border-color:rgb(49, 49, 49);
+}
+
+div.float {
+    float:right;
+}
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+p {
+    font-family:Times, serif;
+    font-size:18px;
+    font-style:normal;
+    font-weight:normal;
+    color:rgb(0, 0, 0);
+    background-color:rgb(0, 0, 0);
+
+    }
+
+p.one {
+    font-family:Times, serif;
+    font-size:18px;
+    font-style:normal;
+    font-weight:normal;
+    color:rgb(49, 49, 49);
+    background-color:rgb(49, 49, 49);
+
+    }
+
+/*Online Popout*/
+
+#popupOnline {
+            display: none;
+            position: fixed;
+            top: 24%;
+            left: 84%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid green;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactOnline {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Offline Popout*/
+
+#popupOffline {
+            display: none;
+            position: fixed;
+            top: 24%;
+            left: 84%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid green;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactOffline {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Carnifex Profile*/
+
+#popupCarnifex {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(117, 0, 0);
+            box-shadow: 0 4px 8px rgba(129, 4, 4, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactCarnifex {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Curator Corporis Profile*/
+
+#popupCorporis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(113, 247, 113);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactCorporis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Deut Profile*/
+
+#popupDeut {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(255, 94, 0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactDeut {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Exilium Profile*/
+
+#popupExilium {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(173, 95, 247);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactExilium {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Genesis Profile*/
+
+#popupGenesis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(140, 0, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactGenesis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Mentem Profile*/
+
+#popupMentem {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(0, 153, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactMentem {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Mortis Profile*/
+
+#popupMortis {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(122, 35, 0);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactMortis {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Noctem Cursor Profile*/
+
+#popupNoctem {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(0, 26, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactNoctem {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Oculus Profile*/
+
+#popupOculus {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(128, 0, 53);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+
+        }
+
+        #ContactOculus {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Portitorem Profile*/
+
+#popupPortitorem {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(255, 69, 184);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactPortitorem {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Remedium Profile*/
+
+#popupRemedium {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(66, 69, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactRemedium {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Somnus Profile*/
+
+#popupSomnus {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(0, 255, 255);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactSomnus {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Speculum Profile*/
+
+#popupSpeculum {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(255, 182, 24);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactSpeculum {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+/*Visus Profile*/
+
+#popupVisus {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgb(49, 49, 49);
+            border: 5px solid rgb(255, 71, 71);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #ContactVisus {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+</style>
+
+<!--Online Profile-->
+
+    <div id="ContactOnline"></div>
+    <div id="popupOnline">
+        <p class = "one"><div class = "status"><b>Online - 7</b></div></p>
+        <p class = "one">
+            <button onclick="popupFnCarnifex()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(117, 0, 0); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Carnifex</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnExilium()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(173, 95, 247); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Exilium</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnMentem()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(0, 153, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Mentem</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnOculus()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(128, 0, 53); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Oculus</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnPortitorem()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(255, 69, 184); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Portitorem</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnSpeculum()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(255, 182, 24); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Speculum</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnVisus()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(255, 71, 71); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Visus</b>
+            </button>
+        </p>
+        <button onclick="closeFnOnline()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnOnline() {
+            document.getElementById(
+                "ContactOnline"
+            ).style.display = "block";
+            document.getElementById(
+                "popupOnline"
+            ).style.display = "block";
+        }
+        function closeFnOnline() {
+            document.getElementById(
+                "ContactOnline"
+            ).style.display = "none";
+            document.getElementById(
+                "popupOnline"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Offline Popout-->
+
+    <div id="ContactOffline"></div>
+    <div id="popupOffline">
+        <p class = "one"><div class = "status"><b>Offline - 6</b></div></p>
+        <p class = "one">
+            <button onclick="popupFnCorporis()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(113, 247, 113); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Curator Corporis</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnDeut()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(255, 94, 0); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Deut</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnMortis()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(122, 35, 0); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Mortis</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnNoctem()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(0, 26, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Noctem Cursor</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnRemedium()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(66, 69, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Remedium</b>
+            </button>
+        </p>
+        <p class = "one">
+            <button onclick="popupFnSomnus()" style = "background-color:rgb(49, 49, 49); border-color: rgb(49, 49, 49); border-width: 0px; color: rgb(0, 255, 255); font-family: 'Courier New', Courier, monospace; font-size: 20px; line-height: 15px;">
+                <b>Somnus</b>
+            </button>
+        </p>
+        <button onclick="closeFnOffline()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnOffline() {
+            document.getElementById(
+                "ContactOffline"
+            ).style.display = "block";
+            document.getElementById(
+                "popupOffline"
+            ).style.display = "block";
+        }
+        function closeFnOffline() {
+            document.getElementById(
+                "ContactOffline"
+            ).style.display = "none";
+            document.getElementById(
+                "popupOffline"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Carnifex Profile-->
+
+    <div id="ContactCarnifex"></div>
+    <div id="popupCarnifex">
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(117, 0, 0); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Carnifex</b></span></p>
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Provider | Ghost Benefactor</b></span></p>
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Closed</b></span></p>
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — January 1st, 2006</b></span></p>
+        <button onclick="closeFnCarnifex()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnCarnifex() {
+            document.getElementById(
+                "ContactCarnifex"
+            ).style.display = "block";
+            document.getElementById(
+                "popupCarnifex"
+            ).style.display = "block";
+        }
+        function closeFnCarnifex() {
+            document.getElementById(
+                "ContactCarnifex"
+            ).style.display = "none";
+            document.getElementById(
+                "popupCarnifex"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Curator Corporis Profile-->
+
+    <div id="ContactCorporis"></div>
+    <div id="popupCorporis">
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(113, 247, 113); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Curator Corporis</b></span></p>
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Merchant | Pharmaceutical Specialist</b></span></p>
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open </b></span></p>
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — December 11th, 2016</b></span></p>
+        <button onclick="closeFnCorporis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnCorporis() {
+            document.getElementById(
+                "ContactCorporis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupCorporis"
+            ).style.display = "block";
+        }
+        function closeFnCorporis() {
+            document.getElementById(
+                "ContactCorporis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupCorporis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Deut Profile-->
+
+    <div id="ContactDeut"></div>
+    <div id="popupDeut">
+        <p class = "one"><span style = "color:rgb(255, 94, 0); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Deut</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Bound Enforcer</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open </b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 12th, 2020</b></span></p>
+        <button onclick="closeFnDeut()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnDeut() {
+            document.getElementById(
+                "ContactDeut"
+            ).style.display = "block";
+            document.getElementById(
+                "popupDeut"
+            ).style.display = "block";
+        }
+        function closeFnDeut() {
+            document.getElementById(
+                "ContactDeut"
+            ).style.display = "none";
+            document.getElementById(
+                "popupDeut"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Exilium Profile-->
+
+    <div id="ContactExilium"></div>
+    <div id="popupExilium">
+        <p class = "one"><span style = "color:rgb(173, 95, 247); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Exilium</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Merchant | Neurochemical Curator</b></span></p>
+                <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — February 25th, 2019</b></span></p>
+        <button onclick="closeFnExilium()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnExilium() {
+            document.getElementById(
+                "ContactExilium"
+            ).style.display = "block";
+            document.getElementById(
+                "popupExilium"
+            ).style.display = "block";
+        }
+        function closeFnExilium() {
+            document.getElementById(
+                "ContactExilium"
+            ).style.display = "none";
+            document.getElementById(
+                "popupExilium"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Genesis Profile-->
+
+    <div id="ContactGenesis"></div>
+    <div id="popupGenesis">
+        <p><span style = "color:rgb(140, 0, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Genesis</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Customer | Psychologist</b></span></p>
+        <p><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — October 10th, 2020</b></span></p>
+        <button onclick="closeFnGenesis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "block";
+        }
+        function closeFnGenesis() {
+            document.getElementById(
+                "ContactGenesis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupGenesis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Mentem Profile-->
+
+    <div id="ContactMentem"></div>
+    <div id="popupMentem">
+        <p class = "one"><span style = "color:rgb(0, 153, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Mentem</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Customer | Neurochemical Engineer</b></span></p>
+        <p class = "one"><span style = "background-color: color rgb(49, 49, 49); color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — April 4th, 2019</b></span></p>
+        <button onclick="closeFnMentem()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnMentem() {
+            document.getElementById(
+                "ContactMentem"
+            ).style.display = "block";
+            document.getElementById(
+                "popupMentem"
+            ).style.display = "block";
+        }
+        function closeFnMentem() {
+            document.getElementById(
+                "ContactMentem"
+            ).style.display = "none";
+            document.getElementById(
+                "popupMentem"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Mortis Profile-->
+
+    <div id="ContactMortis"></div>
+    <div id="popupMortis">
+        <p class = "one"><span style = "color:rgb(122, 35, 0); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Mortis</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Merchant | Narcotic Facilitator</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — December 12th, 2009</b></span></p>
+        <button onclick="closeFnMortis()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnMortis() {
+            document.getElementById(
+                "ContactMortis"
+            ).style.display = "block";
+            document.getElementById(
+                "popupMortis"
+            ).style.display = "block";
+        }
+        function closeFnMortis() {
+            document.getElementById(
+                "ContactMortis"
+            ).style.display = "none";
+            document.getElementById(
+                "popupMortis"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Noctem Cursor Profile-->
+
+    <div id="ContactNoctem"></div>
+    <div id="popupNoctem">
+        <p class = "one"><span style = "color:rgb(0, 26, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Noctem Cursor</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Service Provider | Unbound Courier</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — May 2nd, 2020</b></span></p>
+        <button onclick="closeFnNoctem()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnNoctem() {
+            document.getElementById(
+                "ContactNoctem"
+            ).style.display = "block";
+            document.getElementById(
+                "popupNoctem"
+            ).style.display = "block";
+        }
+        function closeFnNoctem() {
+            document.getElementById(
+                "ContactNoctem"
+            ).style.display = "none";
+            document.getElementById(
+                "popupNoctem"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Oculus Profile-->
+
+    <div id="ContactOculus"></div>
+    <div id="popupOculus">
+        <p class = "one"><span style = "color:rgb(128, 0, 53); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Oculus</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Anonymous Provider | Ghost Benefactor</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Closed</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — November 7th, 2002</b></span></p>
+        <button onclick="closeFnOculus()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnOculus() {
+            document.getElementById(
+                "ContactOculus"
+            ).style.display = "block";
+            document.getElementById(
+                "popupOculus"
+            ).style.display = "block";
+        }
+        function closeFnOculus() {
+            document.getElementById(
+                "ContactOculus"
+            ).style.display = "none";
+            document.getElementById(
+                "popupOculus"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Portitorem Profile-->
+
+    <div id="ContactPortitorem"></div>
+    <div id="popupPortitorem">
+        <p class = "one"><span style = "color:rgb(255, 69, 184); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Portitorem</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Service Provider | Unbound Courier</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — August 6th, 2019</b></span></p>
+        <button onclick="closeFnPortitorem()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnPortitorem() {
+            document.getElementById(
+                "ContactPortitorem"
+            ).style.display = "block";
+            document.getElementById(
+                "popupPortitorem"
+            ).style.display = "block";
+        }
+        function closeFnPortitorem() {
+            document.getElementById(
+                "ContactPortitorem"
+            ).style.display = "none";
+            document.getElementById(
+                "popupPortitorem"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Remedium Profile-->
+
+    <div id="ContactRemedium"></div>
+    <div id="popupRemedium">
+        <p class = "one"><span style = "color:rgb(66, 69, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Remedium</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Merchant | Neurochemical Curator</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messsages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — September 23rd, 2018</b></span></p>
+        <button onclick="closeFnRemedium()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnRemedium() {
+            document.getElementById(
+                "ContactRemedium"
+            ).style.display = "block";
+            document.getElementById(
+                "popupRemedium"
+            ).style.display = "block";
+        }
+        function closeFnRemedium() {
+            document.getElementById(
+                "ContactRemedium"
+            ).style.display = "none";
+            document.getElementById(
+                "popupRemedium"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Somnus Profile-->
+
+    <div id="ContactSomnus"></div>
+    <div id="popupSomnus">
+        <p class = "one"><span style = "color:rgb(0, 255, 255); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Somnus</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Merchant | Pharmaceutical Specialist</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Open</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — June 30th, 2017</b></span></p>
+        <button onclick="closeFnSomnus()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnSomnus() {
+            document.getElementById(
+                "ContactSomnus"
+            ).style.display = "block";
+            document.getElementById(
+                "popupSomnus"
+            ).style.display = "block";
+        }
+        function closeFnSomnus() {
+            document.getElementById(
+                "ContactSomnus"
+            ).style.display = "none";
+            document.getElementById(
+                "popupSomnus"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Speculum Profile-->
+
+    <div id="ContactSpeculum"></div>
+    <div id="popupSpeculum">
+        <p class = "one"><span style = "color:rgb(255, 182, 24); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Speculum</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Service Provider | Bound Courier</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Closed</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — November 18th, 2021</b></span></p>
+        <button onclick="closeFnSpeculum()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnSpeculum() {
+            document.getElementById(
+                "ContactSpeculum"
+            ).style.display = "block";
+            document.getElementById(
+                "popupSpeculum"
+            ).style.display = "block";
+        }
+        function closeFnSpeculum() {
+            document.getElementById(
+                "ContactSpeculum"
+            ).style.display = "none";
+            document.getElementById(
+                "popupSpeculum"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--Visus Profile-->
+
+    <div id="ContactVisus"></div>
+    <div id="popupVisus">
+        <p class = "one"><span style = "color:rgb(255, 71, 71); font-family: 'Courier New', Courier, monospace; font-size: 25px;"><b>Visus</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Private Service Provider | Bound Courier</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Direct Messages — Closed</b></span></p>
+        <p class = "one"><span style = "color:rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 15px;"><b>Account Created — June 9th, 2008</b></span></p>
+        <button onclick="closeFnVisus()" style  = "background-color:rgb(49, 49, 49)">
+            Close
+        </button>
+    </div>
+    <script>
+        function popupFnVisus() {
+            document.getElementById(
+                "ContactVisus"
+            ).style.display = "block";
+            document.getElementById(
+                "popupVisus"
+            ).style.display = "block";
+        }
+        function closeFnVisus() {
+            document.getElementById(
+                "ContactVisus"
+            ).style.display = "none";
+            document.getElementById(
+                "popupVisus"
+            ).style.display = "none";
+        }
+    </script>
+
+<!--ACTUAL WEBSITE CODE-->
+
+</head>
+<body>
+<div class = "fade-in-text">
+<a href="GENESIS PROFILE/Genesis Profile.html"><h1>
+    <button style = 
+        "text-align:center; 
+        font-family:'Courier New', Courier, monospace;
+        color:rgb(140, 0, 255);
+        background-color:#000000;
+        font-size:45px;
+        border-color:#000000;
+        border-width: 0px;
+        ">
+            <b><u>GENESIS</u></b>
+    </button>
+</a></h1>
+
+
+
+        <h2><span style = "background-color:rgb(0, 0, 0); border-color: rgb(49, 49, 49); border-width: 0px; color: green; font-family: 'Courier New', Courier, monospace; font-size: 30px; line-height: 15px;">
+            Contacts</span>
+        </h2>
+        <p>
+            <button onclick="popupFnOnline()" style = "float: right; background-color:rgb(0, 0, 0); border-color: rgb(0, 0, 0); border-width: 0px; color: rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 17px; line-height: 15px;">
+                Online — 7
+            </button>
+        </p>
+        <br>
+        <p>
+            <button onclick="popupFnOffline()" style = "float: right; background-color:rgb(0, 0, 0); border-color: rgb(0, 0, 0); border-width: 0px; color: rgb(105, 105, 105); font-family: 'Courier New', Courier, monospace; font-size: 17px; line-height: 15px;">
+                Offline — 6
+            </button>
+        </p>
+    <h4>Group Chats</h4>
+    <h5>
+        <div>
+        <p>
+            <a href="DIRECT MESSAGES/Trinity.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px">Trinity<span style="color: red; font-size: 30px;"><b>²</b></span></button>
+            </a>
+        </p>
+        </div>
+    </h5>
+    <h6>Direct Messages</h6>
+        <div><p>
+            <a href="DIRECT MESSAGES/Carnifex.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px;line-height: 0px;">Carnifex<span style="color: red; font-size: 30px;"><b>²</b></span></button>
+            </a>
+        </p></div>
+        <div><p>
+            <a href="DIRECT MESSAGES/Oculus.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px; line-height: 25px;">Oculus<span style="color: red; font-size: 30px;"><b>³</b></span></button>
+            </a>
+        </p></div>
+        <div><p>
+            <a href="DIRECT MESSAGES/Visus.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px; line-height: 0px;">Visus</button>
+            </a>
+        </p></div>
+        <div><p>
+            <a href="DIRECT MESSAGES/Mortis.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px; line-height: 25px;">Mortis</button>
+            </a>
+        </p></div>
+        <div><p>
+            <a href="DIRECT MESSAGES/Speculum.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px; line-height: 0px;">Speculum</button>
+            </a>
+        </p></div>
+        <div><p>
+            <a href="DIRECT MESSAGES/Remedium.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px; line-height: 25px;">Remedium</button>
+            </a>
+        </p></div>
+        <div><p>
+            <a href="DIRECT MESSAGES/Noctem Cursor.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px; line-height: 0px;">Noctem Cursor</button>
+            </a>
+        </p></div>
+        <div><p>
+            <a href="DIRECT MESSAGES/Somnus.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px; line-height: 25px;">Somnus</button>
+            </a>
+        </p></div>
+        <div><p>
+            <a href="DIRECT MESSAGES/Exilium.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px; line-height: 0px;">Exilium</button>
+            </a>
+        </p></div>
+        <div><p>
+            <a href="DIRECT MESSAGES/Portitorem.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px; line-height: 25px;">Portitorem</button>
+            </a>
+        </p></div>
+        <div><p>
+            <a href="DIRECT MESSAGES/Curator Corporis.html">
+                <button style="background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:20px; line-height: 0px;">Curator Corporis</button>
+            </a>
+        </p></div>
+
+
+    </div>
+
+</body>
+</html>

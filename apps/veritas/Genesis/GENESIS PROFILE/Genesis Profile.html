@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Disable CTRL U -->
+
+<script>
+document.onkeydown = function(e) {
+if (e.ctrlKey && e.keyCode === 85) {
+return false;
+}
+};
+</script>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Profile</title>
+  <style>
+
+/* Background */
+
+body {
+    background-color:#000000;
+    background-repeat:no-repeat;
+    background-position:top left;
+    background-attachment:fixed;
+}
+
+/* Title */
+
+h1 {
+    text-align:center;
+    font-family:'Courier New', Courier, monospace;
+    color:rgb(140, 0, 255);
+    background-color:#000000;
+    font-size: 45px;
+}
+
+h2 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+h3 {
+    text-align:left;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    background-color: #000000;
+    line-height:0px;
+}
+
+    .warning {
+      color: red;
+      font-weight: bold;
+      margin-top: 20px;
+      display: none;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    select, input[type="text"] {
+      background-color: rgb(26, 26, 26);
+      color: white;
+      border: none;
+      font-size: 16px;
+      padding: 8px;
+      border-radius: 4px;
+      margin: 0 5px;
+      appearance: none;
+      outline: none;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+
+      background-color: rgb(26, 26, 26);
+      color: white;
+      padding: 10px 40px 10px 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 20px;
+      cursor: pointer;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+  div.a {
+    text-indent: 15px;
+    line-height: 40px;
+  }
+
+  div.b {
+    text-indent: 8px;
+  }
+
+div.fade-in-text {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1;}
+}
+
+  </style>
+</head>
+<body>
+
+<div class = "fade-in-text">
+
+<h1><u>GENESIS</u></h1>
+
+<h3>Account Type</h3>
+
+  <h2>
+      <select data-original="Anonymous Customer">
+      <option value="Anonymous Customer" selected>Anonymous Customer</option>
+      <option value="Anonymous Provider">Anonymous Provider</option>
+      <option value="Private Merchant">Private Merchant</option>
+      <option value="Private Service Provider">Private Service Provider</option>
+    </select>
+  </h2>
+<br>
+<h3>Speciality</h3>
+<h2>
+  <input type="text" value="Political Activist" data-original="Political Activist">
+</h2>
+<br>
+<h3>Direct Message Status</h3>
+
+  <h2>
+      <select data-original="Open">
+      <option value="Open" selected>Open</option>
+      <option value="Closed">Closed</option>
+    </select>
+  </h2>
+<br>
+  <h3>Account Age</h3>
+  <h2><div class = "a">October 10th, 2020</div></h2>
+<br>
+  <h3>Banking Details</h3>
+  <h2><div class = "a">Amount Loaded — <span style = "color:yellow">$0.00 USD</span></div></h2>
+  <a href="Transaction History Password.html">
+  <h2><div class = "b"><button style = "background-color:#000000; border-color:#000000; border-width: 0px; color:rgb(255, 255, 255); font-family:'Courier New', Courier, monospace; font-size:15px"><u>Transaction History</u></button></div></h2></a>
+
+  <div id="warning" class="warning">Account has been frozen. You do not have authorization to edit this profile.</div>
+
+<script>
+    const selects = document.querySelectorAll('select');
+    const inputs = document.querySelectorAll('input[type="text"]');
+    const warning = document.getElementById('warning');
+
+    function checkForChanges() {
+      let changed = false;
+
+      selects.forEach(select => {
+        const original = select.getAttribute('data-original');
+        if (select.value !== original) {
+          changed = true;
+        }
+      });
+
+      inputs.forEach(input => {
+        const original = input.getAttribute('data-original');
+        if (input.value.trim().toLowerCase() !== original.toLowerCase()) {
+          changed = true;
+        }
+      });
+
+      warning.style.display = changed ? 'block' : 'none';
+    }
+
+    selects.forEach(select => {
+      select.addEventListener('change', checkForChanges);
+    });
+
+    inputs.forEach(input => {
+      input.addEventListener('input', checkForChanges);
+    });
+  </script>
+
+</div>
+</body>
+</html>
