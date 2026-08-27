@@ -1231,27 +1231,30 @@ notificationClose.addEventListener(
          * Click behavior
          */
 
-        icon.addEventListener(
-            "click",
-            () => {
+icon.addEventListener(
+    "click",
+    () => {
 
-                if (!accessible) {
+        const currentlyAccessible =
+            application.unlocked &&
+            playerAccessLevel >=
+            application.required_access_level;
 
-                    alert(
-                        "ACCESS DENIED"
-                    );
+        if (!currentlyAccessible) {
 
-                    return;
+            alert(
+                "ACCESS DENIED"
+            );
 
-                }
+            return;
+        }
 
-
-                openApplication(
-                    application
-                );
-
-            }
+        openApplication(
+            application
         );
+
+    }
+);
 
 
 
@@ -2460,27 +2463,53 @@ function updateApplicationIcon(
      * Update locked/unlocked appearance.
      */
 
-    if (accessible) {
+if (accessible) {
 
-        icon.classList.remove(
-            "locked"
+    icon.classList.remove(
+        "locked"
+    );
+
+    iconImage.textContent =
+        application.icon;
+
+} else {
+
+    icon.classList.add(
+        "locked"
+    );
+
+    iconImage.textContent =
+        "🔒";
+
+
+    // Close the application if it is currently open
+
+    const openWindow =
+        document.getElementById(
+            "window-" + application.id
         );
 
+    if (openWindow) {
 
-        iconImage.textContent =
-            application.icon;
-
-    } else {
-
-        icon.classList.add(
-            "locked"
-        );
+        openWindow.remove();
 
 
-        iconImage.textContent =
-            "🔒";
+        // Remove its taskbar button
+
+        const taskButton =
+            document.getElementById(
+                "task-" + application.id
+            );
+
+        if (taskButton) {
+
+            taskButton.remove();
+
+        }
 
     }
+
+}
 
 }
 
