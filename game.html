@@ -1151,6 +1151,9 @@ notificationClose.addEventListener(
         icon.dataset.applicationId =
             application.id;
 
+icon.dataset.unlocked =
+    application.unlocked;
+
 
 
         /*
@@ -1235,10 +1238,10 @@ icon.addEventListener(
     "click",
     () => {
 
-        const currentlyAccessible =
-            application.unlocked &&
-            playerAccessLevel >=
-            application.required_access_level;
+const currentlyAccessible =
+    icon.dataset.unlocked === "true" &&
+    playerAccessLevel >=
+    application.required_access_level;
 
         if (!currentlyAccessible) {
 
@@ -2436,6 +2439,9 @@ function updateApplicationIcon(
         return;
 
     }
+
+icon.dataset.unlocked =
+    application.unlocked;
 
 
     /*
