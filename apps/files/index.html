@@ -489,6 +489,32 @@ body {
 
 }
 
+.viewerText {
+
+    width: 100%;
+
+    flex: 1;
+
+    padding: 25px;
+
+    overflow-y: auto;
+
+    white-space: pre-wrap;
+
+    text-align: left;
+
+    color: #bbb;
+
+    font-family:
+        "Courier New",
+        monospace;
+
+    font-size: 13px;
+
+    line-height: 1.6;
+
+}
+
 
 </style>
 
@@ -676,10 +702,11 @@ const fileSystem = {
     id: "system_logs",
     name: "SYSTEM.LOG",
     type: "file",
+    fileType: "text",
 
     content: `
 SYSTEM LOG
-============
+====================
 
 DATE: 08/27/2026
 
@@ -690,14 +717,40 @@ UNKNOWN
 
 SECURITY STATUS:
 NORMAL
+
+--------------------
+
+NO CRITICAL ERRORS
+DETECTED.
 `
 },
 
-            {
-                id: "configuration",
-                name: "CONFIG.TXT",
-                type: "file"
-            }
+{
+    id: "configuration",
+    name: "CONFIG.TXT",
+    type: "file",
+    fileType: "text",
+
+    content: `
+SYSTEM CONFIGURATION
+====================
+
+VERSION: 4.7.2
+
+SECURITY LEVEL: STANDARD
+
+REMOTE ACCESS: ENABLED
+
+USER MONITORING: ENABLED
+
+AUTOMATIC UPDATES: ENABLED
+
+--------------------
+
+DO NOT MODIFY SYSTEM
+CONFIGURATION FILES.
+`
+}
 
         ]
 
@@ -1033,10 +1086,19 @@ function renderFolder() {
                 "fileIcon";
 
 
-            icon.textContent =
-                item.type === "folder"
-                    ? "📁"
-                    : "📄";
+if (item.type === "folder") {
+
+    icon.textContent = "📁";
+
+} else if (item.fileType === "image") {
+
+    icon.textContent = "🖼️";
+
+} else {
+
+    icon.textContent = "📄";
+
+}
 
 
             const name =
@@ -1200,6 +1262,17 @@ forwardButton.addEventListener(
    FILE VIEWER
 ======================================== */
 
+function escapeHTML(text) {
+
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+}
+
 function openFile(file) {
 
     const viewer =
@@ -1226,21 +1299,21 @@ function openFile(file) {
             </div>
 
 
-            <div id="viewerContent">
+<div id="viewerContent">
 
-                <div class="viewerIcon">
-                    📄
-                </div>
+    <div class="viewerIcon">
+        📄
+    </div>
 
-                <div class="viewerTitle">
-                    ${file.name}
-                </div>
+    <div class="viewerTitle">
+        ${file.name}
+    </div>
 
-                <div class="viewerMessage">
-                    FILE CONTENTS
-                </div>
+    <div class="viewerText">
+        ${escapeHTML(file.content || "NO CONTENT")}
+    </div>
 
-            </div>
+</div>
 
         </div>
 
