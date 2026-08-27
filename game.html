@@ -348,11 +348,11 @@
 
     position: absolute;
 
-    top: 80px;
-    left: 200px;
+    top: 0;
+    left: 0;
 
-    width: 800px;
-    height: 550px;
+    width: 100%;
+    height: 100%;
 
     min-width: 400px;
     min-height: 250px;
@@ -1608,6 +1608,14 @@ windowElement.appendChild(
     windowElement.style.display =
         "flex";
 
+// Open applications maximized by default
+windowElement.style.left = "0px";
+windowElement.style.top = "0px";
+windowElement.style.width = "100%";
+windowElement.style.height = "100%";
+
+maximized = true;
+
 
     /*
      * Close
@@ -1651,7 +1659,7 @@ windowElement.appendChild(
      * Maximize
      */
 
-    let maximized = false;
+    let maximized = true;
 
     maximize.addEventListener(
         "click",
