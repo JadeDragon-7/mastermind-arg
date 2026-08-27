@@ -515,6 +515,43 @@ body {
 
 }
 
+.imageViewerContent {
+
+    padding: 20px;
+
+    overflow: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+.fileImage {
+
+    max-width: 100%;
+
+    max-height: 100%;
+
+    object-fit: contain;
+
+}
+
+.htmlViewer {
+
+    flex: 1;
+
+    width: 100%;
+
+    border: none;
+
+    background: white;
+
+}
+
 
 </style>
 
@@ -763,6 +800,16 @@ CONFIGURATION FILES.
     content: `
 THIS FILE SHOULD NOT BE ACCESSIBLE.
 `
+},
+
+{
+    id: "internalPortal",
+    name: "PORTAL.HTML",
+    type: "file",
+
+    fileType: "html",
+
+    src: "portal.html"
 }
 
         ]
@@ -963,11 +1010,15 @@ THIS FILE SHOULD NOT BE ACCESSIBLE.
                 type: "file"
             },
 
-            {
-                id: "incidentPhoto",
-                name: "PHOTO.PNG",
-                type: "file"
-            }
+{
+    id: "incidentPhoto",
+    name: "PHOTO.PNG",
+    type: "file",
+
+    fileType: "image",
+
+    src: "images/test.png"
+}
 
         ]
 
@@ -1406,7 +1457,40 @@ function showAccessDenied(file) {
 
 }
 
-function openFile(file) {
+function openTextFile(file) {
+
+    if (file.fileType === "image") {
+
+        openImageFile(file);
+
+        return;
+
+    }
+
+
+    if (file.fileType === "text") {
+
+        openTextFile(file);
+
+        return;
+
+    }
+
+
+    if (file.fileType === "html") {
+
+        openHTMLFile(file);
+
+        return;
+
+    }
+
+
+    openUnknownFile(file);
+
+}
+
+function openImageFile(file) {
 
     const viewer =
         document.createElement("div");
@@ -1422,7 +1506,7 @@ function openFile(file) {
             <div id="viewerHeader">
 
                 <span>
-                    ${file.name}
+                    ${escapeHTML(file.name)}
                 </span>
 
                 <button id="viewerClose">
@@ -1432,21 +1516,154 @@ function openFile(file) {
             </div>
 
 
-<div id="viewerContent">
+            <div
+                id="viewerContent"
+                class="imageViewerContent"
+            >
 
-    <div class="viewerIcon">
-        📄
-    </div>
+                <img
+                    src="${file.src}"
+                    class="fileImage"
+                    alt="${escapeHTML(file.name)}"
+                >
 
-    <div class="viewerTitle">
-        ${file.name}
-    </div>
+            </div>
 
-    <div class="viewerText">
-        ${escapeHTML(file.content || "NO CONTENT")}
-    </div>
+        </div>
 
-</div>
+    `;
+
+
+    document.body.appendChild(
+        viewer
+    );
+
+
+    document
+        .getElementById(
+            "viewerClose"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                viewer.remove();
+
+            }
+        );
+
+}
+
+function openHTMLFile(file) {
+
+    const viewer =
+        document.createElement("div");
+
+    viewer.id =
+        "fileViewer";
+
+
+    viewer.innerHTML = `
+
+        <div id="viewerWindow">
+
+            <div id="viewerHeader">
+
+                <span>
+                    ${escapeHTML(file.name)}
+                </span>
+
+                <button id="viewerClose">
+                    ×
+                </button>
+
+            </div>
+
+
+            <iframe
+                src="${file.src}"
+                class="htmlViewer"
+            ></iframe>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        viewer
+    );
+
+
+    document
+        .getElementById(
+            "viewerClose"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                viewer.remove();
+
+            }
+        );
+
+}
+
+function openUnknownFile(file) {
+
+    const viewer =
+        document.createElement("div");
+
+    viewer.id =
+        "fileViewer";
+
+
+    viewer.innerHTML = `
+
+        <div id="viewerWindow">
+
+            <div id="viewerHeader">
+
+                <span>
+                    SYSTEM
+                </span>
+
+                <button id="viewerClose">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div id="viewerContent">
+
+                <div class="viewerIcon">
+                    📄
+                </div>
+
+                <div class="viewerTitle">
+
+                    ${escapeHTML(file.name)}
+
+                </div>
+
+
+                <div class="viewerMessage">
+
+                    FILE TYPE NOT SUPPORTED
+
+                    <br><br>
+
+                    TYPE:
+                    ${escapeHTML(
+                        file.fileType ||
+                        "UNKNOWN"
+                    )}
+
+                </div>
+
+            </div>
 
         </div>
 
