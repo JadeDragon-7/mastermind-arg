@@ -750,6 +750,19 @@ AUTOMATIC UPDATES: ENABLED
 DO NOT MODIFY SYSTEM
 CONFIGURATION FILES.
 `
+},
+
+{
+    id: "restricted",
+    name: "RESTRICTED.TXT",
+    type: "file",
+    fileType: "text",
+
+    requiredAccessLevel: 4,
+
+    content: `
+THIS FILE SHOULD NOT BE ACCESSIBLE.
+`
 }
 
         ]
@@ -991,6 +1004,8 @@ CONFIGURATION FILES.
 
 let currentFolder = "root";
 
+let playerAccessLevel = 1;
+
 let history = ["root"];
 
 let historyIndex = 0;
@@ -1076,6 +1091,19 @@ function renderFolder() {
 
             }
 
+if (
+    item.type === "file" &&
+    item.requiredAccessLevel &&
+    playerAccessLevel <
+        item.requiredAccessLevel
+) {
+
+    element.classList.add(
+        "lockedFile"
+    );
+
+}
+
 
             const icon =
                 document.createElement(
@@ -1090,7 +1118,17 @@ if (item.type === "folder") {
 
     icon.textContent = "📁";
 
-} else if (item.fileType === "image") {
+} else if (
+    item.requiredAccessLevel &&
+    playerAccessLevel <
+        item.requiredAccessLevel
+) {
+
+    icon.textContent = "🔒";
+
+} else if (
+    item.fileType === "image"
+) {
 
     icon.textContent = "🖼️";
 
@@ -1132,11 +1170,27 @@ element.addEventListener(
                 item.id
             );
 
-        } else {
-
-            openFile(item);
+            return;
 
         }
+
+
+        if (
+            item.requiredAccessLevel &&
+            playerAccessLevel <
+                item.requiredAccessLevel
+        ) {
+
+            showAccessDenied(
+                item
+            );
+
+            return;
+
+        }
+
+
+        openFile(item);
 
     }
 );
@@ -1270,6 +1324,85 @@ function escapeHTML(text) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
+}
+
+function showAccessDenied(file) {
+
+    const viewer =
+        document.createElement("div");
+
+    viewer.id =
+        "fileViewer";
+
+
+    viewer.innerHTML = `
+
+        <div id="viewerWindow">
+
+            <div id="viewerHeader">
+
+                <span>
+                    SYSTEM SECURITY
+                </span>
+
+                <button id="viewerClose">
+                    ×
+                </button>
+
+            </div>
+
+
+            <div id="viewerContent">
+
+                <div class="viewerIcon">
+                    🔒
+                </div>
+
+                <div class="viewerTitle">
+                    ACCESS DENIED
+                </div>
+
+                <div class="viewerMessage">
+
+                    ${file.name}
+
+                    <br><br>
+
+                    REQUIRED ACCESS LEVEL:
+                    ${file.requiredAccessLevel}
+
+                    <br>
+
+                    CURRENT ACCESS LEVEL:
+                    ${playerAccessLevel}
+
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        viewer
+    );
+
+
+    document
+        .getElementById(
+            "viewerClose"
+        )
+        .addEventListener(
+            "click",
+            () => {
+
+                viewer.remove();
+
+            }
+        );
 
 }
 
