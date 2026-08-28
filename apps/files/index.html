@@ -669,6 +669,81 @@ body {
 
 <script>
 
+/*
+
+-- FOLDERS --
+
+{
+    id: "system",
+    name: "SYSTEM",
+    type: "folder"
+}
+
+
+-- TEXT FILES --
+
+{
+    id: "system_logs",
+    name: "SYSTEM.LOG",
+    type: "file",
+    fileType: "text",
+
+    content: `
+
+`
+}
+
+
+-- HTML --
+
+{
+    id: "internalPortal",
+    name: "PORTAL.HTML",
+    type: "file",
+
+    fileType: "html",
+
+    src: "portal.html"
+}
+
+
+-- PHOTOS --
+
+{
+    id: "incidentPhoto",
+    name: "PHOTO.PNG",
+    type: "file",
+
+    fileType: "image",
+
+    src: "images/test.jpg"
+}
+
+
+
+-- RESTRICTED FILES --
+
+{
+    id: "restricted",
+    name: "RESTRICTED.TXT",
+    type: "file",
+    fileType: "text",
+
+    requiredAccessLevel: 4,
+
+    content: `
+THIS FILE SHOULD NOT BE ACCESSIBLE.
+`
+}
+
+
+
+
+
+
+
+*/
+
 
 /* ========================================
    FILE SYSTEM
@@ -700,13 +775,13 @@ const fileSystem = {
 
             {
                 id: "archives",
-                name: "ARCHIVES",
+                name: "DOCUMENTS",
                 type: "folder"
             },
 
             {
                 id: "reports",
-                name: "REPORTS",
+                name: "ARCHIVES",
                 type: "folder"
             },
 
@@ -790,27 +865,84 @@ CONFIGURATION FILES.
 },
 
 {
-    id: "restricted",
-    name: "RESTRICTED.TXT",
+    id: "error_log",
+    name: "ERROR.LOG",
     type: "file",
     fileType: "text",
 
-    requiredAccessLevel: 4,
-
     content: `
-THIS FILE SHOULD NOT BE ACCESSIBLE.
+ERROR LOG
+====================
 `
 },
 
 {
-    id: "internalPortal",
-    name: "PORTAL.HTML",
+    id: "update_log",
+    name: "UPDATE.LOG",
     type: "file",
+    fileType: "text",
 
-    fileType: "html",
+    content: `
+UPDATE LOG
+====================
+`
+},
 
-    src: "portal.html"
-}
+{
+    id: "admin_folder",
+    name: "ADMIN",
+    type: "folder"
+},
+
+
+
+        ]
+
+    },
+
+    admin_folder: {
+
+        name: "ADMIN",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "admin_log",
+                name: "ADMIN.LOG",
+                type: "file",
+                fileType: "text",
+
+                content: `
+                UPDATE LOG
+                ====================
+                `
+            },
+
+            {
+                id: "users_txt",
+                name: "USERS.TXT",
+                type: "file",
+                fileType: "text",
+
+                content: `
+                USERS TEXT
+                ====================
+                `
+            },
+
+            {
+                id: "access_txt",
+                name: "ACCESS.TXT",
+                type: "file",
+                fileType: "text",
+
+                content: `
+                ACCESS TEXT
+                ====================
+                `
+            },
 
         ]
 
