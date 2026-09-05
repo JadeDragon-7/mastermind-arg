@@ -774,13 +774,13 @@ const fileSystem = {
             },
 
             {
-                id: "archives",
+                id: "documents",
                 name: "DOCUMENTS",
                 type: "folder"
             },
 
             {
-                id: "reports",
+                id: "archives",
                 name: "ARCHIVES",
                 type: "folder"
             },
@@ -892,7 +892,7 @@ UPDATE LOG
     id: "admin_folder",
     name: "ADMIN",
     type: "folder"
-},
+}
 
 
 
@@ -974,23 +974,39 @@ UPDATE LOG
     },
 
 
-    archives: {
+    /* ========================================
+       DOCUMENTS
+    ======================================== */
 
-        name: "ARCHIVES",
+    documents: {
+
+        name: "DOCUMENTS",
 
         type: "folder",
 
         children: [
 
             {
-                id: "archive2019",
-                name: "2019",
+                id: "GameOne",
+                name: "I",
                 type: "folder"
             },
 
             {
-                id: "archive2020",
-                name: "2020",
+                id: "GameTwo",
+                name: "II",
+                type: "folder"
+            },
+
+            {
+                id: "GameThree",
+                name: "III",
+                type: "folder"
+            },
+
+                        {
+                id: "GameFour",
+                name: "IV",
                 type: "folder"
             }
 
@@ -1097,10 +1113,13 @@ UPDATE LOG
 
     },
 
+    /* ========================================
+       DOCUMENT FOLDERS
+    ======================================== */
 
-    archive2019: {
+    GameOne: {
 
-        name: "2019",
+        name: "I",
 
         type: "folder",
 
@@ -1116,16 +1135,70 @@ UPDATE LOG
 
     },
 
+    GameTwo: {
 
-    archive2020: {
-
-        name: "2020",
+        name: "II",
 
         type: "folder",
 
-        children: []
+        children: [
+
+            {
+                id: "incident004",
+                name: "INCIDENT_004",
+                type: "folder"
+            }
+
+        ]
 
     },
+
+    GameThree: {
+
+        name: "III",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "incident004",
+                name: "INCIDENT_004",
+                type: "folder"
+            }
+
+        ]
+
+    },
+
+    GameFour: {
+
+        name: "IV",
+
+        type: "folder",
+
+        children: [
+
+            {
+                id: "TC-One",
+                name: "I.PNG",
+                type: "file",
+
+                fileType: "image",
+
+                src: "images/Tarot Cards/0..png"
+            }
+
+        ]
+
+    },
+
+
+
+
+
+
+
 
 
     incident004: {
