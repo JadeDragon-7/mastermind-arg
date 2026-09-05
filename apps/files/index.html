@@ -581,13 +581,13 @@ body {
 
 
 .fileImage {
-
-    max-width: 100%;
-
-    max-height: 100%;
+    max-width: calc(100% - 80px);
+    max-height: calc(100% - 20px);
 
     object-fit: contain;
 
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 .htmlViewer {
@@ -833,24 +833,6 @@ body {
 
 .viewerResizeHandle:hover {
     opacity: 1;
-}
-
-/* Maximized viewer */
-
-#viewerWindow.maximized {
-    left: 0;
-    top: 0;
-
-    width: 100vw;
-    height: 100vh;
-
-    transform: none;
-
-    border: none;
-}
-
-#viewerWindow.maximized .viewerResizeHandle {
-    display: none;
 }
 
 
@@ -2304,25 +2286,17 @@ function openImageFile(file) {
                     ${escapeHTML(file.name)}
                 </div>
 
-                <div id="viewerControls">
+<div id="viewerControls">
 
-                    <button
-                        id="viewerMaximize"
-                        class="viewerWindowButton"
-                        title="Maximize"
-                    >
-                        ⛶
-                    </button>
+    <button
+        id="viewerClose"
+        class="viewerWindowButton"
+        title="Close"
+    >
+        ×
+    </button>
 
-                    <button
-                        id="viewerClose"
-                        class="viewerWindowButton"
-                        title="Close"
-                    >
-                        ×
-                    </button>
-
-                </div>
+</div>
 
             </div>
 
@@ -2359,14 +2333,6 @@ function openImageFile(file) {
 
                 </div>
 
-
-                <div
-                    id="imageCounter"
-                    class="imageCounter"
-                >
-                    ${currentImageIndex + 1} / ${imageFiles.length}
-                </div>
-
             </div>
 
 
@@ -2398,9 +2364,6 @@ function openImageFile(file) {
 
     const titleElement =
         document.getElementById("viewerTitle");
-
-    const counterElement =
-        document.getElementById("imageCounter");
 
     const previousButton =
         document.getElementById("previousImageButton");
@@ -2448,11 +2411,6 @@ function openImageFile(file) {
 
         titleElement.textContent =
             currentImage.name;
-
-
-        counterElement.textContent =
-            `${currentImageIndex + 1} / ${imageFiles.length}`;
-
 
         previousButton.disabled =
             currentImageIndex === 0;
@@ -2505,45 +2463,6 @@ function openImageFile(file) {
         }
     );
 
-
-    // =========================
-    // MAXIMIZE
-    // =========================
-
-    let isMaximized = false;
-
-
-    maximizeButton.addEventListener(
-        "click",
-        function () {
-
-            isMaximized = !isMaximized;
-
-
-            if (isMaximized) {
-
-                windowElement.classList.add(
-                    "maximized"
-                );
-
-                maximizeButton.textContent = "❐";
-                maximizeButton.title = "Restore";
-
-            } else {
-
-                windowElement.classList.remove(
-                    "maximized"
-                );
-
-                maximizeButton.textContent = "⛶";
-                maximizeButton.title = "Maximize";
-
-            }
-
-        }
-    );
-
-
     // =========================
     // DRAG WINDOW
     // =========================
@@ -2561,19 +2480,14 @@ function openImageFile(file) {
         "mousedown",
         function (event) {
 
-            // Don't drag when clicking a window button
-            if (
-                event.target.closest(
-                    ".viewerWindowButton"
-                )
-            ) {
-                return;
-            }
-
-
-            if (isMaximized) {
-                return;
-            }
+// Don't drag when clicking a window button
+if (
+    event.target.closest(
+        ".viewerWindowButton"
+    )
+) {
+    return;
+}
 
 
             isDragging = true;
