@@ -579,17 +579,6 @@ body {
     pointer-events: none;
 }
 
-
-.fileImage {
-    max-width: calc(100% - 80px);
-    max-height: calc(100% - 20px);
-
-    object-fit: contain;
-
-    user-select: none;
-    -webkit-user-drag: none;
-}
-
 .htmlViewer {
 
     flex: 1;
@@ -2571,16 +2560,11 @@ if (
     let resizeStartHeight = 0;
 
 
-    resizeHandle.addEventListener(
-        "mousedown",
-        function (event) {
+resizeHandle.addEventListener(
+    "mousedown",
+    function (event) {
 
-            if (isMaximized) {
-                return;
-            }
-
-
-            isResizing = true;
+        isResizing = true;
 
 
             const rect =
