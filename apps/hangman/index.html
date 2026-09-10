@@ -297,6 +297,7 @@ body {
 
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
@@ -309,9 +310,20 @@ body {
 // We will eventually remove this and retrieve the
 // player's unique word from Supabase.
 
-const WORD = "MYSTERY";
+const { createClient } = supabase;
+
+const SUPABASE_URL = "https://fyhxgigfatooxkxlxipz.supabase.co";
+const SUPABASE_KEY = "sb_publishable_vq5sbfZOEZV5SR1m0uuicw_W2Rqd6-L";
+
+
+const supabaseClient = createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 const MAX_WRONG_GUESSES = 6;
+
+let WORD = "";
 
 
 /* =====================================================
@@ -734,12 +746,149 @@ resetButton.addEventListener(
 
 
 /* =====================================================
+   LOAD PLAYER GAME
+===================================================== */
+
+async function loadPlayerGame() {
+
+    // Find the currently logged-in player
+
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+
+    // Check for authentication error
+
+    if (userError) {
+
+        console.error(
+            "Error getting player:",
+            userError
+        );
+
+        statusElement.textContent =
+            "ERROR LOADING PLAYER";
+
+        return;
+    }
+
+
+    // Make sure someone is actually logged in
+
+    if (!user) {
+
+        console.error(
+            "No player is currently logged in."
+        );
+
+        statusElement.textContent =
+            "NO PLAYER LOGGED IN";
+
+        return;
+    }
+
+
+    // Find this player's Hangman game
+
+    const {
+        data: game,
+        error: gameError
+    } = await supabaseClient
+        .from("hangman_games")
+        .select("*")
+        .eq("player_id", user.id)
+        .single();
+
+
+    // Check for database error
+
+    if (gameError) {
+
+        console.error(
+            "Error loading Hangman game:",
+            gameError
+        );
+
+        statusElement.textContent =
+            "ERROR LOADING GAME";
+
+        return;
+    }
+
+
+    // Make sure a game was found
+
+    if (!game) {
+
+        console.error(
+            "No Hangman game was assigned to this player."
+        );
+
+        statusElement.textContent =
+            "NO GAME ASSIGNED";
+
+        return;
+    }
+
+
+    // Load the player's word
+
+    WORD = game.word.toUpperCase();
+
+
+    // Load saved guesses
+
+    guessedLetters =
+        game.guessed_letters || [];
+
+
+    // Load saved wrong guesses
+
+    wrongGuesses =
+        game.wrong_guesses || 0;
+
+
+    // Create the letter buttons
+
+    createLetterButtons();
+
+
+    // Disable letters that were already guessed
+
+    const buttons =
+        document.querySelectorAll(
+            ".letterButton"
+        );
+
+    buttons.forEach(button => {
+
+        if (
+            guessedLetters.includes(
+                button.textContent
+            )
+        ) {
+
+            button.disabled = true;
+
+        }
+
+    });
+
+
+    // Display the saved game
+
+    updateGame();
+
+}
+
+
+/* =====================================================
    START GAME
 ===================================================== */
 
-createLetterButtons();
-
-updateGame();
+loadPlayerGame();
 
 </script>
 
