@@ -65,6 +65,47 @@ body {
 }
 
 /* =========================
+   GAME TABS
+========================= */
+
+#gameTabs {
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+
+    border-bottom: 2px solid #444;
+}
+
+.gameTab {
+    padding: 12px 30px;
+
+    background: #222;
+    color: #aaa;
+
+    border: none;
+    border-right: 1px solid #444;
+
+    cursor: pointer;
+
+    font-size: 16px;
+}
+
+.gameTab:first-child {
+    border-left: 1px solid #444;
+}
+
+.gameTab:hover {
+    background: #333;
+    color: white;
+}
+
+.gameTab.active {
+    background: #444;
+    color: white;
+}
+
+/* =========================
    GAME AREA
 ========================= */
 
@@ -237,11 +278,13 @@ body {
 
 <div id="game">
 
-    <div id="title">
-        HANGMAN
-    </div>
+<div id="title">
+    HANGMAN
+</div>
 
-    <div id="gameArea">
+<div id="gameTabs"></div>
+
+<div id="gameArea">
 
         <!-- =========================
              HANGMAN DRAWING
@@ -335,9 +378,20 @@ let guessedLetters = [];
 let wrongGuesses = 0;
 
 
+// All Hangman games assigned to this player
+let games = [];
+
+
+// Currently selected game
+let currentGame = null;
+
+
 /* =====================================================
    ELEMENTS
 ===================================================== */
+
+const gameTabsElement =
+    document.getElementById("gameTabs");
 
 const wordElement =
     document.getElementById("word");
@@ -366,6 +420,106 @@ const gameOverMessage =
 const resetButton =
     document.getElementById("resetButton");
 
+
+/* =====================================================
+   CREATE GAME TABS
+===================================================== */
+
+function createGameTabs() {
+
+    gameTabsElement.innerHTML = "";
+
+    games.forEach((game, index) => {
+
+        const tab =
+            document.createElement("button");
+
+        tab.classList.add("gameTab");
+
+        tab.textContent =
+            `GAME ${game.tab_number}`;
+
+        tab.addEventListener(
+            "click",
+            function () {
+
+                selectGame(index);
+
+            }
+        );
+
+        gameTabsElement.appendChild(tab);
+
+    });
+
+}
+
+/* =====================================================
+   SELECT GAME
+===================================================== */
+
+function selectGame(index) {
+
+    currentGame = games[index];
+
+    WORD =
+        currentGame.word.toUpperCase();
+
+    guessedLetters =
+        currentGame.guessed_letters || [];
+
+    wrongGuesses =
+        currentGame.wrong_guesses || 0;
+
+    // Update active tab
+
+    const tabs =
+        document.querySelectorAll(".gameTab");
+
+    tabs.forEach((tab, tabIndex) => {
+
+        tab.classList.toggle(
+            "active",
+            tabIndex === index
+        );
+
+    });
+
+    // Hide game over screen
+
+    gameOverElement.style.display =
+        "none";
+
+    // Recreate buttons
+
+    createLetterButtons();
+
+    // Disable previously guessed letters
+
+    const buttons =
+        document.querySelectorAll(
+            ".letterButton"
+        );
+
+    buttons.forEach(button => {
+
+        if (
+            guessedLetters.includes(
+                button.textContent
+            )
+        ) {
+
+            button.disabled = true;
+
+        }
+
+    });
+
+    // Display selected game
+
+    updateGame();
+
+}
 
 /* =====================================================
    DRAW HANGMAN
@@ -641,7 +795,7 @@ async function guessLetter(letter) {
             guessed_letters: guessedLetters,
             wrong_guesses: wrongGuesses
         })
-        .eq("player_id", user.id);
+        .eq("id", currentGame.id)
 
 
     if (error) {
@@ -838,94 +992,39 @@ async function loadPlayerGame() {
 
     // Find this player's Hangman game
 
-    const {
-        data: game,
-        error: gameError
-    } = await supabaseClient
-        .from("hangman_games")
-        .select("*")
-        .eq("player_id", user.id)
-        .single();
-
+const { data: loadedGames, error: gameError } = await supabaseClient
+    .from("hangman_games")
+    .select("*")
+    .eq("player_id", user.id)
+    .order("tab_number", { ascending: true });
 
     // Check for database error
 
-    if (gameError) {
+if (gameError) {
+    console.error("Error loading Hangman games:", gameError);
+    statusElement.textContent = "ERROR LOADING GAME";
+    return;
+}
 
-        console.error(
-            "Error loading Hangman game:",
-            gameError
-        );
-
-        statusElement.textContent =
-            "ERROR LOADING GAME";
-
-        return;
-    }
+if (!loadedGames || loadedGames.length === 0) {
+    statusElement.textContent = "NO GAME ASSIGNED";
+    return;
+}
 
 
-    // Make sure a game was found
+// Store all games
 
-    if (!game) {
-
-        console.error(
-            "No Hangman game was assigned to this player."
-        );
-
-        statusElement.textContent =
-            "NO GAME ASSIGNED";
-
-        return;
-    }
+games = loadedGames;
 
 
-    // Load the player's word
+// Create the game tabs
 
-    WORD = game.word.toUpperCase();
-
-
-    // Load saved guesses
-
-    guessedLetters =
-        game.guessed_letters || [];
+createGameTabs();
 
 
-    // Load saved wrong guesses
+// Select the first game
 
-    wrongGuesses =
-        game.wrong_guesses || 0;
-
-
-    // Create the letter buttons
-
-    createLetterButtons();
-
-
-    // Disable letters that were already guessed
-
-    const buttons =
-        document.querySelectorAll(
-            ".letterButton"
-        );
-
-    buttons.forEach(button => {
-
-        if (
-            guessedLetters.includes(
-                button.textContent
-            )
-        ) {
-
-            button.disabled = true;
-
-        }
-
-    });
-
-
-    // Display the saved game
-
-    updateGame();
+selectGame(0);
 
 }
 
