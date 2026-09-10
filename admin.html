@@ -1457,15 +1457,14 @@ button.addEventListener(
              */
 
 await loadGameState();
-
 await loadApplications();
-
 await loadHangmanGames();
+subscribeToHangmanAdmin();
 
         }
 
 
-        /* ========================================
+/* ========================================
    LOAD HANGMAN GAMES
 ======================================== */
 
@@ -1591,6 +1590,46 @@ async function loadHangmanGames() {
         );
 
     });
+
+}
+
+/* ========================================
+   REALTIME HANGMAN ADMIN UPDATES
+======================================== */
+
+function subscribeToHangmanAdmin() {
+
+    supabaseClient
+        .channel("hangman-admin")
+        .on(
+            "postgres_changes",
+            {
+                event: "UPDATE",
+                schema: "public",
+                table: "hangman_games"
+            },
+            payload => {
+
+                console.log(
+                    "HANGMAN ADMIN REALTIME UPDATE:",
+                    payload
+                );
+
+                // Reload the Hangman list
+                loadHangmanGames();
+
+            }
+        )
+        .subscribe(
+            status => {
+
+                console.log(
+                    "HANGMAN ADMIN REALTIME STATUS:",
+                    status
+                );
+
+            }
+        );
 
 }
 
