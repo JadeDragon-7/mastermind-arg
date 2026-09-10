@@ -469,6 +469,165 @@
 
 }
 
+/* ========================================
+   HANGMAN CONTROLS
+======================================== */
+
+#hangmanGamesList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+/* Individual game row */
+
+.adminHangmanGame {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding: 14px;
+
+    background: #0d0d0d;
+
+    border: 1px solid #333;
+
+}
+
+
+/* Game information */
+
+.adminHangmanInfo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    min-width: 0;
+
+}
+
+
+.adminHangmanPlayer {
+
+    color: #ddd;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+
+.adminHangmanDetails {
+
+    color: #666;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* Status */
+
+.adminHangmanStatus {
+
+    font-size: 10px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+}
+
+
+/* Action buttons */
+
+.adminHangmanActions {
+
+    display: flex;
+
+    gap: 6px;
+
+    flex-shrink: 0;
+
+}
+
+
+.hangmanAdminButton {
+
+    height: 30px;
+
+    padding: 0 10px;
+
+    border: 1px solid #555;
+
+    background: transparent;
+
+    color: #888;
+
+    font-size: 9px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+}
+
+
+.hangmanAdminButton:hover {
+
+    border-color: #3498DB;
+
+    color: #3498DB;
+
+}
+
+
+/* Unlock button */
+
+.hangmanUnlockButton {
+
+    border-color: #3498DB;
+
+    color: #3498DB;
+
+}
+
+
+/* Reset button */
+
+.hangmanResetButton:hover {
+
+    border-color: #e74c3c;
+
+    color: #e74c3c;
+
+}
+
+
+/* Disabled buttons */
+
+.hangmanAdminButton:disabled {
+
+    opacity: 0.4;
+
+    cursor: not-allowed;
+
+}
+
 
     </style>
 
@@ -586,6 +745,25 @@
 
     <div id="applicationsList">
         LOADING APPLICATIONS...
+    </div>
+
+</section>
+
+<!-- ========================================
+     HANGMAN
+======================================== -->
+
+<section
+    class="adminSection"
+    id="hangmanSection"
+>
+
+    <div class="sectionTitle">
+        HANGMAN GAMES
+    </div>
+
+    <div id="hangmanGamesList">
+        LOADING HANGMAN GAMES...
     </div>
 
 </section>
@@ -713,6 +891,11 @@
         const logoutButton =
             document.getElementById(
                 "logoutButton"
+            );
+
+        const hangmanGamesList =
+            document.getElementById(
+                "hangmanGamesList"
             );
 
 
@@ -1273,10 +1456,487 @@ button.addEventListener(
              * Administrator
              */
 
-            await loadGameState();
-            await loadApplications();
+await loadGameState();
+
+await loadApplications();
+
+await loadHangmanGames();
 
         }
+
+
+        /* ========================================
+   LOAD HANGMAN GAMES
+======================================== */
+
+async function loadHangmanGames() {
+
+    hangmanGamesList.textContent =
+        "LOADING HANGMAN GAMES...";
+
+
+    /*
+     * Get all Hangman games
+     */
+
+    const {
+        data: games,
+        error: gameError
+    } = await supabaseClient
+        .from("hangman_games")
+        .select("*")
+        .order(
+            "player_id",
+            {
+                ascending: true
+            }
+        )
+        .order(
+            "tab_number",
+            {
+                ascending: true
+            }
+        );
+
+
+    if (gameError) {
+
+        console.error(
+            "HANGMAN ERROR:",
+            gameError
+        );
+
+        hangmanGamesList.textContent =
+            "COULD NOT LOAD HANGMAN GAMES.";
+
+        return;
+
+    }
+
+
+    /*
+     * Get all players
+     */
+
+    const {
+        data: players,
+        error: playerError
+    } = await supabaseClient
+        .from("players")
+        .select(
+            "user_id, username"
+        );
+
+
+    if (playerError) {
+
+        console.error(
+            "PLAYER ERROR:",
+            playerError
+        );
+
+        hangmanGamesList.textContent =
+            "COULD NOT LOAD PLAYERS.";
+
+        return;
+
+    }
+
+
+    /*
+     * Create a quick lookup table
+     */
+
+    const playerNames = {};
+
+    players.forEach(player => {
+
+        playerNames[player.user_id] =
+            player.username;
+
+    });
+
+
+    /*
+     * Nothing found
+     */
+
+    if (!games || games.length === 0) {
+
+        hangmanGamesList.textContent =
+            "NO HANGMAN GAMES.";
+
+        return;
+
+    }
+
+
+    /*
+     * Clear loading message
+     */
+
+    hangmanGamesList.innerHTML = "";
+
+
+    /*
+     * Create each game row
+     */
+
+    games.forEach(game => {
+
+        createHangmanAdminRow(
+            game,
+            playerNames[game.player_id] ||
+            "UNKNOWN PLAYER"
+        );
+
+    });
+
+}
+
+/* ========================================
+   CREATE HANGMAN ADMIN ROW
+======================================== */
+
+function createHangmanAdminRow(
+    game,
+    username
+) {
+
+    const row =
+        document.createElement("div");
+
+    row.className =
+        "adminHangmanGame";
+
+
+    /*
+     * Information
+     */
+
+    const info =
+        document.createElement("div");
+
+    info.className =
+        "adminHangmanInfo";
+
+
+    const player =
+        document.createElement("div");
+
+    player.className =
+        "adminHangmanPlayer";
+
+    player.textContent =
+        `${username} — GAME ${game.tab_number}`;
+
+
+    const details =
+        document.createElement("div");
+
+    details.className =
+        "adminHangmanDetails";
+
+
+    details.textContent =
+        `WRONG: ${game.wrong_guesses || 0} / 6` +
+        `   |   GUESSES: ${game.guess_number || 0}`;
+
+
+    const status =
+        document.createElement("div");
+
+    status.className =
+        "adminHangmanStatus";
+
+
+    if (game.status === "won") {
+
+        status.textContent =
+            "WON";
+
+    } else if (game.status === "lost") {
+
+        status.textContent =
+            "LOST";
+
+    } else if (
+        game.guess_unlocked === true
+    ) {
+
+        status.textContent =
+            "UNLOCKED";
+
+    } else {
+
+        status.textContent =
+            "LOCKED";
+
+    }
+
+
+    info.appendChild(player);
+
+    info.appendChild(details);
+
+    info.appendChild(status);
+
+
+    /*
+     * Action buttons
+     */
+
+    const actions =
+        document.createElement("div");
+
+    actions.className =
+        "adminHangmanActions";
+
+
+    /*
+     * UNLOCK
+     */
+
+    const unlockButton =
+        document.createElement("button");
+
+    unlockButton.className =
+        "hangmanAdminButton " +
+        "hangmanUnlockButton";
+
+    unlockButton.textContent =
+        "UNLOCK";
+
+
+    /*
+     * Don't allow unlocking finished games
+     * or already unlocked games.
+     */
+
+    if (
+        game.status === "won" ||
+        game.status === "lost" ||
+        game.guess_unlocked === true
+    ) {
+
+        unlockButton.disabled = true;
+
+    }
+
+
+    unlockButton.addEventListener(
+        "click",
+        async () => {
+
+            await unlockHangmanGame(
+                game,
+                unlockButton
+            );
+
+        }
+    );
+
+
+    /*
+     * RESET
+     */
+
+    const resetButton =
+        document.createElement("button");
+
+    resetButton.className =
+        "hangmanAdminButton " +
+        "hangmanResetButton";
+
+    resetButton.textContent =
+        "RESET";
+
+
+    resetButton.addEventListener(
+        "click",
+        async () => {
+
+            await resetHangmanGame(
+                game,
+                resetButton
+            );
+
+        }
+    );
+
+
+    actions.appendChild(
+        unlockButton
+    );
+
+    actions.appendChild(
+        resetButton
+    );
+
+
+    /*
+     * Assemble row
+     */
+
+    row.appendChild(info);
+
+    row.appendChild(actions);
+
+
+    hangmanGamesList.appendChild(row);
+
+}
+
+/* ========================================
+   UNLOCK HANGMAN GAME
+======================================== */
+
+async function unlockHangmanGame(
+    game,
+    button
+) {
+
+    if (button.disabled) {
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "UPDATING...";
+
+
+    const {
+        error
+    } = await supabaseClient
+        .from("hangman_games")
+        .update({
+
+            guess_unlocked:
+                true
+
+        })
+        .eq(
+            "id",
+            game.id
+        );
+
+
+    if (error) {
+
+        console.error(
+            "HANGMAN UNLOCK ERROR:",
+            error
+        );
+
+        button.disabled = false;
+
+        button.textContent =
+            "UNLOCK";
+
+        return;
+
+    }
+
+
+    /*
+     * Refresh the entire list
+     */
+
+    await loadHangmanGames();
+
+}
+
+
+/* ========================================
+   RESET HANGMAN GAME
+======================================== */
+
+async function resetHangmanGame(
+    game,
+    button
+) {
+
+    /*
+     * Confirmation
+     */
+
+    const confirmed =
+        confirm(
+            `RESET GAME ${game.tab_number} FOR THIS PLAYER?\n\n` +
+            `ALL PROGRESS WILL BE ERASED.`
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    button.disabled = true;
+
+    button.textContent =
+        "RESETTING...";
+
+
+    /*
+     * Reset the puzzle
+     */
+
+    const {
+        error
+    } = await supabaseClient
+        .from("hangman_games")
+        .update({
+
+            guessed_letters: [],
+
+            wrong_guesses: 0,
+
+            guess_number: 0,
+
+            guess_unlocked: true,
+
+            status: "playing",
+
+            completed_at: null
+
+        })
+        .eq(
+            "id",
+            game.id
+        );
+
+
+    if (error) {
+
+        console.error(
+            "HANGMAN RESET ERROR:",
+            error
+        );
+
+        alert(
+            "RESET FAILED."
+        );
+
+        button.disabled = false;
+
+        button.textContent =
+            "RESET";
+
+        return;
+
+    }
+
+
+    /*
+     * Refresh admin display
+     */
+
+    await loadHangmanGames();
+
+}
 
 
 
