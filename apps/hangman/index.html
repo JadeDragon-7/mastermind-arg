@@ -568,7 +568,7 @@ function createLetterButtons() {
    GUESS LETTER
 ===================================================== */
 
-function guessLetter(letter) {
+async function guessLetter(letter) {
 
     // Prevent duplicate guesses
 
@@ -578,6 +578,8 @@ function guessLetter(letter) {
         return;
     }
 
+
+    // Add the letter to the guessed letters
 
     guessedLetters.push(letter);
 
@@ -611,7 +613,51 @@ function guessLetter(letter) {
     }
 
 
+    // Update the game visually
+
     updateGame();
+
+
+    // Save progress to Supabase
+
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+
+    if (!user) {
+
+        console.error(
+            "Cannot save progress: no player is logged in."
+        );
+
+        return;
+    }
+
+
+    const { error } = await supabaseClient
+        .from("hangman_games")
+        .update({
+            guessed_letters: guessedLetters,
+            wrong_guesses: wrongGuesses
+        })
+        .eq("player_id", user.id);
+
+
+    if (error) {
+
+        console.error(
+            "Error saving Hangman progress:",
+            error
+        );
+
+    } else {
+
+        console.log(
+            "Hangman progress saved."
+        );
+
+    }
 
 }
 
