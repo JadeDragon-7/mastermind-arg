@@ -116,23 +116,165 @@ body {
     display: flex;
 }
 
-/* =========================
+/* =====================================================
    HANGMAN
-========================= */
+===================================================== */
 
-#hangmanArea {
-    width: 45%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    border-right: 2px solid #444;
-}
-
-#hangmanCanvas {
+#hangman {
+    position: relative;
     width: 300px;
     height: 300px;
+}
+
+
+/* =====================================================
+   PERMANENT GALLOWS
+===================================================== */
+
+.hangmanPart {
+    position: absolute;
+    background: black;
+}
+
+
+/* Base */
+
+.base {
+    width: 180px;
+    height: 8px;
+
+    left: 50px;
+    bottom: 20px;
+}
+
+
+/* Vertical support */
+
+.pole {
+    width: 8px;
+    height: 250px;
+
+    left: 70px;
+    bottom: 20px;
+}
+
+
+/* Top */
+
+.top {
+    width: 130px;
+    height: 8px;
+
+    left: 70px;
+    top: 30px;
+}
+
+
+/* Rope */
+
+.rope {
+    width: 5px;
+    height: 35px;
+
+    left: 195px;
+    top: 38px;
+}
+
+
+/* =====================================================
+   HEAD
+===================================================== */
+
+.head {
+    width: 55px;
+    height: 55px;
+
+    border: 6px solid black;
+    border-radius: 50%;
+
+    background: transparent;
+
+    left: 167px;
+    top: 68px;
+
+    box-sizing: border-box;
+}
+
+
+/* =====================================================
+   BODY
+===================================================== */
+
+.body {
+    width: 8px;
+    height: 90px;
+
+    left: 191px;
+    top: 123px;
+}
+
+
+/* =====================================================
+   LEFT ARM
+===================================================== */
+
+.leftArm {
+    width: 8px;
+    height: 65px;
+
+    left: 151px;
+    top: 130px;
+
+    transform: rotate(55deg);
+    transform-origin: top center;
+}
+
+
+/* =====================================================
+   RIGHT ARM
+===================================================== */
+
+.rightArm {
+    width: 8px;
+    height: 65px;
+
+    left: 231px;
+    top: 130px;
+
+    transform: rotate(-55deg);
+    transform-origin: top center;
+}
+
+
+/* =====================================================
+   LEFT LEG
+===================================================== */
+
+.leftLeg {
+    width: 8px;
+    height: 75px;
+
+    left: 170px;
+    top: 205px;
+
+    transform: rotate(30deg);
+    transform-origin: top center;
+}
+
+
+/* =====================================================
+   RIGHT LEG
+===================================================== */
+
+.rightLeg {
+    width: 8px;
+    height: 75px;
+
+    left: 212px;
+    top: 205px;
+
+    transform: rotate(-30deg);
+    transform-origin: top center;
 }
 
 /* =========================
@@ -183,6 +325,19 @@ body {
 
     font-size: 18px;
     color: #aaa;
+}
+
+#guessStatus {
+    margin-bottom: 25px;
+
+    font-size: 16px;
+    letter-spacing: 3px;
+
+    color: #aaa;
+}
+
+#guessStatus.locked {
+    color: #777;
 }
 
 /* =========================
@@ -307,9 +462,13 @@ body {
 
         <div id="guessArea">
 
-            <div id="status">
-                WRONG GUESSES: 0 / 6
-            </div>
+<div id="status">
+    WRONG GUESSES: 0 / 6
+</div>
+
+<div id="guessStatus">
+    UNLOCKED
+</div>
 
             <div id="word"></div>
 
@@ -331,10 +490,6 @@ body {
         </h2>
 
         <p id="gameOverMessage"></p>
-
-        <button id="resetButton">
-            PLAY AGAIN
-        </button>
 
     </div>
 
@@ -402,6 +557,9 @@ const lettersElement =
 const statusElement =
     document.getElementById("status");
 
+const guessStatusElement =
+    document.getElementById("guessStatus");
+
 const canvas =
     document.getElementById("hangmanCanvas");
 
@@ -416,9 +574,6 @@ const gameOverTitle =
 
 const gameOverMessage =
     document.getElementById("gameOverMessage");
-
-const resetButton =
-    document.getElementById("resetButton");
 
 
 /* =====================================================
@@ -454,13 +609,12 @@ function createGameTabs() {
 
 }
 
-/* =====================================================
-   SELECT GAME
-===================================================== */
-
 function selectGame(index) {
 
     currentGame = games[index];
+
+
+    // Load this game's data
 
     WORD =
         currentGame.word.toUpperCase();
@@ -470,6 +624,7 @@ function selectGame(index) {
 
     wrongGuesses =
         currentGame.wrong_guesses || 0;
+
 
     // Update active tab
 
@@ -485,14 +640,11 @@ function selectGame(index) {
 
     });
 
-    // Hide game over screen
 
-    gameOverElement.style.display =
-        "none";
-
-    // Recreate buttons
+    // Create keyboard
 
     createLetterButtons();
+
 
     // Disable previously guessed letters
 
@@ -515,9 +667,45 @@ function selectGame(index) {
 
     });
 
-    // Display selected game
+
+    // If the game is locked, disable
+    // all buttons
+
+    if (
+        currentGame.guess_unlocked !== true
+    ) {
+
+        buttons.forEach(button => {
+
+            button.disabled = true;
+
+        });
+
+    }
+
+
+    // Render game
 
     updateGame();
+
+
+    // Show permanent result if finished
+
+    if (
+        currentGame.status === "won" ||
+        currentGame.status === "lost"
+    ) {
+
+        showGameOver(
+            currentGame.status === "won"
+        );
+
+    } else {
+
+        gameOverElement.style.display =
+            "none";
+
+    }
 
 }
 
@@ -527,6 +715,8 @@ function selectGame(index) {
 
 function drawHangman() {
 
+    // Clear the canvas
+
     ctx.clearRect(
         0,
         0,
@@ -534,115 +724,163 @@ function drawHangman() {
         canvas.height
     );
 
-    ctx.strokeStyle = "white";
-    ctx.lineWidth = 4;
 
-    /*
-        Each wrong guess adds another part.
+    /* =====================================================
+       PERMANENT GALLOWS
+       These NEVER count as wrong guesses.
+    ===================================================== */
 
-        1 = base
-        2 = vertical pole
-        3 = top
-        4 = rope
-        5 = head
-        6 = body
-        7 = arms
-        8 = legs
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 8;
+    ctx.lineCap = "square";
 
-        We'll eventually decide exactly how many
-        mistakes you want the player to have.
-    */
+
+    // Base
+
+    ctx.beginPath();
+
+    ctx.moveTo(50, 270);
+    ctx.lineTo(230, 270);
+
+    ctx.stroke();
+
+
+    // Vertical support
+
+    ctx.beginPath();
+
+    ctx.moveTo(70, 270);
+    ctx.lineTo(70, 30);
+
+    ctx.stroke();
+
+
+    // Top support
+
+    ctx.beginPath();
+
+    ctx.moveTo(70, 30);
+    ctx.lineTo(200, 30);
+
+    ctx.stroke();
+
+
+    // Rope
+
+    ctx.lineWidth = 5;
+
+    ctx.beginPath();
+
+    ctx.moveTo(195, 30);
+    ctx.lineTo(195, 65);
+
+    ctx.stroke();
+
+
+    /* =====================================================
+       PERSON
+       1 = HEAD
+       2 = BODY
+       3 = LEFT ARM
+       4 = RIGHT ARM
+       5 = LEFT LEG
+       6 = RIGHT LEG
+    ===================================================== */
+
+
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 6;
+    ctx.lineCap = "round";
+
+
+    // 1 — HEAD
 
     if (wrongGuesses >= 1) {
 
         ctx.beginPath();
 
-        ctx.moveTo(40, 260);
-        ctx.lineTo(180, 260);
-
-        ctx.stroke();
-    }
-
-    if (wrongGuesses >= 2) {
-
-        ctx.beginPath();
-
-        ctx.moveTo(70, 260);
-        ctx.lineTo(70, 40);
-
-        ctx.stroke();
-    }
-
-    if (wrongGuesses >= 3) {
-
-        ctx.beginPath();
-
-        ctx.moveTo(70, 40);
-        ctx.lineTo(180, 40);
-
-        ctx.stroke();
-    }
-
-    if (wrongGuesses >= 4) {
-
-        ctx.beginPath();
-
-        ctx.moveTo(180, 40);
-        ctx.lineTo(180, 75);
-
-        ctx.stroke();
-    }
-
-    if (wrongGuesses >= 5) {
-
-        ctx.beginPath();
-
         ctx.arc(
-            180,
-            100,
+            195,
+            90,
             25,
             0,
             Math.PI * 2
         );
 
         ctx.stroke();
+
     }
+
+
+    // 2 — BODY
+
+    if (wrongGuesses >= 2) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(195, 115);
+        ctx.lineTo(195, 190);
+
+        ctx.stroke();
+
+    }
+
+
+    // 3 — LEFT ARM
+
+    if (wrongGuesses >= 3) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(195, 130);
+        ctx.lineTo(155, 165);
+
+        ctx.stroke();
+
+    }
+
+
+    // 4 — RIGHT ARM
+
+    if (wrongGuesses >= 4) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(195, 130);
+        ctx.lineTo(235, 165);
+
+        ctx.stroke();
+
+    }
+
+
+    // 5 — LEFT LEG
+
+    if (wrongGuesses >= 5) {
+
+        ctx.beginPath();
+
+        ctx.moveTo(195, 190);
+        ctx.lineTo(160, 240);
+
+        ctx.stroke();
+
+    }
+
+
+    // 6 — RIGHT LEG
 
     if (wrongGuesses >= 6) {
 
         ctx.beginPath();
 
-        ctx.moveTo(180, 125);
-        ctx.lineTo(180, 190);
+        ctx.moveTo(195, 190);
+        ctx.lineTo(230, 240);
 
         ctx.stroke();
+
     }
 
-    if (wrongGuesses >= 7) {
-
-        ctx.beginPath();
-
-        ctx.moveTo(180, 145);
-        ctx.lineTo(145, 170);
-
-        ctx.moveTo(180, 145);
-        ctx.lineTo(215, 170);
-
-        ctx.stroke();
-    }
-
-    if (wrongGuesses >= 8) {
-
-        ctx.beginPath();
-
-        ctx.moveTo(180, 190);
-        ctx.lineTo(150, 230);
-
-        ctx.moveTo(180, 190);
-        ctx.lineTo(210, 230);
-
-        ctx.stroke();
-    }
 }
 
 
@@ -724,21 +962,79 @@ function createLetterButtons() {
 
 async function guessLetter(letter) {
 
-    // Prevent duplicate guesses
+    // Make sure a game is selected
+
+    if (!currentGame) {
+        return;
+    }
+
+
+    // Finished games cannot be played
 
     if (
-        guessedLetters.includes(letter)
+        currentGame.status === "won" ||
+        currentGame.status === "lost"
     ) {
         return;
     }
 
 
-    // Add the letter to the guessed letters
+    // Player must be unlocked
+
+    if (currentGame.guess_unlocked !== true) {
+        return;
+    }
+
+
+    // Prevent duplicate guesses
+
+    if (guessedLetters.includes(letter)) {
+        return;
+    }
+
+
+    // Save the game ID BEFORE doing anything async
+
+    const gameId =
+        currentGame.id;
+
+
+    // Add the letter
 
     guessedLetters.push(letter);
 
 
-    // Disable button
+    // Check whether the guess was wrong
+
+    if (!WORD.includes(letter)) {
+
+        wrongGuesses++;
+
+    }
+
+
+    // Increase guess number
+
+    currentGame.guess_number =
+        (currentGame.guess_number || 0) + 1;
+
+
+    // LOCK the game
+
+    currentGame.guess_unlocked =
+        false;
+
+
+    // Update local game state
+
+    currentGame.guessed_letters =
+        [...guessedLetters];
+
+    currentGame.wrong_guesses =
+        wrongGuesses;
+
+
+    // Disable the letter that was just guessed
 
     const buttons =
         document.querySelectorAll(
@@ -758,21 +1054,12 @@ async function guessLetter(letter) {
     });
 
 
-    // Check whether letter exists
-
-    if (!WORD.includes(letter)) {
-
-        wrongGuesses++;
-
-    }
-
-
-    // Update the game visually
+    // Update the screen
 
     updateGame();
 
 
-    // Save progress to Supabase
+    // Save progress
 
     const {
         data: { user }
@@ -786,16 +1073,48 @@ async function guessLetter(letter) {
         );
 
         return;
+
     }
 
 
-    const { error } = await supabaseClient
+// Save the values for THIS game before
+// making the asynchronous database request
+
+const savedGuesses =
+    [...guessedLetters];
+
+const savedWrongGuesses =
+    wrongGuesses;
+
+const savedGuessNumber =
+    currentGame.guess_number;
+
+const savedUnlocked =
+    false;
+
+
+const { error } =
+    await supabaseClient
         .from("hangman_games")
         .update({
-            guessed_letters: guessedLetters,
-            wrong_guesses: wrongGuesses
+
+            guessed_letters:
+                savedGuesses,
+
+            wrong_guesses:
+                savedWrongGuesses,
+
+            guess_number:
+                savedGuessNumber,
+
+            guess_unlocked:
+                savedUnlocked
+
         })
-        .eq("id", currentGame.id)
+        .eq(
+            "id",
+            gameId
+        );
 
 
     if (error) {
@@ -808,7 +1127,7 @@ async function guessLetter(letter) {
     } else {
 
         console.log(
-            "Hangman progress saved."
+            `Game ${currentGame.tab_number} guess saved and locked.`
         );
 
     }
@@ -826,8 +1145,34 @@ function updateGame() {
 
     drawHangman();
 
+
     statusElement.textContent =
         `WRONG GUESSES: ${wrongGuesses} / ${MAX_WRONG_GUESSES}`;
+
+
+    if (
+        currentGame &&
+        currentGame.guess_unlocked === true &&
+        currentGame.status === "playing"
+    ) {
+
+        guessStatusElement.textContent =
+            "UNLOCKED";
+
+        guessStatusElement.classList.remove(
+            "locked"
+        );
+
+    } else {
+
+        guessStatusElement.textContent =
+            "LOCKED";
+
+        guessStatusElement.classList.add(
+            "locked"
+        );
+
+    }
 
 
     checkGameState();
@@ -871,10 +1216,10 @@ function checkGameState() {
 
 
 /* =====================================================
-   END GAME
+   SHOW GAME OVER SCREEN
 ===================================================== */
 
-function endGame(won) {
+function showGameOver(won) {
 
     gameOverElement.style.display =
         "flex";
@@ -886,7 +1231,7 @@ function endGame(won) {
             "YOU WIN";
 
         gameOverMessage.textContent =
-            `THE WORD WAS: ${WORD}`;
+            "THE WORD HAS BEEN SOLVED.";
 
     } else {
 
@@ -894,55 +1239,120 @@ function endGame(won) {
             "GAME OVER";
 
         gameOverMessage.textContent =
-            `THE WORD WAS: ${WORD}`;
+            "THE HANGMAN IS COMPLETE.";
 
     }
 
 
-    // Disable all buttons
+    // Disable all letter buttons
 
-    const buttons =
-        document.querySelectorAll(
-            ".letterButton"
+    document
+        .querySelectorAll(".letterButton")
+        .forEach(button => {
+
+            button.disabled = true;
+
+        });
+
+}
+
+
+/* =====================================================
+   END GAME
+===================================================== */
+
+async function endGame(won) {
+
+    if (!currentGame) {
+        return;
+    }
+
+
+    // Don't finish an already completed game
+
+    if (
+        currentGame.status === "won" ||
+        currentGame.status === "lost"
+    ) {
+
+        showGameOver(
+            currentGame.status === "won"
         );
 
-    buttons.forEach(button => {
+        return;
 
-        button.disabled = true;
+    }
 
-    });
+
+    // Determine result
+
+    const newStatus =
+        won ? "won" : "lost";
+
+
+    // Permanently update local state
+
+    currentGame.status =
+        newStatus;
+
+    currentGame.completed_at =
+        new Date().toISOString();
+
+
+    // Lock the game permanently
+
+    currentGame.guess_unlocked =
+        false;
+
+
+    // Show result
+
+    showGameOver(won);
+
+
+    // Save game ID before async request
+
+    const gameId =
+        currentGame.id;
+
+
+    const { error } =
+        await supabaseClient
+            .from("hangman_games")
+            .update({
+
+                status:
+                    newStatus,
+
+                completed_at:
+                    currentGame.completed_at,
+
+                guess_unlocked:
+                    false
+
+            })
+            .eq(
+                "id",
+                gameId
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Error saving game result:",
+            error
+        );
+
+    } else {
+
+        console.log(
+            `Game ${currentGame.tab_number} finished: ${newStatus}`
+        );
+
+    }
 
 }
-
-
-/* =====================================================
-   RESET
-===================================================== */
-
-function resetGame() {
-
-    guessedLetters = [];
-
-    wrongGuesses = 0;
-
-    gameOverElement.style.display =
-        "none";
-
-    createLetterButtons();
-
-    updateGame();
-
-}
-
-
-/* =====================================================
-   RESET BUTTON
-===================================================== */
-
-resetButton.addEventListener(
-    "click",
-    resetGame
-);
 
 
 /* =====================================================
