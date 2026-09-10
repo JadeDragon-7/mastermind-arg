@@ -540,6 +540,8 @@ let games = [];
 // Currently selected game
 let currentGame = null;
 
+let currentPlayerId = null;
+
 
 /* =====================================================
    ELEMENTS
@@ -613,9 +615,7 @@ function selectGame(index) {
 
     currentGame = games[index];
 
-
     // Load this game's data
-
     WORD =
         currentGame.word.toUpperCase();
 
@@ -627,7 +627,6 @@ function selectGame(index) {
 
 
     // Update active tab
-
     const tabs =
         document.querySelectorAll(".gameTab");
 
@@ -642,55 +641,18 @@ function selectGame(index) {
 
 
     // Create keyboard
-
     createLetterButtons();
 
 
-    // Disable previously guessed letters
-
-    const buttons =
-        document.querySelectorAll(
-            ".letterButton"
-        );
-
-    buttons.forEach(button => {
-
-        if (
-            guessedLetters.includes(
-                button.textContent
-            )
-        ) {
-
-            button.disabled = true;
-
-        }
-
-    });
-
-
-    // If the game is locked, disable
-    // all buttons
-
-    if (
-        currentGame.guess_unlocked !== true
-    ) {
-
-        buttons.forEach(button => {
-
-            button.disabled = true;
-
-        });
-
-    }
-
-
     // Render game
-
     updateGame();
 
 
-    // Show permanent result if finished
+    // Apply the correct lock state
+    updateGuessLockState();
 
+
+    // Show permanent result if finished
     if (
         currentGame.status === "won" ||
         currentGame.status === "lost"
@@ -706,6 +668,198 @@ function selectGame(index) {
             "none";
 
     }
+
+}
+
+/* ========================================
+   REALTIME HANGMAN UPDATES
+======================================== */
+
+function subscribeToHangmanGames() {
+
+    if (!currentPlayerId) {
+        console.error(
+            "Cannot start Hangman Realtime: no player ID."
+        );
+        return;
+    }
+
+
+    supabaseClient
+        .channel(`hangman-games-${currentPlayerId}`)
+        .on(
+            "postgres_changes",
+            {
+                event: "UPDATE",
+                schema: "public",
+                table: "hangman_games",
+                filter: `player_id=eq.${currentPlayerId}`
+            },
+            payload => {
+
+                console.log(
+                    "HANGMAN REALTIME UPDATE:",
+                    payload
+                );
+
+
+                // Find the game that changed
+                const updatedGame =
+                    games.find(
+                        game =>
+                            game.id === payload.new.id
+                    );
+
+
+                if (!updatedGame) {
+                    return;
+                }
+
+
+                // Update our local copy
+                Object.assign(
+                    updatedGame,
+                    payload.new
+                );
+
+
+                // Only refresh the currently
+                // displayed game
+                if (
+                    currentGame &&
+                    currentGame.id === updatedGame.id
+                ) {
+
+                    currentGame =
+                        updatedGame;
+
+
+                    WORD =
+                        currentGame.word.toUpperCase();
+
+                    guessedLetters =
+                        currentGame.guessed_letters || [];
+
+                    wrongGuesses =
+                        currentGame.wrong_guesses || 0;
+
+
+                    // Rebuild keyboard
+                    createLetterButtons();
+
+
+                    // Refresh game
+                    updateGame();
+
+
+                    // Apply lock/unlock state
+                    updateGuessLockState();
+
+
+                    // Show permanent result
+                    if (
+                        currentGame.status === "won" ||
+                        currentGame.status === "lost"
+                    ) {
+
+                        showGameOver(
+                            currentGame.status === "won"
+                        );
+
+                    } else {
+
+                        gameOverElement.style.display =
+                            "none";
+
+                    }
+
+                }
+
+            }
+        )
+        .subscribe(
+            status => {
+
+                console.log(
+                    "HANGMAN REALTIME STATUS:",
+                    status
+                );
+
+            }
+        );
+
+}
+
+/* ========================================
+   UPDATE GUESS LOCK STATE
+======================================== */
+
+function updateGuessLockState() {
+
+    if (!currentGame) {
+        return;
+    }
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".letterButton"
+        );
+
+
+    /*
+     * Finished games remain locked.
+     */
+
+    if (
+        currentGame.status === "won" ||
+        currentGame.status === "lost"
+    ) {
+
+        buttons.forEach(button => {
+
+            button.disabled = true;
+
+        });
+
+        return;
+
+    }
+
+
+    /*
+     * If the game is locked, disable
+     * every letter button.
+     */
+
+    if (
+        currentGame.guess_unlocked === false
+    ) {
+
+        buttons.forEach(button => {
+
+            button.disabled = true;
+
+        });
+
+        return;
+
+    }
+
+
+    /*
+     * Otherwise, only disable letters
+     * that have already been guessed.
+     */
+
+    buttons.forEach(button => {
+
+        button.disabled =
+            guessedLetters.includes(
+                button.textContent
+            );
+
+    });
 
 }
 
@@ -1399,6 +1553,7 @@ async function loadPlayerGame() {
         return;
     }
 
+currentPlayerId = user.id;
 
     // Find this player's Hangman game
 
@@ -1443,7 +1598,15 @@ selectGame(0);
    START GAME
 ===================================================== */
 
-loadPlayerGame();
+async function startHangman() {
+
+    await loadPlayerGame();
+
+    subscribeToHangmanGames();
+
+}
+
+startHangman();
 
 </script>
 
