@@ -601,8 +601,8 @@ function createGameTabs() {
 
         tab.classList.add("gameTab");
 
-        tab.textContent =
-            `GAME ${game.tab_number}`;
+tab.textContent =
+    game.game_name || `GAME ${game.tab_number}`;
 
         tab.addEventListener(
             "click",
