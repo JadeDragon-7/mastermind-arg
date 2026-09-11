@@ -724,19 +724,24 @@ function subscribeToHangmanGames() {
                 }
 
 
-                // Update our local copy
-                Object.assign(
-                    updatedGame,
-                    payload.new
-                );
+// Update our local copy
+Object.assign(
+    updatedGame,
+    payload.new
+);
 
 
-                // Only refresh the currently
-                // displayed game
-                if (
-                    currentGame &&
-                    currentGame.id === updatedGame.id
-                ) {
+// Rebuild the game tabs
+// This updates names immediately
+createGameTabs();
+
+
+// Only refresh the currently
+// displayed game
+if (
+    currentGame &&
+    currentGame.id === updatedGame.id
+) {
 
                     currentGame =
                         updatedGame;
