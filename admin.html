@@ -660,6 +660,66 @@
     margin-right: 6px;
 }
 
+/* ========================================
+   HANGMAN GAME NAME
+======================================== */
+
+.hangmanGameName {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.hangmanGameName input {
+    flex: 1;
+
+    height: 30px;
+
+    padding: 0 8px;
+
+    background: #0d0d0d;
+    border: 1px solid #444;
+
+    color: #ddd;
+
+    font-family: inherit;
+    font-size: 11px;
+}
+
+.hangmanGameName input:focus {
+    outline: none;
+    border-color: #3498DB;
+}
+
+.hangmanNameSave {
+    height: 30px;
+
+    padding: 0 10px;
+
+    background: transparent;
+
+    border: 1px solid #555;
+
+    color: #888;
+
+    font-size: 9px;
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+}
+
+.hangmanNameSave:hover {
+    border-color: #3498DB;
+    color: #3498DB;
+}
+
+.hangmanNameSave:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
 
     </style>
 
@@ -1702,9 +1762,28 @@ function createHangmanAdminRow(game, username) {
     row.innerHTML = `
         <div class="adminHangmanInfo">
 
-            <div class="adminHangmanPlayer">
-                ${username || "UNKNOWN PLAYER"} — GAME ${game.tab_number}
-            </div>
+<div class="adminHangmanPlayer">
+    ${username || "UNKNOWN PLAYER"} — GAME ${game.tab_number}
+</div>
+
+<div class="hangmanGameName">
+
+    <input
+        type="text"
+        class="hangmanNameInput"
+        value="${game.game_name || ""}"
+        placeholder="GAME NAME"
+        maxlength="40"
+        data-id="${game.id}"
+    >
+
+    <button
+        class="hangmanNameSave"
+        data-id="${game.id}">
+        SAVE
+    </button>
+
+</div>
 
             <div class="adminHangmanDetails">
 
@@ -1771,6 +1850,30 @@ function createHangmanAdminRow(game, username) {
             unlockHangmanGame(game, unlockButton);
         });
     }
+
+    // Game name save button
+const nameInput =
+    row.querySelector(".hangmanNameInput");
+
+const nameSaveButton =
+    row.querySelector(".hangmanNameSave");
+
+if (nameSaveButton) {
+
+    nameSaveButton.addEventListener(
+        "click",
+        () => {
+
+            saveHangmanGameName(
+                game,
+                nameInput,
+                nameSaveButton
+            );
+
+        }
+    );
+
+}
 
     // Reset button
     const resetButton = row.querySelector(".hangmanResetButton");
@@ -1933,6 +2036,53 @@ async function resetHangmanGame(
 
     await loadHangmanGames();
 
+}
+
+/* ========================================
+   SAVE HANGMAN GAME NAME
+======================================== */
+
+async function saveHangmanGameName(game, input, button) {
+
+    if (button.disabled) {
+        return;
+    }
+
+    const newName = input.value.trim();
+
+    button.disabled = true;
+    button.textContent = "SAVING...";
+
+    const { error } = await supabaseClient
+        .from("hangman_games")
+        .update({
+            game_name: newName || null
+        })
+        .eq("id", game.id);
+
+    if (error) {
+
+        console.error(
+            "HANGMAN NAME UPDATE ERROR:",
+            error
+        );
+
+        button.disabled = false;
+        button.textContent = "SAVE";
+
+        alert("NAME SAVE FAILED.");
+
+        return;
+    }
+
+    button.textContent = "SAVED";
+
+    setTimeout(() => {
+
+        button.disabled = false;
+        button.textContent = "SAVE";
+
+    }, 1000);
 }
 
 
