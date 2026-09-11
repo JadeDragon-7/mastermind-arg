@@ -628,6 +628,38 @@
 
 }
 
+.hangmanProgress {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
+.hangmanDot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #333;
+    border: 1px solid #555;
+}
+
+.hangmanDot.filled {
+    background: #fff;
+    border-color: #fff;
+}
+
+.hangmanCorrectLetters {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    font-family: monospace;
+    letter-spacing: 3px;
+}
+
+.hangmanCorrectLetters span {
+    display: inline-block;
+    margin-right: 6px;
+}
+
 
     </style>
 
@@ -1637,193 +1669,117 @@ function subscribeToHangmanAdmin() {
    CREATE HANGMAN ADMIN ROW
 ======================================== */
 
-function createHangmanAdminRow(
-    game,
-    username
-) {
+function createHangmanAdminRow(game, username) {
+    const row = document.createElement("div");
+    row.className = "adminHangmanGame";
 
-    const row =
-        document.createElement("div");
+    const guessedLetters = game.guessed_letters || [];
+    const word = (game.word || "").toUpperCase();
 
-    row.className =
-        "adminHangmanGame";
+    // Find letters that were guessed correctly
+    const correctLetters = [...new Set(
+        guessedLetters.filter(letter =>
+            word.includes(letter.toUpperCase())
+        )
+    )];
 
+    // Create the 6-dot Hangman progress indicator
+    let progressDots = "";
 
-    /*
-     * Information
-     */
-
-    const info =
-        document.createElement("div");
-
-    info.className =
-        "adminHangmanInfo";
-
-
-    const player =
-        document.createElement("div");
-
-    player.className =
-        "adminHangmanPlayer";
-
-    player.textContent =
-        `${username} — GAME ${game.tab_number}`;
-
-
-    const details =
-        document.createElement("div");
-
-    details.className =
-        "adminHangmanDetails";
-
-
-    details.textContent =
-        `WRONG: ${game.wrong_guesses || 0} / 6` +
-        `   |   GUESSES: ${game.guess_number || 0}`;
-
-
-    const status =
-        document.createElement("div");
-
-    status.className =
-        "adminHangmanStatus";
-
-
-    if (game.status === "won") {
-
-        status.textContent =
-            "WON";
-
-    } else if (game.status === "lost") {
-
-        status.textContent =
-            "LOST";
-
-    } else if (
-        game.guess_unlocked === true
-    ) {
-
-        status.textContent =
-            "UNLOCKED";
-
-    } else {
-
-        status.textContent =
-            "LOCKED";
-
+    for (let i = 0; i < 6; i++) {
+        progressDots += `
+            <span class="hangmanDot ${i < game.wrong_guesses ? "filled" : ""}"></span>
+        `;
     }
 
+    // Display correct letters
+    const correctLettersHTML = correctLetters.length
+        ? correctLetters.map(letter => `<span>${letter}</span>`).join("")
+        : "—";
 
-    info.appendChild(player);
+    row.innerHTML = `
+        <div class="adminHangmanInfo">
 
-    info.appendChild(details);
+            <div class="adminHangmanPlayer">
+                ${username || "UNKNOWN PLAYER"} — GAME ${game.tab_number}
+            </div>
 
-    info.appendChild(status);
+            <div class="adminHangmanDetails">
 
+                <div>
+                    WRONG GUESSES: ${game.wrong_guesses} / 6
+                </div>
 
-    /*
-     * Action buttons
-     */
+                <div class="hangmanProgress">
+                    ${progressDots}
+                </div>
 
-    const actions =
-        document.createElement("div");
+                <div class="hangmanCorrectLetters">
+                    CORRECT LETTERS:
+                    ${correctLettersHTML}
+                </div>
 
-    actions.className =
-        "adminHangmanActions";
+                <div>
+                    GUESSES: ${game.guess_number}
+                </div>
 
+                <div class="adminHangmanStatus">
+                    STATUS:
+                    ${
+                        game.status === "won"
+                            ? "WON"
+                            : game.status === "lost"
+                                ? "LOST"
+                                : game.guess_unlocked
+                                    ? "UNLOCKED"
+                                    : "LOCKED"
+                    }
+                </div>
 
-    /*
-     * UNLOCK
-     */
+            </div>
 
-    const unlockButton =
-        document.createElement("button");
+            <div class="adminHangmanActions">
 
-    unlockButton.className =
-        "hangmanAdminButton " +
-        "hangmanUnlockButton";
+                ${
+                    game.status === "playing" && !game.guess_unlocked
+                        ? `<button
+                                class="hangmanAdminButton hangmanUnlockButton"
+                                data-id="${game.id}">
+                                UNLOCK
+                           </button>`
+                        : ""
+                }
 
-    unlockButton.textContent =
-        "UNLOCK";
+                <button
+                    class="hangmanAdminButton hangmanResetButton"
+                    data-id="${game.id}">
+                    RESET
+                </button>
 
+            </div>
 
-    /*
-     * Don't allow unlocking finished games
-     * or already unlocked games.
-     */
+        </div>
+    `;
 
-    if (
-        game.status === "won" ||
-        game.status === "lost" ||
-        game.guess_unlocked === true
-    ) {
+    // Unlock button
+    const unlockButton = row.querySelector(".hangmanUnlockButton");
 
-        unlockButton.disabled = true;
-
+    if (unlockButton) {
+        unlockButton.addEventListener("click", () => {
+            unlockHangmanGame(game, unlockButton);
+        });
     }
 
+    // Reset button
+    const resetButton = row.querySelector(".hangmanResetButton");
 
-    unlockButton.addEventListener(
-        "click",
-        async () => {
+    if (resetButton) {
+        resetButton.addEventListener("click", () => {
+            resetHangmanGame(game, resetButton);
+        });
+    }
 
-            await unlockHangmanGame(
-                game,
-                unlockButton
-            );
-
-        }
-    );
-
-
-    /*
-     * RESET
-     */
-
-    const resetButton =
-        document.createElement("button");
-
-    resetButton.className =
-        "hangmanAdminButton " +
-        "hangmanResetButton";
-
-    resetButton.textContent =
-        "RESET";
-
-
-    resetButton.addEventListener(
-        "click",
-        async () => {
-
-            await resetHangmanGame(
-                game,
-                resetButton
-            );
-
-        }
-    );
-
-
-    actions.appendChild(
-        unlockButton
-    );
-
-    actions.appendChild(
-        resetButton
-    );
-
-
-    /*
-     * Assemble row
-     */
-
-    row.appendChild(info);
-
-    row.appendChild(actions);
-
-
-    hangmanGamesList.appendChild(row);
-
+    return row;
 }
 
 /* ========================================
