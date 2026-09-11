@@ -443,40 +443,38 @@ body {
 
 <div id="gameArea">
 
-        <!-- =========================
-             HANGMAN DRAWING
-        ========================== -->
+    <!-- =========================
+         HANGMAN DRAWING
+    ========================== -->
 
-        <div id="hangmanArea">
+    <div id="hangmanArea">
 
-            <canvas
-                id="hangmanCanvas"
-                width="300"
-                height="300">
-            </canvas>
+        <canvas
+            id="hangmanCanvas"
+            width="300"
+            height="300">
+        </canvas>
 
+    </div>
+
+
+    <!-- =========================
+         GUESS AREA
+    ========================== -->
+
+    <div id="guessArea">
+
+        <div id="status">
+            WRONG GUESSES: 0 / 6
         </div>
 
-
-        <!-- =========================
-             GUESS AREA
-        ========================== -->
-
-        <div id="guessArea">
-
-<div id="status">
-    WRONG GUESSES: 0 / 6
-</div>
-
-<div id="guessStatus">
-    UNLOCKED
-</div>
-
-            <div id="word"></div>
-
-            <div id="letters"></div>
-
+        <div id="guessStatus">
+            UNLOCKED
         </div>
+
+        <div id="word"></div>
+
+        <div id="letters"></div>
 
     </div>
 
@@ -494,6 +492,8 @@ body {
         <p id="gameOverMessage"></p>
 
     </div>
+
+</div>
 
 </div>
 
