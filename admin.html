@@ -1613,15 +1613,17 @@ async function loadHangmanGames() {
      * Create each game row
      */
 
-    games.forEach(game => {
+games.forEach(game => {
 
-        createHangmanAdminRow(
-            game,
-            playerNames[game.player_id] ||
-            "UNKNOWN PLAYER"
-        );
+    const row = createHangmanAdminRow(
+        game,
+        playerNames[game.player_id] ||
+        "UNKNOWN PLAYER"
+    );
 
-    });
+    hangmanGamesList.appendChild(row);
+
+});
 
 }
 
