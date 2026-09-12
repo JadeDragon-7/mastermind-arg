@@ -1080,9 +1080,9 @@ notificationClose.addEventListener(
 
             .from("applications")
 
-            .select(
-                "id, name, display_name, icon, description, url, required_access_level, unlocked"
-            )
+.select(
+    "id, name, display_name, icon, description, url, required_access_level, unlocked, visible"
+)
 
             .order("id");
 
@@ -1116,16 +1116,20 @@ notificationClose.addEventListener(
          * 5. CREATE APPLICATION ICONS
          */
 
-        applications.forEach(
-            application => {
+applications.forEach(
+    application => {
 
-                createApplicationIcon(
-                    application,
-                    player.access_level
-                );
+        if (application.visible === false) {
+            return;
+        }
 
-            }
+        createApplicationIcon(
+            application,
+            player.access_level
         );
+
+    }
+);
 
     }
 
@@ -1139,6 +1143,10 @@ notificationClose.addEventListener(
         application,
         playerAccessLevel
     ) {
+
+    if (application.visible === false) {
+        return;
+    }
 
 
         const icon =
@@ -2415,33 +2423,96 @@ function updateApplicationIcon(
 ) {
 
     /*
-     * Find the existing desktop icon.
+     * ========================================
+     * HIDDEN APPLICATION
+     * ========================================
      */
 
-    const icon =
+    if (application.visible === false) {
+
+        /*
+         * Remove the desktop icon.
+         */
+
+        const icon =
+            document.querySelector(
+                `[data-application-id="${application.id}"]`
+            );
+
+        if (icon) {
+            icon.remove();
+        }
+
+
+        /*
+         * Close the application window
+         * if it is currently open.
+         */
+
+        const openWindow =
+            document.getElementById(
+                "window-" + application.id
+            );
+
+        if (openWindow) {
+            openWindow.remove();
+        }
+
+
+        /*
+         * Remove its taskbar button.
+         */
+
+        const taskButton =
+            document.getElementById(
+                "task-" + application.id
+            );
+
+        if (taskButton) {
+            taskButton.remove();
+        }
+
+        return;
+    }
+
+
+    /*
+     * ========================================
+     * APPLICATION IS VISIBLE
+     * ========================================
+     */
+
+    let icon =
         document.querySelector(
             `[data-application-id="${application.id}"]`
         );
 
 
     /*
-     * If it doesn't exist, something went
-     * wrong or the application wasn't loaded.
+     * If the application is visible but
+     * doesn't currently have an icon,
+     * create one.
      */
 
     if (!icon) {
 
-        console.warn(
-            "Could not find application icon:",
-            application.id
+        createApplicationIcon(
+            application,
+            playerAccessLevel
         );
 
         return;
-
     }
 
-icon.dataset.unlocked =
-    application.unlocked;
+
+    /*
+     * ========================================
+     * EXISTING LOCK / UNLOCK LOGIC
+     * ========================================
+     */
+
+    icon.dataset.unlocked =
+        application.unlocked;
 
 
     /*
@@ -2456,7 +2527,7 @@ icon.dataset.unlocked =
 
 
     /*
-     * Find the icon itself.
+     * Find the icon image.
      */
 
     const iconImage =
@@ -2469,53 +2540,58 @@ icon.dataset.unlocked =
      * Update locked/unlocked appearance.
      */
 
-if (accessible) {
+    if (accessible) {
 
-    icon.classList.remove(
-        "locked"
-    );
-
-    iconImage.textContent =
-        application.icon;
-
-} else {
-
-    icon.classList.add(
-        "locked"
-    );
-
-    iconImage.textContent =
-        "🔒";
-
-
-    // Close the application if it is currently open
-
-    const openWindow =
-        document.getElementById(
-            "window-" + application.id
+        icon.classList.remove(
+            "locked"
         );
 
-    if (openWindow) {
+        iconImage.textContent =
+            application.icon;
 
-        openWindow.remove();
+    } else {
+
+        icon.classList.add(
+            "locked"
+        );
+
+        iconImage.textContent =
+            "🔒";
 
 
-        // Remove its taskbar button
+        /*
+         * Close the application if it
+         * is currently open.
+         */
 
-        const taskButton =
+        const openWindow =
             document.getElementById(
-                "task-" + application.id
+                "window-" + application.id
             );
 
-        if (taskButton) {
+        if (openWindow) {
 
-            taskButton.remove();
+            openWindow.remove();
+
+
+            /*
+             * Remove its taskbar button.
+             */
+
+            const taskButton =
+                document.getElementById(
+                    "task-" + application.id
+                );
+
+            if (taskButton) {
+
+                taskButton.remove();
+
+            }
 
         }
 
     }
-
-}
 
 }
 

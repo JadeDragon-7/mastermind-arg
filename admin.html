@@ -904,8 +904,8 @@
            SUPABASE
         ======================================== */
 
-        const SUPABASE_URL = "https://fyhxgigfatooxkxlxipz.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_vq5sbfZOEZV5SR1m0uuicw_W2Rqd6-L";
+        const SUPABASE_URL = "LINK IS HERE";
+        const SUPABASE_KEY = "KEY IS HERE";
 
 
         const supabaseClient =
@@ -1226,6 +1226,124 @@ function updateApplicationButton(
 
 }
 
+/* ========================================
+   APPLICATION VISIBILITY
+======================================== */
+
+async function toggleApplicationVisibility(
+    application,
+    button
+) {
+
+    if (button.dataset.updating === "true") {
+        return;
+    }
+
+    button.dataset.updating = "true";
+
+    const currentState =
+        button.dataset.visible === "true";
+
+    const newState =
+        !currentState;
+
+    updateApplicationVisibilityButton(
+        button,
+        newState
+    );
+
+    try {
+
+        const {
+            error
+        } = await supabaseClient
+            .from("applications")
+            .update({
+                visible: newState
+            })
+            .eq(
+                "id",
+                application.id
+            );
+
+        if (error) {
+
+            console.error(
+                "APPLICATION VISIBILITY ERROR:",
+                error
+            );
+
+            updateApplicationVisibilityButton(
+                button,
+                currentState
+            );
+
+            return;
+        }
+
+        application.visible =
+            newState;
+
+    } catch (error) {
+
+        console.error(
+            "APPLICATION VISIBILITY ERROR:",
+            error
+        );
+
+        updateApplicationVisibilityButton(
+            button,
+            currentState
+        );
+
+    } finally {
+
+        button.dataset.updating =
+            "false";
+
+    }
+
+}
+
+
+function updateApplicationVisibilityButton(
+    button,
+    visible
+) {
+
+    button.dataset.visible =
+        String(visible);
+
+    if (visible) {
+
+        button.textContent =
+            "VISIBLE";
+
+        button.classList.add(
+            "unlocked"
+        );
+
+        button.classList.remove(
+            "locked"
+        );
+
+    } else {
+
+        button.textContent =
+            "HIDDEN";
+
+        button.classList.add(
+            "locked"
+        );
+
+        button.classList.remove(
+            "unlocked"
+        );
+
+    }
+
+}
+
 async function loadApplications() {
 
     const applicationsList =
@@ -1245,9 +1363,9 @@ async function loadApplications() {
 
         .from("applications")
 
-        .select(
-            "id, name, display_name, icon, description, unlocked"
-        )
+.select(
+    "id, name, display_name, icon, description, unlocked, visible"
+)
 
         .order(
             "id",
@@ -1414,18 +1532,68 @@ button.addEventListener(
     }
 );
 
+/*
+ * ========================================
+ * VISIBILITY BUTTON
+ * ========================================
+ */
+
+const visibilityButton =
+    document.createElement(
+        "button"
+    );
+
+visibilityButton.className =
+    "applicationToggle";
+
+visibilityButton.dataset.visible =
+    String(application.visible);
+
+updateApplicationVisibilityButton(
+    visibilityButton,
+    application.visible
+);
+
+visibilityButton.addEventListener(
+    "click",
+    () => {
+
+        toggleApplicationVisibility(
+            application,
+            visibilityButton
+        );
+
+    }
+);
+
 
             /*
              * Assemble row
              */
 
-            row.appendChild(
-                info
-            );
+row.appendChild(
+    info
+);
 
-            row.appendChild(
-                button
-            );
+const controls =
+    document.createElement(
+        "div"
+    );
+
+controls.style.display = "flex";
+controls.style.gap = "6px";
+
+controls.appendChild(
+    button
+);
+
+controls.appendChild(
+    visibilityButton
+);
+
+row.appendChild(
+    controls
+);
 
 
             applicationsList.appendChild(
