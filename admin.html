@@ -242,6 +242,59 @@
 
         }
 
+#sendBroadcast {
+
+    margin-top: 25px;
+
+    padding:
+        11px 20px;
+
+    background:
+        #3498DB;
+
+    border: none;
+
+    color: white;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+}
+
+
+#sendBroadcast:hover {
+
+    filter:
+        brightness(1.15);
+
+}
+
+
+#sendBroadcast:disabled {
+
+    opacity: 0.5;
+
+    cursor:
+        not-allowed;
+
+}
+
+
+#broadcastResult {
+
+    margin-top: 15px;
+
+    color: #888;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+}
+
 
         #updateGameState:disabled {
 
@@ -821,6 +874,57 @@
             <div id="updateResult"></div>
 
         </section>
+
+<!-- ========================================
+     SYSTEM BROADCAST
+======================================== -->
+
+<section
+    class="adminSection"
+    id="broadcastSection"
+>
+
+    <div class="sectionTitle">
+        SYSTEM BROADCAST
+    </div>
+
+
+    <label
+        for="broadcastTitleInput"
+    >
+        BROADCAST TITLE
+    </label>
+
+    <input
+        id="broadcastTitleInput"
+        type="text"
+        placeholder="SYSTEM NOTICE"
+    >
+
+
+    <label
+        for="broadcastMessageInput"
+    >
+        BROADCAST MESSAGE
+    </label>
+
+    <textarea
+        id="broadcastMessageInput"
+        rows="5"
+        placeholder="Enter message to send to all users..."
+    ></textarea>
+
+
+    <button
+        id="sendBroadcast"
+    >
+        SEND BROADCAST
+    </button>
+
+
+    <div id="broadcastResult"></div>
+
+</section>
 
 <!-- ========================================
      APPLICATIONS
@@ -2386,6 +2490,167 @@ async function saveHangmanGameName(game, input, button) {
             }
         );
 
+
+/* ========================================
+   SYSTEM BROADCAST
+======================================== */
+
+const sendBroadcast =
+    document.getElementById(
+        "sendBroadcast"
+    );
+
+const broadcastTitleInput =
+    document.getElementById(
+        "broadcastTitleInput"
+    );
+
+const broadcastMessageInput =
+    document.getElementById(
+        "broadcastMessageInput"
+    );
+
+const broadcastResult =
+    document.getElementById(
+        "broadcastResult"
+    );
+
+
+sendBroadcast.addEventListener(
+    "click",
+    async () => {
+
+        /* --------------------------------
+           Prevent duplicate clicks
+        -------------------------------- */
+
+        if (
+            sendBroadcast.disabled
+        ) {
+            return;
+        }
+
+
+        const title =
+            broadcastTitleInput
+                .value
+                .trim();
+
+        const message =
+            broadcastMessageInput
+                .value
+                .trim();
+
+
+        /* --------------------------------
+           Validate
+        -------------------------------- */
+
+        if (!title) {
+
+            broadcastResult.textContent =
+                "PLEASE ENTER A BROADCAST TITLE.";
+
+            return;
+
+        }
+
+
+        if (!message) {
+
+            broadcastResult.textContent =
+                "PLEASE ENTER A BROADCAST MESSAGE.";
+
+            return;
+
+        }
+
+
+        /* --------------------------------
+           Disable button
+        -------------------------------- */
+
+        sendBroadcast.disabled =
+            true;
+
+        broadcastResult.textContent =
+            "SENDING BROADCAST...";
+
+
+        try {
+
+            const {
+                error
+            } =
+                await supabaseClient
+
+                    .from(
+                        "system_updates"
+                    )
+
+                    .insert({
+                        title: title,
+                        message: message
+                    });
+
+
+            /* --------------------------------
+               Database error
+            -------------------------------- */
+
+            if (error) {
+
+                console.error(
+                    "BROADCAST ERROR:",
+                    error
+                );
+
+                broadcastResult.textContent =
+                    "COULD NOT SEND BROADCAST.";
+
+                return;
+
+            }
+
+
+            /* --------------------------------
+               Success
+            -------------------------------- */
+
+            broadcastResult.textContent =
+                "BROADCAST SENT.";
+
+
+            /* --------------------------------
+               Clear fields
+            -------------------------------- */
+
+            broadcastTitleInput.value =
+                "";
+
+            broadcastMessageInput.value =
+                "";
+
+
+        } catch (error) {
+
+            console.error(
+                "BROADCAST ERROR:",
+                error
+            );
+
+            broadcastResult.textContent =
+                "COULD NOT SEND BROADCAST.";
+
+        } finally {
+
+            sendBroadcast.disabled =
+                false;
+
+        }
+
+    }
+);
 
 
         /* ========================================
