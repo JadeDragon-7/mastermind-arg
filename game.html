@@ -895,12 +895,19 @@
     let highestZIndex = 100;
     let playerAccessLevel = 0;
 
+    let currentPlayerId = null;
+
     const logoutButton =
         document.getElementById("logoutButton");
 
 const systemNotification =
     document.getElementById(
         "systemNotification"
+    );
+
+const notificationHeader =
+    document.getElementById(
+        "notificationHeader"
     );
 
 const notificationMessage =
@@ -914,9 +921,20 @@ const notificationClose =
     );
 
 
-    /* ========================================
-       REAL TIME NOTIFICATIONS
-    ======================================== */
+
+
+/* ========================================
+   SYSTEM NOTIFICATIONS
+======================================== */
+
+let broadcastQueue = [];
+
+let currentBroadcast = null;
+
+
+/* ========================================
+   SHOW NORMAL SYSTEM NOTIFICATION
+======================================== */
 
 function showSystemNotification(
     message
@@ -925,20 +943,419 @@ function showSystemNotification(
     notificationMessage.textContent =
         message;
 
+    notificationHeader.textContent =
+        "SYSTEM MESSAGE";
+
     systemNotification.style.display =
         "block";
 
 }
 
+
+/* ========================================
+   SHOW BROADCAST NOTIFICATION
+======================================== */
+
+function showBroadcastNotification(
+    update
+) {
+
+    currentBroadcast =
+        update;
+
+    notificationHeader.textContent =
+        update.title;
+
+    notificationMessage.textContent =
+        update.message;
+
+    systemNotification.style.display =
+        "block";
+
+}
+
+
+/* ========================================
+   CLOSE NOTIFICATION
+======================================== */
+
 notificationClose.addEventListener(
     "click",
-    () => {
+    async () => {
+
+        /* --------------------------------
+           Normal system message
+        -------------------------------- */
+
+        if (!currentBroadcast) {
+
+            systemNotification.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        /* --------------------------------
+           Remember which broadcast
+           the player acknowledged
+        -------------------------------- */
+
+        const update =
+            currentBroadcast;
+
+
+        currentBroadcast =
+            null;
+
 
         systemNotification.style.display =
             "none";
 
+
+        /* --------------------------------
+           Mark this broadcast as read
+        -------------------------------- */
+
+        const {
+            error
+        } = await supabaseClient
+
+            .from(
+                "system_update_reads"
+            )
+
+            .insert({
+                update_id:
+                    update.id,
+
+                player_id:
+                    currentPlayerId
+            });
+
+
+        if (error) {
+
+            /*
+             * A duplicate is harmless.
+             * This can happen if the same
+             * notification was already marked.
+             */
+
+            if (
+                error.code !== "23505"
+            ) {
+
+                console.error(
+                    "BROADCAST READ ERROR:",
+                    error
+                );
+
+            }
+
+        }
+
+
+        /* --------------------------------
+           Show next queued broadcast
+        -------------------------------- */
+
+        showNextBroadcast();
+
     }
 );
+
+
+/* ========================================
+   SHOW NEXT BROADCAST
+======================================== */
+
+function showNextBroadcast() {
+
+    if (
+        currentBroadcast
+    ) {
+
+        return;
+
+    }
+
+
+    if (
+        broadcastQueue.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    const next =
+        broadcastQueue.shift();
+
+
+    showBroadcastNotification(
+        next
+    );
+
+}
+
+/* ========================================
+   LOAD UNREAD SYSTEM BROADCASTS
+======================================== */
+
+async function loadUnreadBroadcasts() {
+
+    if (!currentPlayerId) {
+
+        return;
+
+    }
+
+
+    /* --------------------------------
+       Get all broadcasts
+    -------------------------------- */
+
+    const {
+        data: updates,
+        error: updatesError
+    } = await supabaseClient
+
+        .from(
+            "system_updates"
+        )
+
+        .select(
+            "id, title, message, created_at"
+        )
+
+        .order(
+            "created_at",
+            {
+                ascending: true
+            }
+        );
+
+
+    if (updatesError) {
+
+        console.error(
+            "SYSTEM UPDATES ERROR:",
+            updatesError
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !updates ||
+        updates.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    /* --------------------------------
+       Get broadcasts this player
+       has already read
+    -------------------------------- */
+
+    const {
+        data: reads,
+        error: readsError
+    } = await supabaseClient
+
+        .from(
+            "system_update_reads"
+        )
+
+        .select(
+            "update_id"
+        )
+
+        .eq(
+            "player_id",
+            currentPlayerId
+        );
+
+
+    if (readsError) {
+
+        console.error(
+            "SYSTEM UPDATE READS ERROR:",
+            readsError
+        );
+
+        return;
+
+    }
+
+
+    /* --------------------------------
+       Create list of already-read IDs
+    -------------------------------- */
+
+    const readIds =
+        new Set(
+            (reads || []).map(
+                read =>
+                    read.update_id
+            )
+        );
+
+
+    /* --------------------------------
+       Find unread broadcasts
+    -------------------------------- */
+
+    const unread =
+        updates.filter(
+            update =>
+                !readIds.has(
+                    update.id
+                )
+        );
+
+
+    /* --------------------------------
+       Add them to the queue
+    -------------------------------- */
+
+    unread.forEach(
+        update => {
+
+            queueBroadcast(
+                update
+            );
+
+        }
+    );
+
+
+    showNextBroadcast();
+
+}
+
+/* ========================================
+   QUEUE BROADCAST
+======================================== */
+
+function queueBroadcast(
+    update
+) {
+
+    /* --------------------------------
+       Prevent duplicates
+    -------------------------------- */
+
+    if (
+        currentBroadcast &&
+        currentBroadcast.id === update.id
+    ) {
+
+        return;
+
+    }
+
+
+    const alreadyQueued =
+        broadcastQueue.some(
+            queued =>
+                queued.id === update.id
+        );
+
+
+    if (
+        alreadyQueued
+    ) {
+
+        return;
+
+    }
+
+
+    broadcastQueue.push(
+        update
+    );
+
+}
+
+/* ========================================
+   REALTIME SYSTEM BROADCASTS
+======================================== */
+
+function subscribeToSystemUpdates() {
+
+    console.log(
+        "Starting System Updates Realtime subscription..."
+    );
+
+
+    const channel =
+        supabaseClient
+
+            .channel(
+                "system-updates-changes"
+            )
+
+            .on(
+                "postgres_changes",
+                {
+                    event: "INSERT",
+                    schema: "public",
+                    table: "system_updates"
+                },
+
+                (payload) => {
+
+                    console.log(
+                        "SYSTEM UPDATE RECEIVED:",
+                        payload
+                    );
+
+
+                    const update =
+                        payload.new;
+
+
+                    if (!update) {
+
+                        return;
+
+                    }
+
+
+                    queueBroadcast(
+                        update
+                    );
+
+
+                    showNextBroadcast();
+
+                }
+            )
+
+            .subscribe(
+                (status) => {
+
+                    console.log(
+                        "System Updates Realtime status:",
+                        status
+                    );
+
+                }
+            );
+
+
+    return channel;
+
+}
 
 
     /* ========================================
@@ -953,17 +1370,22 @@ notificationClose.addEventListener(
          */
 
         const {
-            data: { session }
-        } = await supabaseClient.auth.getSession();
+    data: { session }
+} = await supabaseClient.auth.getSession();
 
 
-        if (!session) {
+if (!session) {
 
-            window.location.href = "login.html";
+    window.location.href =
+        "login.html";
 
-            return;
+    return;
 
-        }
+}
+
+
+currentPlayerId =
+    session.user.id;
 
 
 
@@ -1000,7 +1422,7 @@ notificationClose.addEventListener(
 
         }
 
-
+        
 
         /*
          * DISPLAY PLAYER
@@ -1017,8 +1439,13 @@ notificationClose.addEventListener(
         player.color
         );
 
+        subscribeToSystemUpdates();
+
+        await loadUnreadBroadcasts();
+        
         subscribeToGameState();
         subscribeToApplications();
+
 
         /*
          * 3. GET GAME STATE
